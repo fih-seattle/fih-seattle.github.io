@@ -35,20 +35,21 @@ const cities = [
   { name: "Suzhou", label: "Coming soon", status: "Coming soon", coords: [31.2989, 120.5853] },
   {
     name: "Seattle",
-    label: "Open regional site",
-    status: "Active local region",
+    label: "Open Seattle command site",
+    status: "Global HQ / Command Center",
     coords: [47.6062, -122.3321],
     url: "seattle-local-region/index.html",
     active: true,
+    headquarters: true,
   },
 ];
 
-const createMarkerIcon = (active) =>
+const createMarkerIcon = (city) =>
   L.divIcon({
-    className: `fih-marker${active ? " is-live" : ""}`,
-    html: "<span></span>",
-    iconSize: [34, 34],
-    iconAnchor: [17, 17],
+    className: `fih-marker${city.active ? " is-live" : ""}${city.headquarters ? " is-hq" : ""}`,
+    html: city.headquarters ? "<span></span><strong>HQ</strong>" : "<span></span>",
+    iconSize: city.headquarters ? [72, 50] : [34, 34],
+    iconAnchor: city.headquarters ? [36, 25] : [17, 17],
     popupAnchor: [0, -18],
   });
 
@@ -67,6 +68,22 @@ if (mapElement && window.L) {
     maxZoom: 16,
   }).addTo(map);
 
+  const seattle = cities.find((city) => city.headquarters);
+
+  if (seattle) {
+    cities
+      .filter((city) => city.name !== seattle.name)
+      .forEach((city) => {
+        L.polyline([seattle.coords, city.coords], {
+          color: "#ffb21a",
+          weight: 1.4,
+          opacity: 0.48,
+          dashArray: "7 10",
+          interactive: false,
+        }).addTo(map);
+      });
+  }
+
   const cityBounds = L.latLngBounds(cities.map((city) => city.coords));
   const fitCityBounds = () => {
     map.fitBounds(cityBounds, {
@@ -77,7 +94,7 @@ if (mapElement && window.L) {
   };
 
   cities.forEach((city) => {
-    const marker = L.marker(city.coords, { icon: createMarkerIcon(city.active) }).addTo(map);
+    const marker = L.marker(city.coords, { icon: createMarkerIcon(city) }).addTo(map);
     const action = city.url ? `<a href="${city.url}">${city.label}</a>` : `<strong>${city.label}</strong>`;
     marker.bindPopup(`
       <div class="fih-popup">
