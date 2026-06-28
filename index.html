@@ -3,29 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Future Intelligence Hub Seattle</title>
+    <title>Future Intelligence Hub</title>
     <meta
       name="description"
-      content="Future Intelligence Hub Seattle is a locally led implementation initiative connecting AI, community knowledge, and global collaboration for practical social innovation in the Seattle region."
+      content="Future Intelligence Hub is an AI-powered social innovation and micro-entrepreneurship incubation infrastructure connecting people, knowledge, resources, and solutions across cities."
     >
-    <meta property="og:title" content="Future Intelligence Hub Seattle">
+    <meta property="og:title" content="Future Intelligence Hub">
     <meta
       property="og:description"
-      content="A Seattle-based local implementation initiative connected to the Future Intelligence Hub global framework."
+      content="An AI-powered urban innovation infrastructure turning local problems into implementable city solutions."
     >
     <meta property="og:type" content="website">
-    <meta property="og:image" content="IN.png">
-    <link rel="preload" href="IN.png" as="image">
-    <link rel="preload" href="assets/hero-seattle-fih.png" as="image">
+    <meta property="og:image" content="assets/future-intelligence-hub-global-transparent.png">
+    <link rel="preload" href="assets/future-intelligence-hub-global-transparent.png" as="image">
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIINfQhmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    >
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header class="site-header" data-header>
-      <a class="brand" href="#top" aria-label="Future Intelligence Hub Seattle home">
-        <span class="brand-mark" aria-hidden="true">ESG</span>
-        <span>
+      <a class="brand" href="#top" aria-label="Future Intelligence Hub home">
+        <span class="brand-mark" aria-hidden="true">FIH</span>
+        <span class="brand-text">
           <span class="brand-name">Future Intelligence Hub</span>
-          <span class="brand-region">Seattle</span>
+          <span class="brand-line">AI-powered city innovation infrastructure</span>
         </span>
       </a>
       <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
@@ -34,223 +39,310 @@
         <span></span>
       </button>
       <nav class="site-nav" id="site-nav" data-nav>
-        <a href="#building">What We Build</a>
+        <a href="#model">Model</a>
+        <a href="#esgin">ESGIN</a>
+        <a href="#cities">Cities</a>
         <a href="#programs">Programs</a>
-        <a href="#leadership">Leadership</a>
-        <a href="#partners">Partners</a>
-        <a class="nav-cta" href="#contact">Join</a>
+        <a href="#impact">Impact</a>
+        <a class="nav-cta" href="#contact">Partner</a>
       </nav>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-media" aria-hidden="true">
-          <img src="assets/hero-seattle-fih.png" alt="">
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-grid"></div>
+          <div class="hero-orbit orbit-one"></div>
+          <div class="hero-orbit orbit-two"></div>
         </div>
-        <div class="hero-overlay"></div>
         <div class="hero-content">
-          <p class="eyebrow">Seattle regional initiative now forming</p>
-          <img class="hero-title-image" src="IN.png" alt="Future Intelligence Hub Seattle">
-          <h1 class="sr-only" id="hero-title">Future Intelligence Hub Seattle</h1>
+          <p class="eyebrow">Global framework, local execution</p>
+          <img class="hero-title-image" src="assets/future-intelligence-hub-global-transparent.png" alt="Future Intelligence Hub by Global ESG Leadership Organization">
+          <h1 class="sr-only" id="hero-title">Future Intelligence Hub</h1>
+          <p class="managed-by">
+            FIH is managed by
+            <a href="https://www.esgin.org/" target="_blank" rel="noopener">Global ESG Leadership Organization</a>.
+            Future Intelligence Hub by Global ESG Leadership Organization.
+          </p>
           <p class="hero-lede">
-            Turning AI, local knowledge, and global connections into practical solutions for the Seattle region.
+            An AI-powered social innovation and micro-entrepreneurship incubation hub empowering sustainable urban and community development.
           </p>
           <p class="hero-copy">
-            Future Intelligence Hub Seattle is a locally led implementation initiative being developed within the Future
-            Intelligence Hub framework. We bring together community builders, educators, entrepreneurs, technologists,
-            mentors, businesses, and civic partners to move real local challenges toward responsible, implementable action.
+            FIH connects people, knowledge, resources, and solutions so local innovators can move from learning and ideas into real-world implementation.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#contact" data-focus="Seattle founding circle">Join the Founding Circle</a>
-            <a class="button button-secondary" href="#contact" data-focus="Partnership conversation">Start a Partnership Conversation</a>
-          </div>
-          <div class="lead-card" aria-label="Local leadership">
-            <p>Led locally by</p>
-            <strong>Yun-Cheng Tsai, Ph.D.</strong>
-            <span>Seattle Regional Lead & Local Implementation Lead</span>
-            <small>
-              By invitation of the
-              <a href="https://www.esgin.org/" target="_blank" rel="noopener">Global ESG Leadership Organization</a>
-            </small>
+            <a class="button button-primary" href="#cities">View City Network</a>
+            <a class="button button-secondary" href="#model">Explore the Model</a>
           </div>
         </div>
       </section>
 
-      <section class="intro-band" aria-label="Purpose">
+      <section class="intro-band" aria-label="Core statement">
         <div class="container intro-grid">
           <p>
-            Seattle is home to extraordinary talent, technology, research, and community energy. Our purpose is to help
-            those strengths connect, so ideas do not stop at workshops, pitch decks, or conversations.
+            Future Intelligence Hub is built for a practical gap: AI opportunities are expanding faster than many micro-entrepreneurs and local innovators can access tools, mentorship, capital, and implementation pathways.
           </p>
-          <div class="signal-list" aria-label="Current status">
-            <span>Locally led in Seattle</span>
-            <span>Connected to a global framework</span>
-            <span>Founding community now forming</span>
+          <div class="signal-list" aria-label="FIH principles">
+            <span>Managed by ESGIN</span>
+            <span>Physical city spaces</span>
+            <span>AI-enabled capability building</span>
+            <span>Real-world adoption pathways</span>
           </div>
         </div>
       </section>
 
-      <section class="section" id="building">
-        <div class="container section-heading">
-          <p class="eyebrow">What we are building</p>
-          <h2>A local platform to learn, build, test, and connect around AI-enabled social innovation.</h2>
-        </div>
-        <div class="container focus-grid">
-          <article class="focus-card">
-            <h3>Future-ready capability workshops</h3>
-            <p>Practical learning experiences that help youth, students, professionals, and community leaders use AI responsibly.</p>
-          </article>
-          <article class="focus-card">
-            <h3>Community problem discovery</h3>
-            <p>Structured conversations that translate local needs into clear challenge statements and testable ideas.</p>
-          </article>
-          <article class="focus-card">
-            <h3>Mentorship for responsible digital citizens</h3>
-            <p>Guidance for youth and emerging innovators navigating online responsibility, privacy, empathy, and digital trust.</p>
-          </article>
-          <article class="focus-card">
-            <h3>Cross-sector collaboration</h3>
-            <p>Connections among community, industry, education, and civic partners who can help ideas reach implementation.</p>
-          </article>
-          <article class="focus-card wide">
-            <h3>Pilots, hackathons, and adoption pathways</h3>
+      <section class="section esgin-section" id="esgin">
+        <div class="container esgin-layout">
+          <div class="esgin-copy">
+            <p class="eyebrow">Managed by ESGIN</p>
+            <h2>FIH is ESGIN's flagship urban implementation platform.</h2>
             <p>
-              A bridge from learning and convening into real-world experiments, measurable outcomes, and partner-ready
-              implementation plans.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section rdy-section" id="programs">
-        <div class="container rdy-layout">
-          <div class="rdy-copy">
-            <p class="eyebrow">Flagship youth initiative</p>
-            <h2>Responsible Digital for Youth (RDY)</h2>
-            <p class="role">A Seattle-ready program concept for ethical, safe, and responsible digital participation.</p>
-            <p>
-              RDY empowers young people ages 13-25 to participate in digital society with ethical awareness, critical
-              thinking, emotional resilience, and practical judgment. The program responds to urgent risks including
-              cyberbullying, misinformation, digital identity pressure, privacy harm, and widening digital inequality.
+              The Global ESG Leadership Organization (ESGIN) is an international, implementation-oriented sustainability organization registered in the United Kingdom and headquartered in Seattle, USA. ESGIN operates as a global multi-stakeholder platform connecting business leaders, sustainability practitioners, policymakers, financial institutions, academia, youth leaders, women leaders, and civil society actors.
             </p>
             <p>
-              Within Future Intelligence Hub Seattle, RDY can become an early pilot pathway for schools, youth-serving
-              organizations, mentors, technology partners, and community groups that want to turn responsible AI and
-              digital citizenship into measurable local action.
+              Unlike organizations focused mainly on policy advocacy or awareness-building, ESGIN emphasizes measurable implementation and institutional capacity-building. FIH translates that global framework into physical, city-level action through AI-powered social innovation and micro-entrepreneurship incubation.
             </p>
-            <a class="button button-primary" href="#contact" data-focus="Responsible Digital for Youth (RDY)">Discuss RDY Partnership</a>
+            <a class="button button-primary" href="https://www.esgin.org/" target="_blank" rel="noopener">Visit ESGIN</a>
           </div>
-          <div class="rdy-panel" aria-label="RDY model pillars">
-            <h3>RDY model pillars</h3>
-            <div class="pillar-list">
-              <div>
-                <strong>Ethics-by-design curriculum</strong>
-                <p>Moral reasoning, civic responsibility, AI awareness, and digital literacy built into short learning modules.</p>
-              </div>
-              <div>
-                <strong>Mentorship framework</strong>
-                <p>Trained mentors guide youth through real digital dilemmas involving empathy, privacy, and accountability.</p>
-              </div>
-              <div>
-                <strong>AI-assisted simulations</strong>
-                <p>Interactive scenarios help learners practice decisions around fake news, online aggression, and reputation.</p>
-              </div>
-              <div>
-                <strong>Peer responsibility circles</strong>
-                <p>Youth co-create digital behavior codes and build local ownership through reflection and shared norms.</p>
-              </div>
+          <div class="esgin-facts" aria-label="ESGIN facts">
+            <div>
+              <strong>60+</strong>
+              <span>countries and territories across ESGIN's global network</span>
+            </div>
+            <div>
+              <strong>6,000+</strong>
+              <span>participants connected through convenings, regional chapters, and digital communities</span>
+            </div>
+            <div>
+              <strong>350+</strong>
+              <span>senior advisors and contributors across six continents</span>
+            </div>
+            <div>
+              <strong>8</strong>
+              <span>UN DESA Doha Solutions Platform initiatives formally accepted and published</span>
             </div>
           </div>
         </div>
-        <div class="container rdy-metrics" aria-label="RDY implementation focus">
-          <div>
-            <strong>Local pilot focus</strong>
-            <span>Workshops, mentor training, youth circles, and school/community partnerships.</span>
-          </div>
-          <div>
-            <strong>Trust-building focus</strong>
-            <span>Transparent privacy norms, support networks, digital ethics codes, and youth voice.</span>
-          </div>
-          <div>
-            <strong>Measurement focus</strong>
-            <span>Participation, ethical reasoning, wellbeing, inclusion, and institutional adoption indicators.</span>
-          </div>
+        <div class="container trust-grid">
+          <article>
+            <h3>Global sustainability action think tank</h3>
+            <p>ESGIN converts real-world sustainability experience into practical action frameworks, practitioner intelligence, and implementation pathways.</p>
+          </article>
+          <article>
+            <h3>UN-aligned participation</h3>
+            <p>ESGIN is listed in the introduction as a UN Global Compact participating organization since May 2025 and a UN-supported PRI signatory since 2024.</p>
+          </article>
+          <article>
+            <h3>Glo-Cal implementation model</h3>
+            <p>FIH follows a Global Host plus Local Implementation Partner model: globally standardized, locally executed, and grounded in each city's real needs.</p>
+          </article>
         </div>
       </section>
 
-      <section class="section dark-section">
-        <div class="container split">
-          <div>
-            <p class="eyebrow">Why Seattle</p>
-            <h2>Technology capacity meets civic imagination.</h2>
-          </div>
-          <div class="split-copy">
-            <p>
-              The Seattle region has the ingredients needed for future intelligence work: globally connected companies,
-              universities, healthcare systems, startups, public-interest technologists, and community organizations.
-            </p>
-            <p>
-              The Hub is being formed to make those ingredients easier to connect around local challenges in education,
-              health, workforce readiness, sustainability, and inclusive entrepreneurship.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="leadership">
-        <div class="container leadership-grid">
-          <div class="profile-panel">
-            <p class="eyebrow">Seattle leadership</p>
-            <h3><a href="https://peculab.github.io/" target="_blank">Yun-Cheng Tsai, Ph.D.</a></h3>
-            <p class="role">Seattle Regional Lead & Local Implementation Lead, Future Intelligence Hub Seattle</p>
-            <p>
-              Dr. Tsai brings an interdisciplinary background across AI, data science, learning analytics, healthcare AI,
-              FinTech, quantum machine learning, teaching, and cross-sector collaboration. Her work focuses on translating
-              complex technical capabilities into practical learning, decision support, and innovation pathways.
-            </p>
-            <p>
-              She is serving as the Seattle regional lead following an invitation to support local execution of the Future
-              Intelligence Hub framework in the Seattle region.
-            </p>
-          </div>
-          <div class="credential-panel" aria-label="Leadership strengths">
-            <h3>Local execution strengths</h3>
-            <ul>
-              <li>AI education and applied data science program design</li>
-              <li>Learning analytics and evidence-informed capability building</li>
-              <li>Healthcare, FinTech, and responsible AI application experience</li>
-              <li>Mentorship for students, builders, and interdisciplinary teams</li>
-              <li>Seattle-area convening across community, education, and technology networks</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section class="section partner-section" id="partners">
+      <section class="section" id="model">
         <div class="container section-heading">
-          <p class="eyebrow">Founding network</p>
-          <h2>Seeking venue, mentor, community, ecosystem, and implementation partners.</h2>
+          <p class="eyebrow">Operating model</p>
+          <h2>People, knowledge, resources, and solutions meeting in one city infrastructure.</h2>
           <p>
-            We are beginning by listening to Seattle-area communities and convening a founding network of people and
-            institutions who want practical, responsible AI-enabled social innovation to move beyond talk.
+            FIH is not another startup competition, training course, or co-working space. It is a repeatable city-level platform where learning, practice, creation, validation, and implementation happen together.
           </p>
         </div>
-        <div class="container partner-grid">
-          <div class="partner-item">
-            <h3>Community partners</h3>
-            <p>Bring local challenges, lived experience, and trusted community relationships.</p>
+        <div class="container model-grid">
+          <article class="model-item">
+            <span>01</span>
+            <h3>Micro-entrepreneurship development</h3>
+            <p>Workshops, mentorship, and hackathons help innovators define problems, design business models, plan resources, communicate value, and execute with teams.</p>
+          </article>
+          <article class="model-item">
+            <span>02</span>
+            <h3>AI application and future-ready capabilities</h3>
+            <p>FIH supports practical AI use while strengthening judgment, communication, creativity, leadership, upskilling, and reskilling.</p>
+          </article>
+          <article class="model-item">
+            <span>03</span>
+            <h3>Sustainable development solutions</h3>
+            <p>Innovators connect city-specific challenges with the UN Sustainable Development Goals and responsible business thinking.</p>
+          </article>
+          <article class="model-item">
+            <span>04</span>
+            <h3>Opportunity Day and adoption</h3>
+            <p>Banking, investment, corporate, government, and community pathways help promising solutions move into pilots, adoption, organizations, or company formation.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section cities-section" id="cities">
+        <div class="container section-heading">
+          <p class="eyebrow">City network</p>
+          <h2>Local hubs are forming across global regions.</h2>
+          <p>
+            Each city follows the same core framework: global host, local implementation partner, and local venue support. Public location details will be announced as each site is confirmed.
+          </p>
+        </div>
+        <div class="container map-layout">
+          <div class="map-panel" aria-label="Future Intelligence Hub city map">
+            <div class="map-caption">
+              <span>FIH Network</span>
+              <strong>City hubs</strong>
+            </div>
+            <div id="fih-world-map" class="world-map" aria-label="Interactive world map with Future Intelligence Hub city locations"></div>
           </div>
-          <div class="partner-item">
-            <h3>Education partners</h3>
-            <p>Host workshops, mentor learners, and connect students with implementation pathways, including RDY pilots.</p>
+          <div class="city-list" aria-live="polite">
+            <div class="city-list-head">
+              <p class="eyebrow">Locations</p>
+              <h3 data-map-status>Seattle is open. Additional city hubs are coming soon.</h3>
+            </div>
+            <div class="city-row">
+              <span>Doha</span>
+              <strong>Coming soon</strong>
+            </div>
+            <div class="city-row">
+              <span>London</span>
+              <strong>Coming soon</strong>
+            </div>
+            <div class="city-row">
+              <span>Hong Kong</span>
+              <strong>Coming soon</strong>
+            </div>
+            <div class="city-row">
+              <span>Bangkok</span>
+              <strong>Coming soon</strong>
+            </div>
+            <div class="city-row">
+              <span>Shanghai</span>
+              <strong>Coming soon</strong>
+            </div>
+            <div class="city-row">
+              <span>Suzhou</span>
+              <strong>Coming soon</strong>
+            </div>
+            <a class="city-row is-live" href="seattle-local-region/index.html">
+              <span>Seattle</span>
+              <strong>Open regional site</strong>
+            </a>
           </div>
-          <div class="partner-item">
-            <h3>Industry partners</h3>
-            <p>Support pilots, practical expertise, responsible technology use, and adoption readiness.</p>
+        </div>
+      </section>
+
+      <section class="section programs-section" id="programs">
+        <div class="container split">
+          <div>
+            <p class="eyebrow">ESGIN infrastructure pillars</p>
+            <h2>FIH sits inside ESGIN's broader implementation infrastructure.</h2>
           </div>
-          <div class="partner-item">
-            <h3>Venue supporters</h3>
-            <p>Help create accessible spaces for workshops, salons, hackathons, and project showcases.</p>
+          <div class="program-list">
+            <article>
+              <h3>Leadership infrastructure</h3>
+              <p>Capability-building for SME owners, professionals, women, youth, and emerging leaders through structured education and applied learning.</p>
+            </article>
+            <article>
+              <h3>Intelligence infrastructure</h3>
+              <p>Applied sustainability knowledge through ESG in Action Monthly, implementation case learning, and practitioner-informed insight.</p>
+            </article>
+            <article>
+              <h3>Policy infrastructure</h3>
+              <p>Practical solutions and policy contributions through UN DESA Doha Solutions Platform submissions, papers, and stakeholder consultations.</p>
+            </article>
+            <article>
+              <h3>Action infrastructure</h3>
+              <p>Regional chapters, cross-sector dialogues, peer learning platforms, and FIH as ESGIN's flagship urban innovation platform.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section initiatives-section" aria-labelledby="initiatives-title">
+        <div class="container section-heading">
+          <p class="eyebrow">Doha Solutions Platform initiatives</p>
+          <h2 id="initiatives-title">FIH supports ESGIN initiatives that move from global recognition into city-level execution.</h2>
+        </div>
+        <div class="container initiative-grid">
+          <article>
+            <span>ID60</span>
+            <h3>Leader for Young Leaders</h3>
+            <p>A world leaders mentorship initiative for youth development.</p>
+          </article>
+          <article>
+            <span>ID62</span>
+            <h3>Capital with Purpose</h3>
+            <p>Global impact fund roundtable and ethical investor ecosystem.</p>
+          </article>
+          <article>
+            <span>ID85</span>
+            <h3>GROW</h3>
+            <p>AI-driven global regeneration for women leaders.</p>
+          </article>
+          <article>
+            <span>ID87</span>
+            <h3>Responsible AI for Business</h3>
+            <p>AI-driven ESG and SDG transformation for SMEs, enterprises, and communities.</p>
+          </article>
+          <article>
+            <span>ID88</span>
+            <h3>Youth and Women Financial Literacy</h3>
+            <p>Economic empowerment through inclusive financial literacy.</p>
+          </article>
+          <article>
+            <span>ID175</span>
+            <h3>GROW Woman Care Alliance</h3>
+            <p>Inclusive enterprise and merchant support for women's economic participation.</p>
+          </article>
+          <article>
+            <span>RDY</span>
+            <h3>Responsible Digital for Youth</h3>
+            <p>Ethical, responsible, and safe digital citizenship for young people.</p>
+          </article>
+          <article>
+            <span>FIH</span>
+            <h3>Future Intelligence Hub</h3>
+            <p>ESGIN's flagship city innovation platform for AI-powered implementation.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section impact-section" id="impact">
+        <div class="container section-heading">
+          <p class="eyebrow">Impact framework</p>
+          <h2>FIH measures whether city solutions actually reach the real world.</h2>
+        </div>
+        <div class="container impact-grid">
+          <div>
+            <strong>2,000-5,000</strong>
+            <span>AI and innovation capability users trained per city per year</span>
+          </div>
+          <div>
+            <strong>30</strong>
+            <span>sustainable city solutions targeted per city per year</span>
+          </div>
+          <div>
+            <strong>30%</strong>
+            <span>target solution implementation rate through adoption, pilots, organizations, or company formation</span>
+          </div>
+          <div>
+            <strong>20%</strong>
+            <span>target cross-city replication or adoption rate each year</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section governance-section" aria-labelledby="governance-title">
+        <div class="container governance-grid">
+          <div>
+            <p class="eyebrow">Governance and contact</p>
+            <h2 id="governance-title">ESGIN provides the institutional home for FIH.</h2>
+          </div>
+          <div class="governance-panel">
+            <p>
+              ESGIN is headquartered in Seattle, United States, and registered in the United Kingdom under Company No. 15443379, with registered office at 128 City Road, London EC1V 2NX.
+            </p>
+            <p>
+              Governance principles listed in the organization introduction include transparency, accountability, integrity, responsible stewardship, and conflict-of-interest management.
+            </p>
+            <p>
+              Website:
+              <a href="https://www.esgin.org/" target="_blank" rel="noopener">www.esgin.org</a>
+              | Contact: <a href="mailto:acc@esgin.org">acc@esgin.org</a>
+            </p>
           </div>
         </div>
       </section>
@@ -258,22 +350,17 @@
       <section class="contact-section" id="contact">
         <div class="container contact-grid">
           <div>
-            <p class="eyebrow">Get involved</p>
-            <h2>Interested in becoming a founding partner?</h2>
+            <p class="eyebrow">Partner with FIH</p>
+            <h2>Help build the next city hub.</h2>
             <p>
-              Introduce your organization, community, venue, youth program, or project idea. The Seattle founding circle is forming now.
+              FIH welcomes venue providers, public-sector collaborators, corporate sponsors, technology partners, foundations, mentor networks, and solution adopters.
             </p>
           </div>
           <form class="contact-form" action="https://formsubmit.co/peculab.ai@gmail.com" method="POST">
-            <input type="hidden" name="_subject" value="Future Intelligence Hub Seattle inquiry">
+            <input type="hidden" name="_subject" value="Future Intelligence Hub global inquiry">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_next" value="https://fih-seattle.github.io/thanks.html">
-            <input
-              type="hidden"
-              name="_autoresponse"
-              value="Thank you for contacting Future Intelligence Hub Seattle. We received your inquiry and will follow up as the Seattle founding circle and pilot programs take shape."
-            >
             <label>
               Name
               <input type="text" name="name" autocomplete="name" required>
@@ -283,29 +370,16 @@
               <input type="email" name="email" autocomplete="email" required>
             </label>
             <label>
-              I am interested as
-              <select name="interest" required>
+              Partner type
+              <select name="partner_type" required>
                 <option value="">Select one</option>
-                <option>Community partner</option>
-                <option>Education partner</option>
-                <option>Industry partner</option>
-                <option>Venue supporter</option>
-                <option>Mentor or volunteer</option>
-                <option>Student or emerging innovator</option>
-                <option>Parent or youth advocate</option>
-              </select>
-            </label>
-            <label>
-              Conversation focus
-              <select name="conversation_focus" data-focus-field required>
-                <option value="">Select one</option>
-                <option>Seattle founding circle</option>
-                <option>Partnership conversation</option>
-                <option>Responsible Digital for Youth (RDY)</option>
-                <option>Youth digital ethics workshop</option>
-                <option>AI and future-ready capability workshop</option>
-                <option>Mentorship or volunteer role</option>
-                <option>Venue or event support</option>
+                <option>Venue provider</option>
+                <option>Corporate sponsor</option>
+                <option>Technology partner</option>
+                <option>Government or public-sector partner</option>
+                <option>Foundation or philanthropy partner</option>
+                <option>Mentor network</option>
+                <option>Solution adopter</option>
               </select>
             </label>
             <label>
@@ -321,19 +395,27 @@
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <strong>Future Intelligence Hub Seattle</strong>
-          <p>A Seattle-based local implementation initiative connected to the Future Intelligence Hub global framework.</p>
-        </div>
-        <div class="footer-note">
+          <strong>Future Intelligence Hub</strong>
           <p>
-            Programs, partnerships, venue arrangements, and public activities will be announced as they are confirmed.
-            References to global initiatives and partner ecosystems describe the broader Future Intelligence Hub framework
-            and do not imply endorsement, sponsorship, or formal affiliation by any organization unless explicitly stated.
+            FIH is managed by
+            <a href="https://www.esgin.org/" target="_blank" rel="noopener">Global ESG Leadership Organization</a>.
+            Future Intelligence Hub by Global ESG Leadership Organization.
+            Connecting people, knowledge, resources, and solutions to build the future society, powered by AI.
           </p>
+        </div>
+        <div class="footer-links">
+          <a href="seattle-local-region/index.html">Seattle local region</a>
+          <a href="Future%20Intelligence%20Hub%20-%20FNV1.pdf">Source PDF</a>
+          <a href="ESGIN_Organization_Introduction_Bilingual.md">ESGIN introduction</a>
         </div>
       </div>
     </footer>
 
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>
