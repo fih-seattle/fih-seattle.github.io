@@ -1,0 +1,83 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function submissionOpen() {
+      return get(/databases/$(database)/documents/settings/competition).data.phase == "submissions_open";
+    }
+
+    function votingOpen() {
+      return get(/databases/$(database)/documents/settings/competition).data.phase == "evaluation_open";
+    }
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isValidCompetitionSettings() {
+      return request.resource.data.keys().hasOnly(["phase", "updatedAt", "updatedBy", "updatedByEmail"])
+        && request.resource.data.phase in ["submissions_open", "evaluation_open", "results_published"];
+    }
+
+    function isApprovedSubmission(data) {
+      return data.status == "approved";
+    }
+
+    function isValidSubmissionCreate() {
+      return signedIn()
+        && submissionOpen()
+        && request.resource.data.status == "pending"
+        && request.resource.data.voteCount == 0
+        && request.resource.data.submitterUid == request.auth.uid
+        && request.resource.data.project_title is string
+        && request.resource.data.poc_website_url is string
+        && request.resource.data.poc_website_url.matches("https?://.*")
+        && request.resource.data.english_pitch_video_url is string
+        && request.resource.data.english_pitch_video_url.matches("https?://.*")
+        && request.resource.data.email is string;
+    }
+
+    match /submissions/{submissionId} {
+      allow read: if isApprovedSubmission(resource.data);
+      allow create: if submissionId == request.auth.uid && isValidSubmissionCreate();
+
+      allow update: if signedIn()
+        && votingOpen()
+        && isApprovedSubmission(resource.data)
+        && request.resource.data.diff(resource.data).changedKeys().hasOnly(["voteCount", "updatedAt"])
+        && request.resource.data.voteCount == resource.data.voteCount + 1
+        && !exists(/databases/$(database)/documents/votes/$(request.auth.uid))
+        && existsAfter(/databases/$(database)/documents/votes/$(request.auth.uid))
+        && getAfter(/databases/$(database)/documents/votes/$(request.auth.uid)).data.submissionId == submissionId;
+
+      allow delete: if false;
+    }
+
+    match /votes/{voteId} {
+      allow read: if false;
+      allow create: if signedIn()
+        && votingOpen()
+        && voteId == request.auth.uid
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.submissionId is string
+        && !exists(/databases/$(database)/documents/votes/$(voteId));
+
+      allow update, delete: if false;
+    }
+
+    match /settings/{settingId} {
+      allow read: if settingId == "competition";
+      allow write: if settingId == "competition" && isAdmin() && isValidCompetitionSettings();
+    }
+
+    match /admins/{adminId} {
+      allow read: if signedIn() && adminId == request.auth.uid;
+      allow write: if false;
+    }
+  }
+}

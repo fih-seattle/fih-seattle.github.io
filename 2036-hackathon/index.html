@@ -105,12 +105,19 @@
             <p class="eyebrow">Submission form</p>
             <h2>Send the project links directly to FIH.</h2>
             <p class="form-intro">
-              The form collects student eligibility, project details, the POC website link, and the English video pitch link. Entries appear on the public leaderboard only after the team gives permission to publish and the organizer marks the submission as approved.
+              The form collects student eligibility, project details, the POC website link, and the English video pitch link. The organizer controls whether submissions, evaluation, or final results are open from Firebase.
             </p>
           </div>
-          <form class="submission-form" action="https://script.google.com/macros/s/AKfycbw8iUX51gmQdHjy79aFPLYDBy8dPZcDKi3-uNAxlKUx-yXnIKvQeMpLjc_oE4pJRYiemg/exec" method="POST" data-google-sheet-form>
+          <form class="submission-form" data-submission-form>
             <input type="hidden" name="source" value="FIH 2036 Future World Hackathon">
             <input type="hidden" name="submitted_at_page_time" data-submitted-at>
+            <div class="auth-panel">
+              <p data-auth-status>Sign in with Google to submit or vote.</p>
+              <div class="auth-actions">
+                <button class="button button-secondary" type="button" data-auth-button>Sign in with Google</button>
+                <button class="button button-secondary" type="button" data-sign-out hidden>Sign out</button>
+              </div>
+            </div>
             <div class="form-grid">
               <label>
                 Student or team lead name
@@ -185,7 +192,7 @@
             </div>
             <button class="button button-primary" type="submit" data-submit-button>Submit Project</button>
             <p class="form-note" data-form-status>
-              Submissions will be recorded in the hackathon Google Sheet after the Google Apps Script endpoint is connected.
+              Submissions are stored in Firebase and remain private until organizer approval.
             </p>
           </form>
         </div>
@@ -194,16 +201,16 @@
       <section class="section section-white" id="works">
         <div class="container section-heading">
           <p class="eyebrow">People's Choice Leaderboard</p>
-          <h2>Submitted works are ranked by authenticated community votes.</h2>
+          <h2>Approved works open for evaluation after the submission deadline.</h2>
           <p>
-            Approved public proposals are loaded from the hackathon Google Sheet with direct links to each POC website and one-minute English product introduction video.
-            Each project also includes a Google-authenticated vote button so one Google user key can vote only once per project.
+            Approved public proposals are loaded from Firebase with direct links to each POC website and one-minute English product introduction video.
+            Each project also includes a Google-authenticated vote button. One Google account can vote for one project only.
             Share a project link to help students rally supporters and bring more visitors to the hackathon page.
           </p>
         </div>
         <div class="container gallery-grid" data-submission-gallery>
           <div class="empty-state" data-empty-state>
-            Loading approved public works from the Google Sheet...
+            The evaluation list opens when the organizer switches the competition phase in Firebase.
           </div>
         </div>
       </section>
@@ -279,6 +286,6 @@
     </footer>
 
     <script src="submissions.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>

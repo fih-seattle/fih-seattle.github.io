@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organizer Control | FIH 2036 Hackathon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="organizer-page">
+  <main class="organizer-shell">
+    <section class="organizer-panel" aria-labelledby="organizer-title">
+      <p class="eyebrow">Organizer only</p>
+      <h1 id="organizer-title">FIH 2036 Hackathon Control</h1>
+      <p class="organizer-lede">Sign in with Google, then choose the current competition status.</p>
+
+      <div class="organizer-auth">
+        <button class="button primary" type="button" data-organizer-sign-in>Sign in with Google</button>
+        <button class="button ghost" type="button" data-organizer-sign-out hidden>Sign out</button>
+        <p data-organizer-status>Not signed in.</p>
+      </div>
+
+      <div class="admin-card" data-admin-card hidden>
+        <h2>Admin setup</h2>
+        <p>This Google account is not registered as an organizer yet.</p>
+        <label>
+          Your Firebase UID
+          <input type="text" readonly data-admin-uid>
+        </label>
+        <p class="small-note">Create a Firestore document at <strong>admins / this UID</strong>. It can contain any field, for example <strong>role = owner</strong>.</p>
+      </div>
+
+      <div class="phase-control" data-phase-control hidden>
+        <h2>Competition status</h2>
+        <p>Current status: <strong data-current-phase>Loading...</strong></p>
+        <div class="phase-options" role="group" aria-label="Competition phase">
+          <button type="button" data-phase-option="submissions_open">
+            <strong>Open submissions</strong>
+            <span>Participants can submit. Public project list is hidden.</span>
+          </button>
+          <button type="button" data-phase-option="evaluation_open">
+            <strong>Close submissions and open voting</strong>
+            <span>Approved projects appear. Google users can vote once.</span>
+          </button>
+          <button type="button" data-phase-option="results_published">
+            <strong>Publish results</strong>
+            <span>Leaderboard stays public. Voting is closed.</span>
+          </button>
+        </div>
+        <p class="small-note" data-phase-message></p>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="organizer.js"></script>
+</body>
+</html>

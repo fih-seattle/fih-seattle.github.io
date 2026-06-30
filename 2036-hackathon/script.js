@@ -1,3 +1,45 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import {
+  GoogleAuthProvider,
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+import {
+  collection,
+  doc,
+  getDoc,
+  getFirestore,
+  increment,
+  onSnapshot,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+  writeBatch,
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCBOEvFK_CDtcFydBm7r0Qd4npHkNpvo8Y",
+  authDomain: "fih-2036-hackathon.firebaseapp.com",
+  projectId: "fih-2036-hackathon",
+  storageBucket: "fih-2036-hackathon.firebasestorage.app",
+  messagingSenderId: "760399385669",
+  appId: "1:760399385669:web:f0944008ef298f4ff5bf2c",
+  measurementId: "G-SMS4CRG32T",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const provider = new GoogleAuthProvider();
+const PHASES = {
+  SUBMISSIONS_OPEN: "submissions_open",
+  EVALUATION_OPEN: "evaluation_open",
+  RESULTS_PUBLISHED: "results_published",
+};
+
 const header = document.querySelector("[data-header]");
 const nav = document.querySelector("[data-nav]");
 const toggle = document.querySelector("[data-nav-toggle]");
@@ -5,14 +47,26 @@ const gallery = document.querySelector("[data-submission-gallery]");
 const emptyState = document.querySelector("[data-empty-state]");
 const scoreBody = document.querySelector("[data-score-body]");
 const exportButton = document.querySelector("[data-export-scores]");
-const googleSheetForm = document.querySelector("[data-google-sheet-form]");
+const submissionForm = document.querySelector("[data-submission-form]");
 const submitButton = document.querySelector("[data-submit-button]");
 const formStatus = document.querySelector("[data-form-status]");
 const submittedAt = document.querySelector("[data-submitted-at]");
+const authButtons = document.querySelectorAll("[data-auth-button]");
+const signOutButtons = document.querySelectorAll("[data-sign-out]");
+const authStatus = document.querySelector("[data-auth-status]");
 
-const PUBLIC_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYM9bQ1W63BDxRpDpbHl3EOQImAGLc8DPRv13pdDtdX5yBGVYL02kjJGxFsXE3RAtoTw/exec";
-const VOTE_ENDPOINT = "https://script.google.com/macros/s/AKfycbw8iUX51gmQdHjy79aFPLYDBy8dPZcDKi3-uNAxlKUx-yXnIKvQeMpLjc_oE4pJRYiemg/exec";
-const sheetSubmissions = [];
+let currentUser = null;
+let approvedSubmissions = [];
+let approvedUnsubscribe = null;
+let competitionSettings = {
+  phase: PHASES.SUBMISSIONS_OPEN,
+  submissionDeadlineLabel: "the submission deadline",
+};
+
+const isSubmissionOpen = () => competitionSettings.phase === PHASES.SUBMISSIONS_OPEN;
+const isShowcaseOpen = () =>
+  competitionSettings.phase === PHASES.EVALUATION_OPEN || competitionSettings.phase === PHASES.RESULTS_PUBLISHED;
+const isVotingOpen = () => competitionSettings.phase === PHASES.EVALUATION_OPEN;
 
 const updateHeader = () => {
   if (header) {
@@ -40,9 +94,69 @@ if (toggle && nav && header) {
   });
 }
 
+const signIn = async () => {
+  const result = await signInWithPopup(auth, provider);
+  return result.user;
+};
+
+authButtons.forEach((button) => {
+  button.addEventListener("click", async () => {
+    try {
+      await signIn();
+    } catch (error) {
+      updateFormStatus("Google sign-in was not completed. Please try again.");
+    }
+  });
+});
+
+signOutButtons.forEach((button) => {
+  button.addEventListener("click", () => signOut(auth));
+});
+
+onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+  const signedIn = Boolean(user);
+  const label = signedIn ? `Signed in as ${user.displayName || user.email}` : "Sign in with Google to submit or vote.";
+
+  if (authStatus) {
+    authStatus.textContent = label;
+  }
+
+  authButtons.forEach((button) => {
+    button.hidden = signedIn;
+  });
+  signOutButtons.forEach((button) => {
+    button.hidden = !signedIn;
+  });
+});
+
+function updateFormStatus(message) {
+  if (formStatus) {
+    formStatus.textContent = message;
+  }
+}
+
+const applyPhaseToPage = () => {
+  if (submitButton) {
+    submitButton.disabled = !isSubmissionOpen();
+    submitButton.textContent = isSubmissionOpen() ? "Submit Project" : "Submission Closed";
+  }
+
+  if (!isSubmissionOpen()) {
+    updateFormStatus(`Submissions are closed. Current phase: ${competitionSettings.phase}.`);
+  } else {
+    updateFormStatus("Submissions are open. Sign in with Google and submit before the deadline.");
+  }
+
+  renderSubmissionGallery(approvedSubmissions);
+  renderScoreTable();
+};
+
 const submissions = Array.isArray(window.hackathonSubmissions) ? window.hackathonSubmissions : [];
 
 const getProjectId = (item, index = 0) => item.id || `FIH2036-${String(index + 1).padStart(3, "0")}`;
+
+const getSubmissionDocId = (item, index = 0) => item.firestoreId || item.id || `FIH2036-${String(index + 1).padStart(3, "0")}`;
 
 const getProjectAnchor = (item, index = 0) => `project-${encodeURIComponent(getProjectId(item, index))}`;
 
@@ -57,52 +171,69 @@ const getSortedSubmissions = (items) =>
     .slice()
     .sort((a, b) => Number(b.voteCount || 0) - Number(a.voteCount || 0));
 
-if (googleSheetForm && PUBLIC_SHEET_ENDPOINT) {
-  googleSheetForm.addEventListener("submit", async (event) => {
+if (submissionForm) {
+  submissionForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    if (submittedAt) {
-      submittedAt.value = new Date().toISOString();
-    }
-
-    const formData = new FormData(googleSheetForm);
-    const payload = Object.fromEntries(formData.entries());
-
-    if (submitButton) {
-      submitButton.disabled = true;
-      submitButton.textContent = "Submitting...";
-    }
-
-    if (formStatus) {
-      formStatus.textContent = "Sending your submission to the hackathon Google Sheet...";
-    }
-
     try {
-      await fetch(PUBLIC_SHEET_ENDPOINT, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify(payload),
+      if (!isSubmissionOpen()) {
+        updateFormStatus("Submissions are currently closed.");
+        return;
+      }
+
+      const user = currentUser || (await signIn());
+
+      if (submittedAt) {
+        submittedAt.value = new Date().toISOString();
+      }
+
+      const formData = new FormData(submissionForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+      }
+
+      updateFormStatus("Submitting your project to the hackathon review queue...");
+
+      await setDoc(doc(db, "submissions", user.uid), {
+        source: "FIH 2036 Future World Hackathon",
+        team_lead_name: cleanText(payload.team_lead_name),
+        email: cleanText(payload.email),
+        age_confirmation: cleanText(payload.age_confirmation),
+        student_status: cleanText(payload.student_status),
+        school: cleanText(payload.school),
+        country_region: cleanText(payload.country_region),
+        team_members: cleanText(payload.team_members),
+        project_title: cleanText(payload.project_title),
+        scenario_definition: cleanText(payload.scenario_definition),
+        problem_and_users: cleanText(payload.problem_and_users),
+        solution_summary: cleanText(payload.solution_summary),
+        poc_website_url: cleanText(payload.poc_website_url),
+        english_pitch_video_url: cleanText(payload.english_pitch_video_url),
+        permission_to_publish: cleanText(payload.permission_to_publish),
+        submitterUid: user.uid,
+        submitterName: user.displayName || "",
+        submitterEmail: user.email || "",
+        status: "pending",
+        voteCount: 0,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
       });
 
       window.location.href = "thanks.html";
     } catch (error) {
-      if (formStatus) {
-        formStatus.textContent = "The Google Sheet submission did not go through. Please check the Apps Script deployment URL and permissions.";
-      }
+      updateFormStatus(`Submission failed: ${error.message}`);
       if (submitButton) {
         submitButton.disabled = false;
         submitButton.textContent = "Submit Project";
       }
     }
   });
-} else if (submittedAt) {
-  googleSheetForm?.addEventListener("submit", () => {
-    submittedAt.value = new Date().toISOString();
-  });
 }
+
+const cleanText = (value) => String(value || "").replace(/\s+/g, " ").trim();
 
 const linkMarkup = (url, label) => {
   if (!url) {
@@ -160,16 +291,17 @@ const videoMarkup = (url) => {
   `;
 };
 
-const voteMarkup = (item) => {
-  const projectId = encodeURIComponent(item.id || "");
-  const voteUrl = `${VOTE_ENDPOINT}?action=vote&project=${projectId}`;
+const voteMarkup = (item, index) => {
+  const projectId = getSubmissionDocId(item, index);
   const voteCount = Number(item.voteCount || 0);
+  const disabled = isVotingOpen() ? "" : "disabled";
+  const label = isVotingOpen() ? "Vote with Google" : "Voting Closed";
 
   return `
     <div class="vote-row">
       <strong>${voteCount}</strong>
       <span>${voteCount === 1 ? "vote" : "votes"}</span>
-      <a class="vote-button" href="${escapeHtml(voteUrl)}" target="_blank" rel="noopener">Vote with Google</a>
+      <button class="vote-button" type="button" data-vote="${escapeHtml(projectId)}" ${disabled}>${label}</button>
     </div>
   `;
 };
@@ -197,6 +329,26 @@ const escapeHtml = (value) => {
   return div.innerHTML;
 };
 
+const normalizeSubmission = (docSnap) => {
+  const data = docSnap.data();
+
+  return {
+    firestoreId: docSnap.id,
+    id: data.public_id || docSnap.id,
+    team: data.team_lead_name || data.submitterName || "Student team",
+    studentStatus: data.student_status || "",
+    school: data.school || "",
+    country: data.country_region || "",
+    project: data.project_title || "",
+    scenario: data.scenario_definition || "",
+    problem: data.problem_and_users || "",
+    solution: data.solution_summary || "",
+    pocUrl: data.poc_website_url || "",
+    videoUrl: data.english_pitch_video_url || "",
+    voteCount: Number(data.voteCount || 0),
+  };
+};
+
 const renderSubmissionGallery = (items) => {
   if (!gallery) {
     return;
@@ -204,7 +356,9 @@ const renderSubmissionGallery = (items) => {
 
   if (!items.length) {
     if (emptyState) {
-      emptyState.textContent = "No approved public works are available yet. Set review_status to Approved, Published, or Public in the Google Sheet after review.";
+      emptyState.textContent = isShowcaseOpen()
+        ? "No approved public works are available yet. Approved projects will appear here after review."
+        : "The evaluation list opens after submissions close.";
     }
     return;
   }
@@ -234,7 +388,7 @@ const renderSubmissionGallery = (items) => {
             ${linkMarkup(item.pocUrl, "Open POC Website")}
             ${linkMarkup(item.videoUrl, "Open Video")}
           </div>
-          ${voteMarkup(item)}
+          ${voteMarkup(item, index)}
           ${shareMarkup(item, index)}
         </article>
       `,
@@ -250,12 +404,12 @@ const renderScoreTable = () => {
     return;
   }
 
-  const scoreSubmissions = submissions.concat(sheetSubmissions);
+  const scoreSubmissions = submissions.concat(approvedSubmissions);
   scoreBody.innerHTML = scoreSubmissions.length
     ? scoreSubmissions
         .map(
           (item, index) => {
-            const id = item.id || `FIH2036-${String(index + 1).padStart(3, "0")}`;
+            const id = getProjectId(item, index);
 
             return `
               <tr data-score-row="${escapeHtml(id)}">
@@ -276,7 +430,7 @@ const renderScoreTable = () => {
           },
         )
         .join("")
-    : `<tr><td colspan="9" class="empty-table">Loading submissions from the Google Sheet...</td></tr>`;
+    : `<tr><td colspan="9" class="empty-table">No approved public submissions are available yet.</td></tr>`;
 
   scoreBody.querySelectorAll("tr[data-score-row]").forEach((row) => {
     const id = row.getAttribute("data-score-row");
@@ -284,46 +438,63 @@ const renderScoreTable = () => {
   });
 };
 
-const loadSheetSubmissions = () => {
-  if ((!gallery && !scoreBody) || !PUBLIC_SHEET_ENDPOINT) {
+const loadApprovedSubmissions = () => {
+  if (!gallery && !scoreBody) {
+    return;
+  }
+
+  if (!isShowcaseOpen()) {
+    if (approvedUnsubscribe) {
+      approvedUnsubscribe();
+      approvedUnsubscribe = null;
+    }
+    approvedSubmissions = [];
     renderSubmissionGallery([]);
     renderScoreTable();
     return;
   }
 
-  const callbackName = `handleHackathonSubmissions_${Date.now()}`;
-  const script = document.createElement("script");
+  if (approvedUnsubscribe) {
+    return;
+  }
 
-  window[callbackName] = (data) => {
-    if (data?.status === "error") {
+  const approvedQuery = query(collection(db, "submissions"), where("status", "==", "approved"));
+
+  approvedUnsubscribe = onSnapshot(
+    approvedQuery,
+    (snapshot) => {
+      approvedSubmissions = snapshot.docs.map(normalizeSubmission);
+      renderSubmissionGallery(approvedSubmissions);
+      renderScoreTable();
+    },
+    (error) => {
       if (emptyState) {
-        emptyState.textContent = `Submitted works could not be loaded: ${data.message}. Check the Apps Script Sheet ID and redeploy a new Web App version.`;
+        emptyState.textContent = `Submitted works could not be loaded from Firebase: ${error.message}`;
       }
       renderScoreTable();
-      script.remove();
-      delete window[callbackName];
-      return;
-    }
+    },
+  );
+};
 
-    const rows = Array.isArray(data?.submissions) ? data.submissions : [];
-    sheetSubmissions.splice(0, sheetSubmissions.length, ...rows);
-    renderSubmissionGallery(sheetSubmissions);
-    renderScoreTable();
-    script.remove();
-    delete window[callbackName];
-  };
+const loadCompetitionSettings = () => {
+  onSnapshot(
+    doc(db, "settings", "competition"),
+    (snapshot) => {
+      if (snapshot.exists()) {
+        competitionSettings = {
+          ...competitionSettings,
+          ...snapshot.data(),
+        };
+      }
 
-  script.onerror = () => {
-    renderSubmissionGallery([]);
-    if (emptyState) {
-      emptyState.textContent = "Submitted works could not be loaded. Check that the public Apps Script deployment access is set to Anyone, then redeploy a new version.";
-    }
-    renderScoreTable();
-    delete window[callbackName];
-  };
-
-  script.src = `${PUBLIC_SHEET_ENDPOINT}?callback=${callbackName}`;
-  document.body.appendChild(script);
+      applyPhaseToPage();
+      loadApprovedSubmissions();
+    },
+    (error) => {
+      updateFormStatus(`Competition settings could not be loaded: ${error.message}`);
+      applyPhaseToPage();
+    },
+  );
 };
 
 const scoreFields = [
@@ -348,25 +519,61 @@ const updateTotal = (row, id) => {
   }
 };
 
-if (gallery || scoreBody) {
-  renderSubmissionGallery([]);
-  loadSheetSubmissions();
-}
+loadCompetitionSettings();
 
 document.addEventListener("click", async (event) => {
+  const voteButton = event.target.closest("[data-vote]");
   const copyButton = event.target.closest("[data-copy-link]");
 
-  if (!copyButton) {
+  if (voteButton) {
+    if (!isVotingOpen()) {
+      window.alert("Voting is not open right now.");
+      return;
+    }
+
+    const submissionId = voteButton.getAttribute("data-vote");
+
+    try {
+      const user = currentUser || (await signIn());
+      const voteId = user.uid;
+      const voteRef = doc(db, "votes", voteId);
+      const existingVote = await getDoc(voteRef);
+
+      if (existingVote.exists()) {
+        voteButton.textContent = "Already voted";
+        window.alert("This Google account has already voted for one project.");
+        return;
+      }
+
+      const batch = writeBatch(db);
+      batch.set(voteRef, {
+        submissionId,
+        uid: user.uid,
+        createdAt: serverTimestamp(),
+      });
+      batch.update(doc(db, "submissions", submissionId), {
+        voteCount: increment(1),
+        updatedAt: serverTimestamp(),
+      });
+      await batch.commit();
+      voteButton.textContent = "Vote recorded";
+    } catch (error) {
+      voteButton.textContent = "Vote failed";
+      window.alert(`Vote failed: ${error.message}`);
+    }
+
     return;
   }
 
-  const link = copyButton.getAttribute("data-copy-link");
+  if (copyButton) {
+    const link = copyButton.getAttribute("data-copy-link");
 
-  try {
-    await navigator.clipboard.writeText(link);
-    copyButton.textContent = "Copied";
-  } catch (error) {
-    window.prompt("Copy this project link:", link);
+    try {
+      await navigator.clipboard.writeText(link);
+      copyButton.textContent = "Copied";
+    } catch (error) {
+      window.prompt("Copy this project link:", link);
+    }
   }
 });
 
