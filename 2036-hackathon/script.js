@@ -42,6 +42,12 @@ const PHASES = {
   EVALUATION_OPEN: "evaluation_open",
   RESULTS_PUBLISHED: "results_published",
 };
+const countdownLabels = {
+  "2026-07-15T00:00:00-07:00": "Open now",
+  "2026-09-30T23:59:59-07:00": "Closed",
+  "2026-10-01T00:00:00-07:00": "Reviewing now",
+  "2026-10-15T00:00:00-07:00": "Announced",
+};
 
 const header = document.querySelector("[data-header]");
 const nav = document.querySelector("[data-nav]");
@@ -57,6 +63,7 @@ const submittedAt = document.querySelector("[data-submitted-at]");
 const authButtons = document.querySelectorAll("[data-auth-button]");
 const signOutButtons = document.querySelectorAll("[data-sign-out]");
 const authStatus = document.querySelector("[data-auth-status]");
+const countdownNodes = document.querySelectorAll("[data-countdown]");
 
 let currentUser = null;
 let approvedSubmissions = [];
@@ -71,6 +78,46 @@ const isShowcaseOpen = () =>
   competitionSettings.phase === PHASES.EVALUATION_OPEN || competitionSettings.phase === PHASES.RESULTS_PUBLISHED;
 const isVotingOpen = () => competitionSettings.phase === PHASES.EVALUATION_OPEN;
 
+const formatCountdown = (targetDate, fallback) => {
+  const diff = targetDate.getTime() - Date.now();
+
+  if (diff <= 0) {
+    return fallback || "Now";
+  }
+
+  const minute = 60 * 1000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+  const days = Math.floor(diff / day);
+  const hours = Math.floor((diff % day) / hour);
+  const minutes = Math.floor((diff % hour) / minute);
+
+  if (days > 1) {
+    return `${days} days`;
+  }
+  if (days === 1) {
+    return `1 day ${hours}h`;
+  }
+  if (hours > 0) {
+    return `${hours}h ${minutes}m`;
+  }
+  return `${Math.max(minutes, 1)}m`;
+};
+
+const updateCountdowns = () => {
+  countdownNodes.forEach((node) => {
+    const targetValue = node.getAttribute("data-countdown");
+    const targetDate = new Date(targetValue);
+
+    if (Number.isNaN(targetDate.getTime())) {
+      node.textContent = "--";
+      return;
+    }
+
+    node.textContent = formatCountdown(targetDate, countdownLabels[targetValue]);
+  });
+};
+
 const updateHeader = () => {
   if (header) {
     header.classList.toggle("is-scrolled", window.scrollY > 16);
@@ -78,7 +125,9 @@ const updateHeader = () => {
 };
 
 updateHeader();
+updateCountdowns();
 window.addEventListener("scroll", updateHeader, { passive: true });
+window.setInterval(updateCountdowns, 60000);
 
 if (toggle && nav && header) {
   toggle.addEventListener("click", () => {
