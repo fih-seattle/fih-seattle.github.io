@@ -51,7 +51,7 @@ service cloud.firestore {
       allow update: if signedIn()
         && votingOpen()
         && isApprovedSubmission(resource.data)
-        && request.resource.data.diff(resource.data).changedKeys().hasOnly(["voteCount", "updatedAt"])
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(["voteCount", "updatedAt"])
         && request.resource.data.voteCount == resource.data.voteCount + 1
         && !exists(/databases/$(database)/documents/votes/$(request.auth.uid))
         && existsAfter(/databases/$(database)/documents/votes/$(request.auth.uid))
@@ -67,6 +67,8 @@ service cloud.firestore {
         && voteId == request.auth.uid
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.submissionId is string
+        && exists(/databases/$(database)/documents/submissions/$(request.resource.data.submissionId))
+        && isApprovedSubmission(get(/databases/$(database)/documents/submissions/$(request.resource.data.submissionId)).data)
         && !exists(/databases/$(database)/documents/votes/$(voteId));
 
       allow update, delete: if false;
