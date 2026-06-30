@@ -3,7 +3,7 @@ import {
   GoogleAuthProvider,
   getAuth,
   onAuthStateChanged,
-  signInWithPopup,
+  signInWithRedirect,
   signOut,
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 import {
@@ -123,7 +123,8 @@ const checkAdmin = async (user) => {
 
 signInButton?.addEventListener("click", async () => {
   try {
-    await signInWithPopup(auth, provider);
+    setStatus("Redirecting to Google sign-in...");
+    await signInWithRedirect(auth, provider);
   } catch (error) {
     setStatus(`Sign-in failed: ${error.message}`);
   }

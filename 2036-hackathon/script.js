@@ -3,7 +3,7 @@ import {
   GoogleAuthProvider,
   getAuth,
   onAuthStateChanged,
-  signInWithPopup,
+  signInWithRedirect,
   signOut,
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 import {
@@ -95,8 +95,8 @@ if (toggle && nav && header) {
 }
 
 const signIn = async () => {
-  const result = await signInWithPopup(auth, provider);
-  return result.user;
+  await signInWithRedirect(auth, provider);
+  return null;
 };
 
 authButtons.forEach((button) => {
@@ -104,7 +104,7 @@ authButtons.forEach((button) => {
     try {
       await signIn();
     } catch (error) {
-      updateFormStatus("Google sign-in was not completed. Please try again.");
+      updateFormStatus(`Google sign-in could not start: ${error.message}`);
     }
   });
 });
@@ -181,7 +181,11 @@ if (submissionForm) {
         return;
       }
 
-      const user = currentUser || (await signIn());
+      if (!currentUser) {
+        await signIn();
+        return;
+      }
+      const user = currentUser;
 
       if (submittedAt) {
         submittedAt.value = new Date().toISOString();
@@ -534,7 +538,11 @@ document.addEventListener("click", async (event) => {
     const submissionId = voteButton.getAttribute("data-vote");
 
     try {
-      const user = currentUser || (await signIn());
+      if (!currentUser) {
+        await signIn();
+        return;
+      }
+      const user = currentUser;
       const voteId = user.uid;
       const voteRef = doc(db, "votes", voteId);
       const existingVote = await getDoc(voteRef);
