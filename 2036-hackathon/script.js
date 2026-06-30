@@ -201,42 +201,47 @@ const renderSubmissionGallery = (items) => {
     return;
   }
 
-  if (items.length) {
-    emptyState?.remove();
-    const sortedItems = getSortedSubmissions(items);
-
-    gallery.innerHTML = sortedItems
-      .map(
-        (item, index) => `
-          <article class="work-card" id="${getProjectAnchor(item, index)}">
-            <div class="rank-row">
-              <span class="rank-badge">#${index + 1}</span>
-              <strong>People's Choice</strong>
-            </div>
-            <div>
-              <span class="project-id">${escapeHtml(getProjectId(item, index))}</span>
-              <h3>${escapeHtml(item.project)}</h3>
-              <p class="team-line">${escapeHtml(item.team)}${item.school ? ` / ${escapeHtml(item.school)}` : ""}${item.country ? ` / ${escapeHtml(item.country)}` : ""}</p>
-              ${item.studentStatus ? `<p class="student-line">${escapeHtml(item.studentStatus)}</p>` : ""}
-            </div>
-            <p><strong>2036 Scenario:</strong> ${escapeHtml(item.scenario)}</p>
-            ${item.problem ? `<p><strong>Target Problem:</strong> ${escapeHtml(item.problem)}</p>` : ""}
-            <p><strong>Solution:</strong> ${escapeHtml(item.solution)}</p>
-            ${videoMarkup(item.videoUrl)}
-            <div class="work-actions">
-              ${linkMarkup(item.pocUrl, "Open POC Website")}
-              ${linkMarkup(item.videoUrl, "Open Video")}
-            </div>
-            ${voteMarkup(item)}
-            ${shareMarkup(item, index)}
-          </article>
-        `,
-      )
-      .join("");
-
-    const targetProject = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
-    targetProject?.scrollIntoView({ block: "start" });
+  if (!items.length) {
+    if (emptyState) {
+      emptyState.textContent = "No approved public works are available yet. Set review_status to Approved, Published, or Public in the Google Sheet after review.";
+    }
+    return;
   }
+
+  emptyState?.remove();
+  const sortedItems = getSortedSubmissions(items);
+
+  gallery.innerHTML = sortedItems
+    .map(
+      (item, index) => `
+        <article class="work-card" id="${getProjectAnchor(item, index)}">
+          <div class="rank-row">
+            <span class="rank-badge">#${index + 1}</span>
+            <strong>People's Choice</strong>
+          </div>
+          <div>
+            <span class="project-id">${escapeHtml(getProjectId(item, index))}</span>
+            <h3>${escapeHtml(item.project)}</h3>
+            <p class="team-line">${escapeHtml(item.team)}${item.school ? ` / ${escapeHtml(item.school)}` : ""}${item.country ? ` / ${escapeHtml(item.country)}` : ""}</p>
+            ${item.studentStatus ? `<p class="student-line">${escapeHtml(item.studentStatus)}</p>` : ""}
+          </div>
+          <p><strong>2036 Scenario:</strong> ${escapeHtml(item.scenario)}</p>
+          ${item.problem ? `<p><strong>Target Problem:</strong> ${escapeHtml(item.problem)}</p>` : ""}
+          <p><strong>Solution:</strong> ${escapeHtml(item.solution)}</p>
+          ${videoMarkup(item.videoUrl)}
+          <div class="work-actions">
+            ${linkMarkup(item.pocUrl, "Open POC Website")}
+            ${linkMarkup(item.videoUrl, "Open Video")}
+          </div>
+          ${voteMarkup(item)}
+          ${shareMarkup(item, index)}
+        </article>
+      `,
+    )
+    .join("");
+
+  const targetProject = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
+  targetProject?.scrollIntoView({ block: "start" });
 };
 
 const renderScoreTable = () => {
@@ -289,6 +294,16 @@ const loadSheetSubmissions = () => {
   const script = document.createElement("script");
 
   window[callbackName] = (data) => {
+    if (data?.status === "error") {
+      if (emptyState) {
+        emptyState.textContent = `Submitted works could not be loaded: ${data.message}. Check the Apps Script Sheet ID and redeploy a new Web App version.`;
+      }
+      renderScoreTable();
+      script.remove();
+      delete window[callbackName];
+      return;
+    }
+
     const rows = Array.isArray(data?.submissions) ? data.submissions : [];
     sheetSubmissions.splice(0, sheetSubmissions.length, ...rows);
     renderSubmissionGallery(sheetSubmissions);

@@ -88,30 +88,25 @@ function parsePayload_(e) {
 }
 
 function doGet(e) {
-  if (e && e.parameter && e.parameter.action === "vote") {
-    return recordVote_(e.parameter.project || "");
-  }
-
   const callback = e && e.parameter && e.parameter.callback;
-  const body = {
-    status: "success",
-    submissions: getPublicSubmissions_(),
-  };
 
-  if (callback) {
-    if (!/^[A-Za-z_$][0-9A-Za-z_$]{0,80}$/.test(callback)) {
-      return jsonResponse_({
-        status: "error",
-        message: "Invalid callback.",
-      });
+  try {
+    if (e && e.parameter && e.parameter.action === "vote") {
+      return recordVote_(e.parameter.project || "");
     }
 
-    return ContentService
-      .createTextOutput(`${callback}(${JSON.stringify(body)});`)
-      .setMimeType(ContentService.MimeType.JAVASCRIPT);
-  }
+    const body = {
+      status: "success",
+      submissions: getPublicSubmissions_(),
+    };
 
-  return jsonResponse_(body);
+    return callbackResponse_(callback, body);
+  } catch (error) {
+    return callbackResponse_(callback, {
+      status: "error",
+      message: error.message,
+    });
+  }
 }
 
 function getSubmissionSheet_() {
@@ -412,4 +407,21 @@ function jsonResponse_(body) {
   return ContentService
     .createTextOutput(JSON.stringify(body))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function callbackResponse_(callback, body) {
+  if (!callback) {
+    return jsonResponse_(body);
+  }
+
+  if (!/^[A-Za-z_$][0-9A-Za-z_$]{0,80}$/.test(callback)) {
+    return jsonResponse_({
+      status: "error",
+      message: "Invalid callback.",
+    });
+  }
+
+  return ContentService
+    .createTextOutput(`${callback}(${JSON.stringify(body)});`)
+    .setMimeType(ContentService.MimeType.JAVASCRIPT);
 }
