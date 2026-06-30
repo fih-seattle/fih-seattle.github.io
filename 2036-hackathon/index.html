@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FIH 2036 Future World Online Hackathon</title>
+    <meta
+      name="description"
+      content="An online hackathon for students age 15+ to submit a 2036 future-world scenario, a solution POC website, and a one-minute English product pitch video."
+    >
+    <meta property="og:title" content="FIH 2036 Future World Online Hackathon">
+    <meta
+      property="og:description"
+      content="Students age 15+ imagine the world of 2036, define a scenario, build a POC website, and submit a one-minute English product pitch video."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="../assets/future-intelligence-hub-global-transparent.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="../index.html" aria-label="Future Intelligence Hub home">
+        <span class="brand-mark" aria-hidden="true">FIH</span>
+        <span class="brand-text">
+          <span class="brand-name">Future Intelligence Hub</span>
+          <span class="brand-line">2036 Future World Online Hackathon</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" data-nav>
+        <a href="#challenge">Challenge</a>
+        <a href="#submit">Submit</a>
+        <a href="#works">Works</a>
+        <a href="#criteria">Criteria</a>
+        <a class="nav-cta" href="judge-scorecard.html">Judge List</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <p class="eyebrow">Online call for students age 15+</p>
+          <h1 id="hero-title">2036 Future World Hackathon</h1>
+          <p class="hero-lede">
+            Imagine a real-world scenario in 2036, define the challenge clearly, build a proof-of-concept website, and pitch the solution in English in one minute.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#submit">Submit Your Work</a>
+            <a class="button button-secondary" href="#works">View Submitted Works</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-white" id="challenge">
+        <div class="container section-heading">
+          <p class="eyebrow">The challenge</p>
+          <h2>Submit a 2036 world-imagination solution that can be seen, tested, and explained.</h2>
+          <p>
+            This online hackathon invites in-school students age 15 and above to create practical future-world proposals. Each team must define a 2036 scenario, explain the problem inside that scenario, build a POC website, and record a one-minute English product introduction video.
+          </p>
+        </div>
+        <div class="container overview-grid">
+          <article class="overview-card">
+            <strong>Who</strong>
+            <h3>Students age 15+</h3>
+            <p>Open to individual students or student teams currently enrolled in school, college, or university.</p>
+          </article>
+          <article class="overview-card">
+            <strong>Theme</strong>
+            <h3>The world in 2036</h3>
+            <p>Choose a future social, city, education, health, climate, AI, work, finance, or community scenario.</p>
+          </article>
+          <article class="overview-card">
+            <strong>Opportunity</strong>
+            <h3>Bangkok presentation pathway</h3>
+            <p>Selected winners may be invited to present their work at the United Nations Conference Centre in Bangkok, Asia's UN regional headquarters venue.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="requirements-title">
+        <div class="container split">
+          <div>
+            <p class="eyebrow">Required deliverables</p>
+            <h2 id="requirements-title">Every submission must include these parts.</h2>
+          </div>
+          <ul class="requirements-list">
+            <li>2036 scenario definition: where, who, what changed, and why it matters.</li>
+            <li>Problem statement and target users inside that 2036 scenario.</li>
+            <li>Solution concept with a clear implementation logic.</li>
+            <li>Published POC website URL for the solution.</li>
+            <li>One-minute English product introduction video URL.</li>
+            <li>Student/team information and school affiliation.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section section-dark" id="submit">
+        <div class="container split">
+          <div>
+            <p class="eyebrow">Submission form</p>
+            <h2>Send the project links directly to FIH.</h2>
+            <p class="form-intro">
+              The form collects student eligibility, project details, the POC website link, and the English video pitch link. Accepted public entries can be listed on this page for judges and viewers.
+            </p>
+          </div>
+          <form class="submission-form" action="https://formsubmit.co/peculab.ai@gmail.com" method="POST" data-google-sheet-form>
+            <input type="hidden" name="source" value="FIH 2036 Future World Hackathon">
+            <input type="hidden" name="submitted_at_page_time" data-submitted-at>
+            <input type="hidden" name="_subject" value="FIH 2036 Future World Hackathon submission">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://fih-seattle.github.io/2036-hackathon/thanks.html">
+            <div class="form-grid">
+              <label>
+                Student or team lead name
+                <input type="text" name="team_lead_name" autocomplete="name" required>
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" autocomplete="email" required>
+              </label>
+              <label>
+                Age confirmation
+                <select name="age_confirmation" required>
+                  <option value="">Select one</option>
+                  <option>I am age 15 or above</option>
+                  <option>Our team members are age 15 or above</option>
+                </select>
+              </label>
+              <label>
+                Current student status
+                <select name="student_status" required>
+                  <option value="">Select one</option>
+                  <option>High school student</option>
+                  <option>College or university student</option>
+                  <option>Graduate student</option>
+                  <option>Other in-school student</option>
+                </select>
+              </label>
+              <label>
+                School / institution
+                <input type="text" name="school" required>
+              </label>
+              <label>
+                Country / region
+                <input type="text" name="country_region" required>
+              </label>
+              <label class="wide">
+                Team members
+                <textarea name="team_members" rows="3" placeholder="Names, ages, school roles, or grade/year"></textarea>
+              </label>
+              <label class="wide">
+                Project title
+                <input type="text" name="project_title" required>
+              </label>
+              <label class="wide">
+                2036 scenario definition
+                <textarea name="scenario_definition" rows="4" required></textarea>
+              </label>
+              <label class="wide">
+                Problem and target users
+                <textarea name="problem_and_users" rows="4" required></textarea>
+              </label>
+              <label class="wide">
+                Solution summary
+                <textarea name="solution_summary" rows="4" required></textarea>
+              </label>
+              <label>
+                POC website URL
+                <input type="url" name="poc_website_url" required>
+              </label>
+              <label>
+                1-minute English video URL
+                <input type="url" name="english_pitch_video_url" required>
+              </label>
+              <label class="wide">
+                Permission to publish
+                <select name="permission_to_publish" required>
+                  <option value="">Select one</option>
+                  <option>Yes, FIH may list our project title, team, scenario, POC link, and video link on this page.</option>
+                  <option>No, please review privately first.</option>
+                </select>
+              </label>
+            </div>
+            <button class="button button-primary" type="submit" data-submit-button>Submit Project</button>
+            <p class="form-note" data-form-status>
+              Submissions will be recorded in the hackathon Google Sheet after the Google Apps Script endpoint is connected.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section section-white" id="works">
+        <div class="container section-heading">
+          <p class="eyebrow">Submitted works</p>
+          <h2>Public project list for viewers and judges.</h2>
+          <p>
+            Accepted submissions will be displayed here with direct links to the POC website and one-minute English product introduction video.
+          </p>
+        </div>
+        <div class="container gallery-grid" data-submission-gallery>
+          <div class="empty-state" data-empty-state>
+            Submitted works will appear here after review.
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="criteria">
+        <div class="container section-heading">
+          <p class="eyebrow">Judging criteria</p>
+          <h2>Judges can score each project on five 20-point dimensions.</h2>
+        </div>
+        <div class="container criteria-grid">
+          <article class="criteria-card">
+            <strong>20 pts</strong>
+            <h3>Scenario Definition</h3>
+            <p>The 2036 context is specific, plausible, and connected to real users or communities.</p>
+          </article>
+          <article class="criteria-card">
+            <strong>20 pts</strong>
+            <h3>Solution Fit</h3>
+            <p>The proposal addresses the defined problem with a practical and understandable implementation path.</p>
+          </article>
+          <article class="criteria-card">
+            <strong>20 pts</strong>
+            <h3>POC Website</h3>
+            <p>The website makes the idea visible, testable, and easy to understand.</p>
+          </article>
+          <article class="criteria-card">
+            <strong>20 pts</strong>
+            <h3>English Pitch</h3>
+            <p>The one-minute video clearly introduces the product, users, value, and next step in English.</p>
+          </article>
+          <article class="criteria-card">
+            <strong>20 pts</strong>
+            <h3>Impact Potential</h3>
+            <p>The project can create meaningful educational, social, environmental, or economic value.</p>
+          </article>
+          <article class="criteria-card">
+            <strong>Judge tool</strong>
+            <h3>Score directly online</h3>
+            <p>Use the judge list to enter scores, calculate totals, and export a CSV file.</p>
+            <a class="work-link" href="judge-scorecard.html">Open Judge List</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section section-white">
+        <div class="container timeline-grid">
+          <article class="timeline-card">
+            <strong>Step 1</strong>
+            <h3>Submit links</h3>
+            <p>Teams submit the POC website, English video, and project information through the online form.</p>
+          </article>
+          <article class="timeline-card">
+            <strong>Step 2</strong>
+            <h3>Review and shortlist</h3>
+            <p>Eligible entries are reviewed and added to the public project list for judges.</p>
+          </article>
+          <article class="timeline-card">
+            <strong>Step 3</strong>
+            <h3>Present in Bangkok</h3>
+            <p>Selected winners may advance to present at the United Nations Conference Centre in Bangkok.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <strong>Future Intelligence Hub</strong>
+        <p>
+          Managed by Global ESG Leadership Organization. Connecting students, AI, and future-world solutions.
+        </p>
+      </div>
+    </footer>
+
+    <script src="submissions.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Judge Scorecard | FIH 2036 Future World Hackathon</title>
+    <meta name="description" content="Judge scorecard for the FIH 2036 Future World Online Hackathon.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="score-page">
+    <header class="site-header is-scrolled" data-header>
+      <a class="brand" href="index.html" aria-label="Hackathon home">
+        <span class="brand-mark" aria-hidden="true">FIH</span>
+        <span class="brand-text">
+          <span class="brand-name">2036 Hackathon</span>
+          <span class="brand-line">Judge scorecard</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" data-nav>
+        <a href="index.html#works">Works</a>
+        <a href="index.html#criteria">Criteria</a>
+        <a class="nav-cta" href="index.html#submit">Submission Form</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="score-header">
+        <div class="container">
+          <p class="eyebrow">Judge list</p>
+          <h1>FIH 2036 Hackathon Scorecard</h1>
+          <p class="hero-lede">
+            Enter 0-20 for each category. Totals calculate automatically, and the completed list can be exported as CSV.
+          </p>
+          <div class="score-actions">
+            <button class="button button-primary" type="button" data-export-scores>Export CSV</button>
+            <a class="button button-secondary" href="index.html">Back to Hackathon Page</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="score-shell" aria-label="Hackathon score table">
+        <div class="score-table-wrap">
+          <table class="score-table">
+            <thead>
+              <tr>
+                <th scope="col">Project</th>
+                <th scope="col">Scenario Definition<br>20</th>
+                <th scope="col">Solution Fit<br>20</th>
+                <th scope="col">POC Website<br>20</th>
+                <th scope="col">English Pitch<br>20</th>
+                <th scope="col">Impact<br>20</th>
+                <th scope="col">Total</th>
+                <th scope="col">Notes</th>
+                <th scope="col">Links</th>
+              </tr>
+            </thead>
+            <tbody data-score-body>
+              <tr>
+                <td colspan="9" class="empty-table">Loading submissions...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="submissions.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
