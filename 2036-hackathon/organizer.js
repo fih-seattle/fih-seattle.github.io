@@ -3,6 +3,7 @@ import {
   GoogleAuthProvider,
   getAuth,
   onAuthStateChanged,
+  signInWithPopup,
   signInWithRedirect,
   signOut,
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
@@ -123,9 +124,14 @@ const checkAdmin = async (user) => {
 
 signInButton?.addEventListener("click", async () => {
   try {
-    setStatus("Redirecting to Google sign-in...");
-    await signInWithRedirect(auth, provider);
+    setStatus("Opening Google sign-in...");
+    await signInWithPopup(auth, provider);
   } catch (error) {
+    if (["auth/popup-blocked", "auth/popup-closed-by-user", "auth/cancelled-popup-request"].includes(error.code)) {
+      setStatus("Redirecting to Google sign-in...");
+      await signInWithRedirect(auth, provider);
+      return;
+    }
     setStatus(`Sign-in failed: ${error.message}`);
   }
 });
