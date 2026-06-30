@@ -10,7 +10,8 @@ const submitButton = document.querySelector("[data-submit-button]");
 const formStatus = document.querySelector("[data-form-status]");
 const submittedAt = document.querySelector("[data-submitted-at]");
 
-const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbw8iUX51gmQdHjy79aFPLYDBy8dPZcDKi3-uNAxlKUx-yXnIKvQeMpLjc_oE4pJRYiemg/exec";
+const PUBLIC_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYM9bQ1W63BDxRpDpbHl3EOQImAGLc8DPRv13pdDtdX5yBGVYL02kjJGxFsXE3RAtoTw/exec";
+const VOTE_ENDPOINT = "https://script.google.com/macros/s/AKfycbw8iUX51gmQdHjy79aFPLYDBy8dPZcDKi3-uNAxlKUx-yXnIKvQeMpLjc_oE4pJRYiemg/exec";
 const sheetSubmissions = [];
 
 const updateHeader = () => {
@@ -56,7 +57,7 @@ const getSortedSubmissions = (items) =>
     .slice()
     .sort((a, b) => Number(b.voteCount || 0) - Number(a.voteCount || 0));
 
-if (googleSheetForm && GOOGLE_SHEET_ENDPOINT) {
+if (googleSheetForm && PUBLIC_SHEET_ENDPOINT) {
   googleSheetForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -77,7 +78,7 @@ if (googleSheetForm && GOOGLE_SHEET_ENDPOINT) {
     }
 
     try {
-      await fetch(GOOGLE_SHEET_ENDPOINT, {
+      await fetch(PUBLIC_SHEET_ENDPOINT, {
         method: "POST",
         mode: "no-cors",
         headers: {
@@ -161,7 +162,7 @@ const videoMarkup = (url) => {
 
 const voteMarkup = (item) => {
   const projectId = encodeURIComponent(item.id || "");
-  const voteUrl = `${GOOGLE_SHEET_ENDPOINT}?action=vote&project=${projectId}`;
+  const voteUrl = `${VOTE_ENDPOINT}?action=vote&project=${projectId}`;
   const voteCount = Number(item.voteCount || 0);
 
   return `
@@ -284,7 +285,7 @@ const renderScoreTable = () => {
 };
 
 const loadSheetSubmissions = () => {
-  if ((!gallery && !scoreBody) || !GOOGLE_SHEET_ENDPOINT) {
+  if ((!gallery && !scoreBody) || !PUBLIC_SHEET_ENDPOINT) {
     renderSubmissionGallery([]);
     renderScoreTable();
     return;
@@ -315,13 +316,13 @@ const loadSheetSubmissions = () => {
   script.onerror = () => {
     renderSubmissionGallery([]);
     if (emptyState) {
-      emptyState.textContent = "Submitted works could not be loaded from the Google Sheet yet.";
+      emptyState.textContent = "Submitted works could not be loaded. Check that the public Apps Script deployment access is set to Anyone, then redeploy a new version.";
     }
     renderScoreTable();
     delete window[callbackName];
   };
 
-  script.src = `${GOOGLE_SHEET_ENDPOINT}?callback=${callbackName}`;
+  script.src = `${PUBLIC_SHEET_ENDPOINT}?callback=${callbackName}`;
   document.body.appendChild(script);
 };
 

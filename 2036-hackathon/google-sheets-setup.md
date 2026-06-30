@@ -40,28 +40,49 @@ For judges, use one of these safer paths:
 
 ## 3. Deploy the Web App
 
+For the safest stable setup, use two deployments from the same Apps Script project:
+
+### Public submission and leaderboard endpoint
+
+Use this URL in `PUBLIC_SHEET_ENDPOINT`.
+
+1. Click `Deploy > New deployment`.
+2. Choose `Web app`.
+3. Set `Execute as` to `Me`.
+4. Set `Who has access` to `Anyone`.
+5. Deploy and approve permissions.
+6. Copy the Web App URL.
+
+This endpoint is used to submit forms and load the public leaderboard. It must be loadable by a public website.
+
+### Google-authenticated vote endpoint
+
+Use this URL in `VOTE_ENDPOINT`.
+
 1. Click `Deploy > New deployment`.
 2. Choose `Web app`.
 3. Set `Execute as` to `Me`.
 4. Set `Who has access` to `Anyone with Google account` if the option is available.
-5. If your account only shows `Anyone`, the submission form will still work, but Google-authenticated voting is weaker. Use a Google Workspace or account setting that allows `Anyone with Google account` when possible.
+5. If your account only shows `Anyone`, the vote endpoint will still work, but Google-authenticated voting is weaker.
 6. Deploy and approve permissions.
 7. Copy the Web App URL.
 
-This makes the form publicly submit-able while the Sheet remains private. Google documents that a web app can run as the script owner, and in that mode the script executes as you regardless of who accesses the web app.
+If the public leaderboard briefly shows `No approved public works` and then changes to `Submitted works could not be loaded`, the public endpoint is probably not accessible as `Anyone`, or the latest Apps Script version has not been redeployed.
 
 ## 4. Connect the Website
 
 Open `2036-hackathon/script.js` and replace:
 
 ```js
-const GOOGLE_SHEET_ENDPOINT = "";
+const PUBLIC_SHEET_ENDPOINT = "";
+const VOTE_ENDPOINT = "";
 ```
 
 with:
 
 ```js
-const GOOGLE_SHEET_ENDPOINT = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+const PUBLIC_SHEET_ENDPOINT = "PASTE_PUBLIC_ANYONE_WEB_APP_URL_HERE";
+const VOTE_ENDPOINT = "PASTE_GOOGLE_ACCOUNT_VOTE_WEB_APP_URL_HERE";
 ```
 
 After this is connected, submissions from the public hackathon page will append to the `Submissions` sheet.
