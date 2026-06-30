@@ -1,10 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import {
+  browserLocalPersistence,
   GoogleAuthProvider,
   getAuth,
   onAuthStateChanged,
+  setPersistence,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 import {
@@ -36,6 +37,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
+const authReady = setPersistence(auth, browserLocalPersistence);
 
 const signInButton = document.querySelector("[data-organizer-sign-in]");
 const signOutButton = document.querySelector("[data-organizer-sign-out]");
@@ -125,14 +127,10 @@ const checkAdmin = async (user) => {
 signInButton?.addEventListener("click", async () => {
   try {
     setStatus("Opening Google sign-in...");
+    await authReady;
     await signInWithPopup(auth, provider);
   } catch (error) {
-    if (["auth/popup-blocked", "auth/popup-closed-by-user", "auth/cancelled-popup-request"].includes(error.code)) {
-      setStatus("Redirecting to Google sign-in...");
-      await signInWithRedirect(auth, provider);
-      return;
-    }
-    setStatus(`Sign-in failed: ${error.message}`);
+    setStatus(`Sign-in failed: ${error.message}. If a popup was blocked, allow popups for this site and try again.`);
   }
 });
 

@@ -1,10 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import {
+  browserLocalPersistence,
   GoogleAuthProvider,
   getAuth,
   onAuthStateChanged,
+  setPersistence,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 import {
@@ -35,6 +36,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
+const authReady = setPersistence(auth, browserLocalPersistence);
 const PHASES = {
   SUBMISSIONS_OPEN: "submissions_open",
   EVALUATION_OPEN: "evaluation_open",
@@ -96,16 +98,9 @@ if (toggle && nav && header) {
 }
 
 const signIn = async () => {
-  try {
-    const result = await signInWithPopup(auth, provider);
-    return result.user;
-  } catch (error) {
-    if (["auth/popup-blocked", "auth/popup-closed-by-user", "auth/cancelled-popup-request"].includes(error.code)) {
-      await signInWithRedirect(auth, provider);
-      return null;
-    }
-    throw error;
-  }
+  await authReady;
+  const result = await signInWithPopup(auth, provider);
+  return result.user;
 };
 
 authButtons.forEach((button) => {
@@ -113,7 +108,7 @@ authButtons.forEach((button) => {
     try {
       await signIn();
     } catch (error) {
-      updateFormStatus(`Google sign-in could not start: ${error.message}`);
+      updateFormStatus(`Google sign-in failed: ${error.message}. If a popup was blocked, allow popups for this site and try again.`);
     }
   });
 });
