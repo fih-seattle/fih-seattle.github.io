@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: /2036-hackathon/judge-scorecard.html

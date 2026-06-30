@@ -105,16 +105,12 @@
             <p class="eyebrow">Submission form</p>
             <h2>Send the project links directly to FIH.</h2>
             <p class="form-intro">
-              The form collects student eligibility, project details, the POC website link, and the English video pitch link. Accepted public entries can be listed on this page for judges and viewers.
+              The form collects student eligibility, project details, the POC website link, and the English video pitch link. Entries appear on the public leaderboard only after the team gives permission to publish and the organizer marks the submission as approved.
             </p>
           </div>
-          <form class="submission-form" action="https://formsubmit.co/peculab.ai@gmail.com" method="POST" data-google-sheet-form>
+          <form class="submission-form" action="https://script.google.com/macros/s/AKfycbw8iUX51gmQdHjy79aFPLYDBy8dPZcDKi3-uNAxlKUx-yXnIKvQeMpLjc_oE4pJRYiemg/exec" method="POST" data-google-sheet-form>
             <input type="hidden" name="source" value="FIH 2036 Future World Hackathon">
             <input type="hidden" name="submitted_at_page_time" data-submitted-at>
-            <input type="hidden" name="_subject" value="FIH 2036 Future World Hackathon submission">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_next" value="https://fih-seattle.github.io/2036-hackathon/thanks.html">
             <div class="form-grid">
               <label>
                 Student or team lead name
@@ -197,15 +193,17 @@
 
       <section class="section section-white" id="works">
         <div class="container section-heading">
-          <p class="eyebrow">Submitted works</p>
-          <h2>Public project list for viewers and judges.</h2>
+          <p class="eyebrow">People's Choice Leaderboard</p>
+          <h2>Submitted works are ranked by authenticated community votes.</h2>
           <p>
-            Accepted submissions will be displayed here with direct links to the POC website and one-minute English product introduction video.
+            Approved public proposals are loaded from the hackathon Google Sheet with direct links to each POC website and one-minute English product introduction video.
+            Each project also includes a Google-authenticated vote button so one Google user key can vote only once per project.
+            Share a project link to help students rally supporters and bring more visitors to the hackathon page.
           </p>
         </div>
         <div class="container gallery-grid" data-submission-gallery>
           <div class="empty-state" data-empty-state>
-            Submitted works will appear here after review.
+            Loading approved public works from the Google Sheet...
           </div>
         </div>
       </section>
@@ -260,7 +258,7 @@
           <article class="timeline-card">
             <strong>Step 2</strong>
             <h3>Review and shortlist</h3>
-            <p>Eligible entries are reviewed and added to the public project list for judges.</p>
+            <p>Eligible entries are reviewed and approved before they appear on the public leaderboard.</p>
           </article>
           <article class="timeline-card">
             <strong>Step 3</strong>
