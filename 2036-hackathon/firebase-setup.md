@@ -78,6 +78,13 @@ After that, reload `organizer.html`. You can switch between:
 
 The public code can show this page, but Firestore rules prevent non-admin users from changing the phase.
 
+The same organizer page also includes a submission editor. It can:
+
+- View pending and approved submissions.
+- Edit project title, POC URL, video URL, scenario, problem, solution, and status.
+- Apply the built-in GAF-CNN demo preset for testing.
+- Change `status` to `approved` without editing every field in the Firebase Console.
+
 New submissions are written to the `submissions` collection with:
 
 ```text

@@ -9,10 +9,12 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 import {
+  collection,
   doc,
   getDoc,
   getFirestore,
   onSnapshot,
+  query,
   serverTimestamp,
   setDoc,
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
@@ -48,16 +50,53 @@ const phaseControl = document.querySelector("[data-phase-control]");
 const currentPhase = document.querySelector("[data-current-phase]");
 const phaseMessage = document.querySelector("[data-phase-message]");
 const phaseButtons = document.querySelectorAll("[data-phase-option]");
+const submissionManager = document.querySelector("[data-submission-manager]");
+const submissionList = document.querySelector("[data-submission-list]");
 
 let currentUser = null;
 let currentPhaseValue = "";
 let settingsUnsubscribe = null;
+let submissionsUnsubscribe = null;
+
+const DEMO_SUBMISSION = {
+  team_lead_name: "Yun-Cheng Tsai",
+  email: "pecu610@gmail.com",
+  age_confirmation: "I am age 15 or above",
+  student_status: "High school student",
+  school: "Future Intelligence Hub Demo School",
+  country_region: "Taiwan / United States",
+  team_members: "FIH demo submission for system testing",
+  project_title: "2036 Market Pattern Intelligence Demo",
+  scenario_definition:
+    "In 2036, young investors, student finance clubs, and community learning programs use transparent AI tools to understand volatile market behavior before making decisions.",
+  problem_and_users:
+    "Students and early-stage investors often see price charts but cannot explain repeated technical patterns or the uncertainty behind model outputs. They need an interpretable learning tool that turns market sequences into visual evidence.",
+  solution_summary:
+    "This POC demonstrates a GAF-CNN inspired workflow: candlestick time-series data is converted into Gramian Angular Field images, then a convolutional model classifies recurring technical patterns for learning and discussion.",
+  poc_website_url: "https://fiworld.org/2036-hackathon/demo-gaf-cnn.html",
+  english_pitch_video_url: "https://youtu.be/5bJZOxhV9z4?si=ZKSgUvp_ufUQDc7x",
+  permission_to_publish:
+    "Yes, FIH may list our project title, team, scenario, POC link, and video link on this page.",
+  status: "approved",
+};
 
 const setStatus = (message) => {
   if (statusText) {
     statusText.textContent = message;
   }
 };
+
+const escapeHtml = (value = "") =>
+  String(value).replace(/[&<>"']/g, (char) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
+    return entities[char];
+  });
 
 const showAdminSetup = (user) => {
   if (adminUid) {
@@ -69,6 +108,9 @@ const showAdminSetup = (user) => {
   if (phaseControl) {
     phaseControl.hidden = true;
   }
+  if (submissionManager) {
+    submissionManager.hidden = true;
+  }
 };
 
 const showPhaseControl = () => {
@@ -77,6 +119,9 @@ const showPhaseControl = () => {
   }
   if (phaseControl) {
     phaseControl.hidden = false;
+  }
+  if (submissionManager) {
+    submissionManager.hidden = false;
   }
 };
 
@@ -111,6 +156,116 @@ const watchSettings = () => {
   );
 };
 
+const textField = (id, name, label, value = "", wide = false) => `
+  <label class="${wide ? "wide" : ""}">
+    ${label}
+    <input type="text" name="${name}" value="${escapeHtml(value)}" data-submission-field="${id}:${name}">
+  </label>
+`;
+
+const textareaField = (id, name, label, value = "") => `
+  <label class="wide">
+    ${label}
+    <textarea rows="3" name="${name}" data-submission-field="${id}:${name}">${escapeHtml(value)}</textarea>
+  </label>
+`;
+
+const submissionCard = (submission) => {
+  const id = submission.id;
+  return `
+    <article class="submission-edit-card" data-submission-card="${id}">
+      <div class="submission-edit-header">
+        <div>
+          <strong>${escapeHtml(submission.project_title || "Untitled submission")}</strong>
+          <span>${escapeHtml(submission.email || submission.submitterEmail || "No email")} | ${escapeHtml(submission.status || "pending")}</span>
+        </div>
+        <div class="submission-edit-actions">
+          <button type="button" data-apply-demo="${id}">Apply GAF-CNN demo</button>
+          <button type="button" data-save-submission="${id}">Save</button>
+        </div>
+      </div>
+      <div class="submission-edit-grid">
+        ${textField(id, "project_title", "Project title", submission.project_title, true)}
+        ${textField(id, "team_lead_name", "Team lead", submission.team_lead_name)}
+        ${textField(id, "email", "Email", submission.email)}
+        ${textField(id, "school", "School", submission.school)}
+        ${textField(id, "country_region", "Country / region", submission.country_region)}
+        ${textField(id, "poc_website_url", "POC website URL", submission.poc_website_url, true)}
+        ${textField(id, "english_pitch_video_url", "English video URL", submission.english_pitch_video_url, true)}
+        ${textField(id, "status", "Status", submission.status)}
+        ${textareaField(id, "scenario_definition", "2036 scenario", submission.scenario_definition)}
+        ${textareaField(id, "problem_and_users", "Problem and users", submission.problem_and_users)}
+        ${textareaField(id, "solution_summary", "Solution summary", submission.solution_summary)}
+      </div>
+      <p class="small-note" data-submission-message="${id}"></p>
+    </article>
+  `;
+};
+
+const renderSubmissions = (submissions) => {
+  if (!submissionList) {
+    return;
+  }
+
+  submissionList.innerHTML = submissions.length
+    ? submissions.map(submissionCard).join("")
+    : `<p class="small-note">No submissions yet.</p>`;
+};
+
+const watchSubmissions = () => {
+  if (submissionsUnsubscribe) {
+    submissionsUnsubscribe();
+  }
+
+  submissionsUnsubscribe = onSnapshot(
+    query(collection(db, "submissions")),
+    (snapshot) => {
+      const submissions = snapshot.docs
+        .map((submissionDoc) => ({
+          id: submissionDoc.id,
+          ...submissionDoc.data(),
+        }))
+        .sort((a, b) => String(a.project_title || "").localeCompare(String(b.project_title || "")));
+      renderSubmissions(submissions);
+    },
+    (error) => {
+      if (submissionList) {
+        submissionList.innerHTML = `<p class="small-note">Could not load submissions: ${error.message}</p>`;
+      }
+    },
+  );
+};
+
+const setSubmissionMessage = (id, message) => {
+  const messageNode = document.querySelector(`[data-submission-message="${id}"]`);
+  if (messageNode) {
+    messageNode.textContent = message;
+  }
+};
+
+const fieldValue = (id, name) =>
+  document.querySelector(`[data-submission-field="${id}:${name}"]`)?.value.trim() || "";
+
+const saveSubmission = async (id, values) => {
+  if (!currentUser) {
+    setStatus("Please sign in first.");
+    return;
+  }
+
+  setSubmissionMessage(id, "Saving...");
+  await setDoc(
+    doc(db, "submissions", id),
+    {
+      ...values,
+      updatedAt: serverTimestamp(),
+      updatedBy: currentUser.uid,
+      updatedByEmail: currentUser.email || "",
+    },
+    { merge: true },
+  );
+  setSubmissionMessage(id, "Saved.");
+};
+
 const checkAdmin = async (user) => {
   const adminSnapshot = await getDoc(doc(db, "admins", user.uid));
   if (!adminSnapshot.exists()) {
@@ -122,6 +277,7 @@ const checkAdmin = async (user) => {
   showPhaseControl();
   setStatus(`Signed in as ${user.email}. Organizer permission active.`);
   watchSettings();
+  watchSubmissions();
 };
 
 signInButton?.addEventListener("click", async () => {
@@ -135,6 +291,40 @@ signInButton?.addEventListener("click", async () => {
 });
 
 signOutButton?.addEventListener("click", () => signOut(auth));
+
+submissionList?.addEventListener("click", async (event) => {
+  const demoButton = event.target.closest("[data-apply-demo]");
+  const saveButton = event.target.closest("[data-save-submission]");
+
+  try {
+    if (demoButton) {
+      await saveSubmission(demoButton.dataset.applyDemo, DEMO_SUBMISSION);
+      return;
+    }
+
+    if (saveButton) {
+      const id = saveButton.dataset.saveSubmission;
+      await saveSubmission(id, {
+        project_title: fieldValue(id, "project_title"),
+        team_lead_name: fieldValue(id, "team_lead_name"),
+        email: fieldValue(id, "email"),
+        school: fieldValue(id, "school"),
+        country_region: fieldValue(id, "country_region"),
+        poc_website_url: fieldValue(id, "poc_website_url"),
+        english_pitch_video_url: fieldValue(id, "english_pitch_video_url"),
+        status: fieldValue(id, "status"),
+        scenario_definition: fieldValue(id, "scenario_definition"),
+        problem_and_users: fieldValue(id, "problem_and_users"),
+        solution_summary: fieldValue(id, "solution_summary"),
+      });
+    }
+  } catch (error) {
+    const id = demoButton?.dataset.applyDemo || saveButton?.dataset.saveSubmission;
+    if (id) {
+      setSubmissionMessage(id, `Save failed: ${error.message}`);
+    }
+  }
+});
 
 phaseButtons.forEach((button) => {
   button.addEventListener("click", async () => {
@@ -185,6 +375,10 @@ onAuthStateChanged(auth, (user) => {
     settingsUnsubscribe();
     settingsUnsubscribe = null;
   }
+  if (submissionsUnsubscribe) {
+    submissionsUnsubscribe();
+    submissionsUnsubscribe = null;
+  }
 
   if (signInButton) {
     signInButton.hidden = Boolean(user);
@@ -201,6 +395,9 @@ onAuthStateChanged(auth, (user) => {
     }
     if (phaseControl) {
       phaseControl.hidden = true;
+    }
+    if (submissionManager) {
+      submissionManager.hidden = true;
     }
     return;
   }
