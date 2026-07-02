@@ -213,6 +213,9 @@ const applyPhaseToPage = () => {
 };
 
 const submissions = Array.isArray(window.hackathonSubmissions) ? window.hackathonSubmissions : [];
+const isDemoSubmission = (item) => Boolean(item.isDemo || item.demo);
+const demoSubmissions = submissions.filter(isDemoSubmission);
+const publicStaticSubmissions = submissions.filter((item) => !isDemoSubmission(item));
 
 const getProjectId = (item, index = 0) => item.id || `FIH2036-${String(index + 1).padStart(3, "0")}`;
 
@@ -226,7 +229,7 @@ const getProjectShareUrl = (item, index = 0) => {
 };
 
 const getSortedSubmissions = (items) =>
-  submissions
+  publicStaticSubmissions
     .concat(items)
     .slice()
     .sort((a, b) => Number(b.voteCount || 0) - Number(a.voteCount || 0));
@@ -362,6 +365,15 @@ const videoMarkup = (url) => {
 };
 
 const voteMarkup = (item, index) => {
+  if (isDemoSubmission(item)) {
+    return `
+      <div class="vote-row sample-note">
+        <strong>Demo</strong>
+        <span>Reference project only</span>
+      </div>
+    `;
+  }
+
   const projectId = getSubmissionDocId(item, index);
   const voteCount = Number(item.voteCount || 0);
   const disabled = isVotingOpen() ? "" : "disabled";
@@ -377,6 +389,10 @@ const voteMarkup = (item, index) => {
 };
 
 const shareMarkup = (item, index) => {
+  if (isDemoSubmission(item)) {
+    return "";
+  }
+
   const shareUrl = getProjectShareUrl(item, index);
   const title = `Vote for ${item.project || "this 2036 Future World Hackathon project"}`;
   const encodedUrl = encodeURIComponent(shareUrl);
@@ -421,56 +437,82 @@ const normalizeSubmission = (docSnap) => {
   };
 };
 
+const projectCardMarkup = (item, index) => {
+  const group = getParticipantGroup(item);
+  const rankLabel = isDemoSubmission(item) ? "Sample Work" : "People's Choice";
+  const rankBadge = isDemoSubmission(item) ? "Demo" : `#${index + 1}`;
+
+  return `
+    <article class="work-card${isDemoSubmission(item) ? " is-sample" : ""}" id="${getProjectAnchor(item, index)}">
+      <div class="rank-row">
+        <span class="rank-badge">${escapeHtml(rankBadge)}</span>
+        <strong>${escapeHtml(rankLabel)}</strong>
+      </div>
+      <div>
+        <span class="project-id">${escapeHtml(getProjectId(item, index))}</span>
+        <h3>${escapeHtml(item.project)}</h3>
+        <p class="team-line">${escapeHtml(item.team)}${item.school ? ` / ${escapeHtml(item.school)}` : ""}${item.country ? ` / ${escapeHtml(item.country)}` : ""}</p>
+        <p class="student-line">${escapeHtml(group)}${item.studentStatus ? ` / ${escapeHtml(item.studentStatus)}` : ""}</p>
+        ${getSuggestedTopic(item) ? `<p class="topic-line">${escapeHtml(getSuggestedTopic(item))}</p>` : ""}
+      </div>
+      <p><strong>2036 Scenario:</strong> ${escapeHtml(item.scenario)}</p>
+      ${item.problem ? `<p><strong>Target Problem:</strong> ${escapeHtml(item.problem)}</p>` : ""}
+      <p><strong>Solution:</strong> ${escapeHtml(item.solution)}</p>
+      ${videoMarkup(item.videoUrl)}
+      <div class="work-actions">
+        ${linkMarkup(item.pocUrl, isDemoSubmission(item) ? "Open Sample POC" : "Open POC Website")}
+        ${linkMarkup(item.videoUrl, "Open Video")}
+      </div>
+      ${voteMarkup(item, index)}
+      ${shareMarkup(item, index)}
+    </article>
+  `;
+};
+
 const renderSubmissionGallery = (items) => {
   if (!gallery) {
     return;
   }
 
   const sortedItems = getSortedSubmissions(items);
+  const demoMarkup = demoSubmissions.length
+    ? `
+      <section class="work-group sample-work-group" aria-label="Sample project">
+        <div class="work-group-heading">
+          <span>Sample Project</span>
+          <strong>Open now</strong>
+        </div>
+        <div class="gallery-grid">
+          ${demoSubmissions
+            .map((item, index) => projectCardMarkup(item, index))
+            .join("")}
+        </div>
+      </section>
+    `
+    : "";
 
-  if (!sortedItems.length) {
-    if (emptyState) {
-      emptyState.textContent = isShowcaseOpen()
-        ? "No approved public works are available yet. Approved projects will appear here after review."
-        : "The evaluation list opens after submissions close.";
-    }
+  if (!isShowcaseOpen()) {
+    emptyState?.remove();
+    gallery.innerHTML = `
+      ${demoMarkup}
+      <div class="empty-state works-locked">
+        Public project browsing opens after the submission deadline. Until then, use the sample project as a reference for topic framing, POC structure, and judging expectations.
+      </div>
+    `;
     return;
   }
 
   emptyState?.remove();
 
-  gallery.innerHTML = participantGroups
-    .map((group) => {
+  const groupedMarkup = sortedItems.length
+    ? participantGroups
+        .map((group) => {
       const groupItems = sortedItems.filter((item) => getParticipantGroup(item) === group);
       const cards = groupItems.length
         ? groupItems
             .map((item) => {
               const index = sortedItems.indexOf(item);
-              return `
-                <article class="work-card" id="${getProjectAnchor(item, index)}">
-                  <div class="rank-row">
-                    <span class="rank-badge">#${index + 1}</span>
-                    <strong>People's Choice</strong>
-                  </div>
-                  <div>
-                    <span class="project-id">${escapeHtml(getProjectId(item, index))}</span>
-                    <h3>${escapeHtml(item.project)}</h3>
-                    <p class="team-line">${escapeHtml(item.team)}${item.school ? ` / ${escapeHtml(item.school)}` : ""}${item.country ? ` / ${escapeHtml(item.country)}` : ""}</p>
-                    <p class="student-line">${escapeHtml(group)}${item.studentStatus ? ` / ${escapeHtml(item.studentStatus)}` : ""}</p>
-                    ${getSuggestedTopic(item) ? `<p class="topic-line">${escapeHtml(getSuggestedTopic(item))}</p>` : ""}
-                  </div>
-                  <p><strong>2036 Scenario:</strong> ${escapeHtml(item.scenario)}</p>
-                  ${item.problem ? `<p><strong>Target Problem:</strong> ${escapeHtml(item.problem)}</p>` : ""}
-                  <p><strong>Solution:</strong> ${escapeHtml(item.solution)}</p>
-                  ${videoMarkup(item.videoUrl)}
-                  <div class="work-actions">
-                    ${linkMarkup(item.pocUrl, "Open POC Website")}
-                    ${linkMarkup(item.videoUrl, "Open Video")}
-                  </div>
-                  ${voteMarkup(item, index)}
-                  ${shareMarkup(item, index)}
-                </article>
-              `;
+              return projectCardMarkup(item, index);
             })
             .join("")
         : `<div class="empty-state">No approved works in this group yet.</div>`;
@@ -484,8 +526,11 @@ const renderSubmissionGallery = (items) => {
           <div class="gallery-grid">${cards}</div>
         </section>
       `;
-    })
-    .join("");
+        })
+        .join("")
+    : `<div class="empty-state">No approved public works are available yet. Approved projects will appear here after review.</div>`;
+
+  gallery.innerHTML = `${demoMarkup}${groupedMarkup}`;
 
   const targetProject = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
   targetProject?.scrollIntoView({ block: "start" });

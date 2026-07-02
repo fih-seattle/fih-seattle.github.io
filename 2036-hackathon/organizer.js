@@ -67,14 +67,14 @@ const DEMO_SUBMISSION = {
   school: "Future Intelligence Hub Demo School",
   country_region: "Taiwan / United States",
   team_members: "FIH demo submission for system testing",
-  project_title: "2036 Market Pattern Intelligence Demo",
+  project_title: "2036 Market Trust Lab",
   suggested_topic: "Impact Capital & Ethical Economy",
   scenario_definition:
-    "In 2036, university finance labs and community investment clubs use transparent AI tools to understand volatile market behavior before making learning or portfolio decisions.",
+    "In 2036, university finance labs and community investment clubs use transparent AI tools to inspect market-pattern evidence before making learning or portfolio decisions.",
   problem_and_users:
-    "Students, early-stage investors, and financial-literacy educators often see price charts but cannot explain repeated technical patterns or the uncertainty behind model outputs. They need an interpretable learning tool that turns market sequences into visual evidence.",
+    "Students, early-stage investors, and financial-literacy educators often see price charts but cannot explain repeated technical patterns, uncertainty, or model reasoning. They need an interpretable learning tool that turns market sequences into visual evidence.",
   solution_summary:
-    "This POC demonstrates an impact-capital learning workflow: candlestick time-series data is converted into Gramian Angular Field images, then a CNN-style classifier surfaces recurring patterns so learners can discuss risk, evidence, and responsible decision-making.",
+    "This POC demonstrates an impact-capital learning workflow: candlestick time-series data is converted into Gramian Angular Field images, then a CNN-style classifier surfaces recurring patterns, confidence, uncertainty, and explanation prompts so learners can discuss risk, evidence, and responsible decision-making.",
   poc_website_url: "https://fiworld.org/2036-hackathon/demo-gaf-cnn.html",
   english_pitch_video_url: "https://youtu.be/5bJZOxhV9z4?si=ZKSgUvp_ufUQDc7x",
   permission_to_publish:
