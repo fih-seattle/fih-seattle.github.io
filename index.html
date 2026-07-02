@@ -232,7 +232,11 @@
         </div>
         <div class="container event-list">
           <article class="event-card is-featured">
-            <span>Nov 4-7, 2026 · Bangkok</span>
+            <button class="media-zoom-trigger event-poster" type="button" data-zoom-src="assets/wfif-2026-bangkok.jpg" data-zoom-title="World Futures Intelligence Forum">
+              <img src="assets/wfif-2026-bangkok.jpg" alt="World Futures Intelligence Forum poster for UNCC Bangkok, 4-5 November 2026" loading="lazy">
+              <span>Click to zoom</span>
+            </button>
+            <span>Nov 4-5, 2026 · Bangkok</span>
             <h3>World Futures Intelligence Forum 2026</h3>
             <p>
               WFIF brings AI, ESG, education, impact capital, and ethical leadership into one international platform at the United Nations Conference Centre in Bangkok. FIH serves as the implementation bridge, helping ideas become prototypes, demo-ready narratives, and city-level action pathways.
@@ -283,7 +287,11 @@
           <h2 id="initiatives-title">FIH supports ESGIN initiatives that move from global recognition into city-level execution.</h2>
         </div>
         <div class="container initiative-grid">
-          <article>
+          <article class="initiative-feature">
+            <button class="media-zoom-trigger initiative-media" type="button" data-zoom-src="assets/doha-leader-for-young-leaders.jpg" data-zoom-title="Leader for Young Leaders">
+              <img src="assets/doha-leader-for-young-leaders.jpg" alt="Leader for Young Leaders Doha Solutions Platform initiative" loading="lazy">
+              <span>Click to zoom</span>
+            </button>
             <span>ID60</span>
             <h3>Leader for Young Leaders</h3>
             <p>A world leaders mentorship initiative for youth development.</p>
@@ -298,7 +306,11 @@
             <h3>GROW</h3>
             <p>AI-driven global regeneration for women leaders.</p>
           </article>
-          <article>
+          <article class="initiative-feature">
+            <button class="media-zoom-trigger initiative-media" type="button" data-zoom-src="assets/doha-responsible-ai-business.jpg" data-zoom-title="Responsible AI for Business">
+              <img src="assets/doha-responsible-ai-business.jpg" alt="Responsible AI for Business Doha Solutions Platform initiative" loading="lazy">
+              <span>Click to zoom</span>
+            </button>
             <span>ID87</span>
             <h3>Responsible AI for Business</h3>
             <p>AI-driven ESG and SDG transformation for SMEs, enterprises, and communities.</p>
@@ -323,6 +335,12 @@
             <h3>Future Intelligence Hub</h3>
             <p>ESGIN's flagship city innovation platform for AI-powered implementation.</p>
           </article>
+        </div>
+        <div class="container evidence-strip">
+          <button class="media-zoom-trigger evidence-card" type="button" data-zoom-src="assets/doha-youth-women-financial-literacy.jpg" data-zoom-title="Youth and Women Financial Literacy">
+            <img src="assets/doha-youth-women-financial-literacy.jpg" alt="Youth and Women Financial Literacy Doha Solutions Platform initiative" loading="lazy">
+            <span>Doha Solutions Platform · Youth and Women Financial Literacy · Click to zoom</span>
+          </button>
         </div>
       </section>
 
@@ -437,6 +455,13 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
+    <div class="media-lightbox" data-media-lightbox hidden>
+      <button class="media-lightbox-close" type="button" aria-label="Close image preview" data-lightbox-close>Close</button>
+      <figure>
+        <img src="" alt="" data-lightbox-image>
+        <figcaption data-lightbox-caption></figcaption>
+      </figure>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

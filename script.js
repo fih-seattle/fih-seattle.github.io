@@ -3,6 +3,10 @@ const nav = document.querySelector("[data-nav]");
 const toggle = document.querySelector("[data-nav-toggle]");
 const statusText = document.querySelector("[data-map-status]");
 const mapElement = document.querySelector("#fih-world-map");
+const lightbox = document.querySelector("[data-media-lightbox]");
+const lightboxImage = document.querySelector("[data-lightbox-image]");
+const lightboxCaption = document.querySelector("[data-lightbox-caption]");
+const lightboxClose = document.querySelector("[data-lightbox-close]");
 
 const updateHeader = () => {
   header.classList.toggle("is-scrolled", window.scrollY > 16);
@@ -23,6 +27,40 @@ nav.addEventListener("click", (event) => {
     toggle.setAttribute("aria-expanded", "false");
     nav.classList.remove("is-open");
     header.classList.remove("is-open");
+  }
+});
+
+const closeLightbox = () => {
+  if (!lightbox || !lightboxImage || !lightboxCaption) {
+    return;
+  }
+
+  lightbox.hidden = true;
+  lightboxImage.removeAttribute("src");
+  lightboxImage.alt = "";
+  lightboxCaption.textContent = "";
+};
+
+document.addEventListener("click", (event) => {
+  const target = event.target instanceof Element ? event.target : null;
+  const trigger = target?.closest("[data-zoom-src]");
+
+  if (trigger && lightbox && lightboxImage && lightboxCaption) {
+    lightboxImage.src = trigger.dataset.zoomSrc;
+    lightboxImage.alt = trigger.querySelector("img")?.alt || trigger.dataset.zoomTitle || "Expanded image";
+    lightboxCaption.textContent = trigger.dataset.zoomTitle || "";
+    lightbox.hidden = false;
+    return;
+  }
+
+  if (event.target === lightbox || target?.closest("[data-lightbox-close]")) {
+    closeLightbox();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeLightbox();
   }
 });
 
