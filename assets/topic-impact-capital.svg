@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Impact capital icon">
+  <rect width="96" height="96" rx="18" fill="#fff8f1"/>
+  <circle cx="48" cy="48" r="28" fill="#ffb21a" opacity=".28"/>
+  <path d="M27 59h42M32 47h32M39 35h18" stroke="#07111f" stroke-width="7" stroke-linecap="round"/>
+  <path d="M61 23l11 11-11 11" fill="none" stroke="#169b8f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M72 34H54" stroke="#169b8f" stroke-width="6" stroke-linecap="round"/>
+</svg>

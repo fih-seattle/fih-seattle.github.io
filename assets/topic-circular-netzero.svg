@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Circular net zero icon">
+  <rect width="96" height="96" rx="18" fill="#e9fff8"/>
+  <path d="M65 26a28 28 0 0 0-43 22" fill="none" stroke="#169b8f" stroke-width="7" stroke-linecap="round"/>
+  <path d="M65 26l-1 16 14-8" fill="#169b8f"/>
+  <path d="M31 70a28 28 0 0 0 43-22" fill="none" stroke="#ff6a00" stroke-width="7" stroke-linecap="round"/>
+  <path d="M31 70l1-16-14 8" fill="#ff6a00"/>
+  <circle cx="48" cy="48" r="10" fill="#ffb21a"/>
+</svg>

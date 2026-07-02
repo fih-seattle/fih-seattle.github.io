@@ -48,6 +48,13 @@ const countdownLabels = {
   "2026-10-01T00:00:00-07:00": "Reviewing now",
   "2026-10-15T00:00:00-07:00": "Announced",
 };
+const participantGroups = [
+  "Middle & High School",
+  "College & University",
+  "Innovators",
+  "Women-Led Teams",
+];
+const defaultParticipantGroup = "Middle & High School";
 
 const header = document.querySelector("[data-header]");
 const nav = document.querySelector("[data-nav]");
@@ -224,6 +231,10 @@ const getSortedSubmissions = (items) =>
     .slice()
     .sort((a, b) => Number(b.voteCount || 0) - Number(a.voteCount || 0));
 
+const getParticipantGroup = (item) => item.participantGroup || item.participant_group || defaultParticipantGroup;
+
+const getSuggestedTopic = (item) => item.suggestedTopic || item.suggested_topic || "";
+
 if (submissionForm) {
   submissionForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -259,11 +270,13 @@ if (submissionForm) {
         team_lead_name: cleanText(payload.team_lead_name),
         email: cleanText(payload.email),
         age_confirmation: cleanText(payload.age_confirmation),
+        participant_group: cleanText(payload.participant_group),
         student_status: cleanText(payload.student_status),
         school: cleanText(payload.school),
         country_region: cleanText(payload.country_region),
         team_members: cleanText(payload.team_members),
         project_title: cleanText(payload.project_title),
+        suggested_topic: cleanText(payload.suggested_topic),
         scenario_definition: cleanText(payload.scenario_definition),
         problem_and_users: cleanText(payload.problem_and_users),
         solution_summary: cleanText(payload.solution_summary),
@@ -393,10 +406,12 @@ const normalizeSubmission = (docSnap) => {
     firestoreId: docSnap.id,
     id: data.public_id || docSnap.id,
     team: data.team_lead_name || data.submitterName || "Student team",
+    participantGroup: data.participant_group || defaultParticipantGroup,
     studentStatus: data.student_status || "",
     school: data.school || "",
     country: data.country_region || "",
     project: data.project_title || "",
+    suggestedTopic: data.suggested_topic || "",
     scenario: data.scenario_definition || "",
     problem: data.problem_and_users || "",
     solution: data.solution_summary || "",
@@ -411,7 +426,9 @@ const renderSubmissionGallery = (items) => {
     return;
   }
 
-  if (!items.length) {
+  const sortedItems = getSortedSubmissions(items);
+
+  if (!sortedItems.length) {
     if (emptyState) {
       emptyState.textContent = isShowcaseOpen()
         ? "No approved public works are available yet. Approved projects will appear here after review."
@@ -421,35 +438,53 @@ const renderSubmissionGallery = (items) => {
   }
 
   emptyState?.remove();
-  const sortedItems = getSortedSubmissions(items);
 
-  gallery.innerHTML = sortedItems
-    .map(
-      (item, index) => `
-        <article class="work-card" id="${getProjectAnchor(item, index)}">
-          <div class="rank-row">
-            <span class="rank-badge">#${index + 1}</span>
-            <strong>People's Choice</strong>
+  gallery.innerHTML = participantGroups
+    .map((group) => {
+      const groupItems = sortedItems.filter((item) => getParticipantGroup(item) === group);
+      const cards = groupItems.length
+        ? groupItems
+            .map((item) => {
+              const index = sortedItems.indexOf(item);
+              return `
+                <article class="work-card" id="${getProjectAnchor(item, index)}">
+                  <div class="rank-row">
+                    <span class="rank-badge">#${index + 1}</span>
+                    <strong>People's Choice</strong>
+                  </div>
+                  <div>
+                    <span class="project-id">${escapeHtml(getProjectId(item, index))}</span>
+                    <h3>${escapeHtml(item.project)}</h3>
+                    <p class="team-line">${escapeHtml(item.team)}${item.school ? ` / ${escapeHtml(item.school)}` : ""}${item.country ? ` / ${escapeHtml(item.country)}` : ""}</p>
+                    <p class="student-line">${escapeHtml(group)}${item.studentStatus ? ` / ${escapeHtml(item.studentStatus)}` : ""}</p>
+                    ${getSuggestedTopic(item) ? `<p class="topic-line">${escapeHtml(getSuggestedTopic(item))}</p>` : ""}
+                  </div>
+                  <p><strong>2036 Scenario:</strong> ${escapeHtml(item.scenario)}</p>
+                  ${item.problem ? `<p><strong>Target Problem:</strong> ${escapeHtml(item.problem)}</p>` : ""}
+                  <p><strong>Solution:</strong> ${escapeHtml(item.solution)}</p>
+                  ${videoMarkup(item.videoUrl)}
+                  <div class="work-actions">
+                    ${linkMarkup(item.pocUrl, "Open POC Website")}
+                    ${linkMarkup(item.videoUrl, "Open Video")}
+                  </div>
+                  ${voteMarkup(item, index)}
+                  ${shareMarkup(item, index)}
+                </article>
+              `;
+            })
+            .join("")
+        : `<div class="empty-state">No approved works in this group yet.</div>`;
+
+      return `
+        <section class="work-group" aria-label="${escapeHtml(group)} works">
+          <div class="work-group-heading">
+            <span>${escapeHtml(group)}</span>
+            <strong>${groupItems.length} ${groupItems.length === 1 ? "work" : "works"}</strong>
           </div>
-          <div>
-            <span class="project-id">${escapeHtml(getProjectId(item, index))}</span>
-            <h3>${escapeHtml(item.project)}</h3>
-            <p class="team-line">${escapeHtml(item.team)}${item.school ? ` / ${escapeHtml(item.school)}` : ""}${item.country ? ` / ${escapeHtml(item.country)}` : ""}</p>
-            ${item.studentStatus ? `<p class="student-line">${escapeHtml(item.studentStatus)}</p>` : ""}
-          </div>
-          <p><strong>2036 Scenario:</strong> ${escapeHtml(item.scenario)}</p>
-          ${item.problem ? `<p><strong>Target Problem:</strong> ${escapeHtml(item.problem)}</p>` : ""}
-          <p><strong>Solution:</strong> ${escapeHtml(item.solution)}</p>
-          ${videoMarkup(item.videoUrl)}
-          <div class="work-actions">
-            ${linkMarkup(item.pocUrl, "Open POC Website")}
-            ${linkMarkup(item.videoUrl, "Open Video")}
-          </div>
-          ${voteMarkup(item, index)}
-          ${shareMarkup(item, index)}
-        </article>
-      `,
-    )
+          <div class="gallery-grid">${cards}</div>
+        </section>
+      `;
+    })
     .join("");
 
   const targetProject = window.location.hash ? document.getElementById(window.location.hash.slice(1)) : null;
@@ -473,7 +508,8 @@ const renderScoreTable = () => {
                 <th scope="row">
                   <span>${escapeHtml(id)}</span>
                   <strong>${escapeHtml(item.project)}</strong>
-                  <small>${escapeHtml(item.team)}</small>
+                  <small>${escapeHtml(item.team)} | ${escapeHtml(getParticipantGroup(item))}</small>
+                  ${getSuggestedTopic(item) ? `<small>${escapeHtml(getSuggestedTopic(item))}</small>` : ""}
                 </th>
                 ${scoreFields.map(([key]) => `<td>${numberInput(id, key)}</td>`).join("")}
                 <td class="total-cell" data-total>0</td>

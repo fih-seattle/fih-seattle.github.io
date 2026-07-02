@@ -462,6 +462,65 @@ h1 {
   line-height: 1.22;
 }
 
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.topic-card {
+  display: grid;
+  gap: 12px;
+  min-height: 292px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--teal);
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.06);
+}
+
+.topic-card img {
+  width: 58px;
+  height: 58px;
+}
+
+.topic-card strong,
+.group-grid strong {
+  color: var(--orange);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topic-card h3,
+.group-grid h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.topic-card p,
+.group-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.group-grid article {
+  min-height: 210px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--orange);
+  background: #fff8f1;
+}
+
 .split {
   display: grid;
   grid-template-columns: minmax(0, 0.78fr) minmax(360px, 1fr);
@@ -674,6 +733,41 @@ h1 {
   gap: 16px;
 }
 
+.grouped-gallery {
+  display: grid;
+  gap: 28px;
+}
+
+.work-group {
+  display: grid;
+  gap: 14px;
+}
+
+.work-group-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--line);
+}
+
+.work-group-heading span {
+  color: var(--night);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 950;
+  line-height: 1;
+}
+
+.work-group-heading strong {
+  color: var(--teal);
+  font-size: 0.86rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .work-card {
   display: grid;
   align-content: space-between;
@@ -728,6 +822,17 @@ h1 {
   color: var(--teal) !important;
   font-size: 0.92rem;
   font-weight: 850;
+}
+
+.topic-line {
+  display: inline-flex;
+  width: fit-content;
+  margin: -4px 0 0;
+  padding: 6px 9px;
+  background: #fff0e3;
+  color: #6c3107 !important;
+  font-size: 0.84rem;
+  font-weight: 900;
 }
 
 .work-link {
@@ -1335,6 +1440,8 @@ h1 {
   .criteria-grid,
   .timeline-grid,
   .countdown-grid,
+  .topic-grid,
+  .group-grid,
   .split,
   .summit-grid,
   .demo-hero,

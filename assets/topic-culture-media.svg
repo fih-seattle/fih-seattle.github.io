@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="Culture and media icon">
+  <rect width="96" height="96" rx="18" fill="#07111f"/>
+  <rect x="22" y="25" width="52" height="38" rx="8" fill="#fff8f1"/>
+  <path d="M39 36l18 10-18 10V36Z" fill="#ff6a00"/>
+  <path d="M28 75c10-10 30-10 40 0" fill="none" stroke="#ffb21a" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="28" cy="22" r="5" fill="#169b8f"/>
+  <circle cx="68" cy="22" r="5" fill="#169b8f"/>
+</svg>

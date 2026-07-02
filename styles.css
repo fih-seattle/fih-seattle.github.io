@@ -285,6 +285,11 @@ p {
   color: #fff;
 }
 
+.button-dark {
+  background: var(--night);
+  color: #fff;
+}
+
 .intro-band {
   padding: 34px 0;
   background: #fff;
@@ -318,6 +323,10 @@ p {
 
 .section {
   padding: 92px 0;
+}
+
+.section-white {
+  background: #fff;
 }
 
 .section-heading {
@@ -819,6 +828,135 @@ p {
   white-space: nowrap;
 }
 
+.events-section {
+  background:
+    linear-gradient(135deg, rgba(255, 178, 26, 0.14), rgba(255, 178, 26, 0) 38%),
+    var(--paper);
+}
+
+.event-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.7fr);
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.event-card {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  min-height: 260px;
+  padding: clamp(22px, 4vw, 34px);
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.06);
+}
+
+.event-card.is-featured {
+  border-top: 5px solid var(--blue);
+}
+
+.event-card span,
+.event-date {
+  color: var(--blue);
+  font-size: 0.8rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.event-card h3 {
+  margin: 0;
+  font-size: clamp(1.45rem, 3vw, 2.3rem);
+  line-height: 1.08;
+}
+
+.event-card p,
+.event-directory-card p,
+.event-directory-card dd {
+  color: var(--muted);
+}
+
+.events-page {
+  background: var(--paper);
+}
+
+.events-hero {
+  padding: 150px 0 76px;
+  background:
+    radial-gradient(circle at 74% 26%, rgba(255, 106, 0, 0.22), transparent 30%),
+    linear-gradient(135deg, #050505, #17110c);
+  color: #fff;
+}
+
+.events-hero h1 {
+  max-width: 860px;
+  margin: 0 0 18px;
+  font-size: clamp(3rem, 8vw, 6.4rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+.event-directory {
+  display: grid;
+  gap: 22px;
+}
+
+.event-directory-card {
+  display: grid;
+  gap: 22px;
+  padding: clamp(24px, 4vw, 42px);
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--blue);
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.event-directory-card h2 {
+  margin: 8px 0 8px;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.event-directory-card dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+}
+
+.event-directory-card dl div {
+  padding: 16px;
+  background: #fff0e3;
+}
+
+.event-directory-card dt {
+  color: #3d1d09;
+  font-weight: 950;
+}
+
+.event-directory-card dd {
+  margin: 6px 0 0;
+}
+
+.event-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.work-link {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 40px;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  color: var(--blue);
+  font-weight: 900;
+  text-decoration: none;
+}
+
 .programs-section {
   background: var(--paper);
 }
@@ -1055,6 +1193,7 @@ p {
   .intro-grid,
   .esgin-layout,
   .map-layout,
+  .event-list,
   .split,
   .governance-grid,
   .contact-grid,
@@ -1115,6 +1254,7 @@ p {
   }
 
   .program-list,
+  .event-directory-card dl,
   .esgin-facts,
   .trust-grid,
   .model-grid,

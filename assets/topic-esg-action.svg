@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="ESG action icon">
+  <rect width="96" height="96" rx="18" fill="#fff8f1"/>
+  <path d="M22 66c15-8 24-20 29-42 17 9 25 23 23 37-2 17-18 26-34 20" fill="#169b8f" opacity=".24"/>
+  <path d="M22 66c17-7 27-19 33-38 13 9 19 20 17 32-2 15-17 23-32 21" fill="none" stroke="#169b8f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M25 70c12-10 24-19 43-27" stroke="#ff6a00" stroke-width="6" stroke-linecap="round"/>
+</svg>

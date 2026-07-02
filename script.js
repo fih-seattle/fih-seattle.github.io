@@ -27,12 +27,6 @@ nav.addEventListener("click", (event) => {
 });
 
 const cities = [
-  { name: "Doha", label: "Coming soon", status: "Coming soon", coords: [25.2854, 51.5310] },
-  { name: "London", label: "Coming soon", status: "Coming soon", coords: [51.5072, -0.1276] },
-  { name: "Hong Kong", label: "Coming soon", status: "Coming soon", coords: [22.3193, 114.1694] },
-  { name: "Bangkok", label: "Coming soon", status: "Coming soon", coords: [13.7563, 100.5018] },
-  { name: "Shanghai", label: "Coming soon", status: "Coming soon", coords: [31.2304, 121.4737] },
-  { name: "Suzhou", label: "Coming soon", status: "Coming soon", coords: [31.2989, 120.5853] },
   {
     name: "Seattle",
     label: "Open Seattle command site",
@@ -42,6 +36,10 @@ const cities = [
     active: true,
     headquarters: true,
   },
+  { name: "Bangkok", label: "November WFIF stage", status: "WFIF 2026 convening city", coords: [13.7563, 100.5018] },
+  { name: "Taipei", label: "Coming soon", status: "Future Intelligence Hub city", coords: [25.0330, 121.5654] },
+  { name: "Shanghai", label: "Coming soon", status: "Future Intelligence Hub city", coords: [31.2304, 121.4737] },
+  { name: "Dubai", label: "Coming soon", status: "Future Intelligence Hub city", coords: [25.2048, 55.2708] },
 ];
 
 const createMarkerIcon = (city) =>

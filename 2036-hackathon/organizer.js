@@ -62,17 +62,19 @@ const DEMO_SUBMISSION = {
   team_lead_name: "Yun-Cheng Tsai",
   email: "pecu610@gmail.com",
   age_confirmation: "I am age 15 or above",
-  student_status: "High school student",
+  participant_group: "College & University",
+  student_status: "Graduate student",
   school: "Future Intelligence Hub Demo School",
   country_region: "Taiwan / United States",
   team_members: "FIH demo submission for system testing",
   project_title: "2036 Market Pattern Intelligence Demo",
+  suggested_topic: "Impact Capital & Ethical Economy",
   scenario_definition:
-    "In 2036, young investors, student finance clubs, and community learning programs use transparent AI tools to understand volatile market behavior before making decisions.",
+    "In 2036, university finance labs and community investment clubs use transparent AI tools to understand volatile market behavior before making learning or portfolio decisions.",
   problem_and_users:
-    "Students and early-stage investors often see price charts but cannot explain repeated technical patterns or the uncertainty behind model outputs. They need an interpretable learning tool that turns market sequences into visual evidence.",
+    "Students, early-stage investors, and financial-literacy educators often see price charts but cannot explain repeated technical patterns or the uncertainty behind model outputs. They need an interpretable learning tool that turns market sequences into visual evidence.",
   solution_summary:
-    "This POC demonstrates a GAF-CNN inspired workflow: candlestick time-series data is converted into Gramian Angular Field images, then a convolutional model classifies recurring technical patterns for learning and discussion.",
+    "This POC demonstrates an impact-capital learning workflow: candlestick time-series data is converted into Gramian Angular Field images, then a CNN-style classifier surfaces recurring patterns so learners can discuss risk, evidence, and responsible decision-making.",
   poc_website_url: "https://fiworld.org/2036-hackathon/demo-gaf-cnn.html",
   english_pitch_video_url: "https://youtu.be/5bJZOxhV9z4?si=ZKSgUvp_ufUQDc7x",
   permission_to_publish:
@@ -188,7 +190,10 @@ const submissionCard = (submission) => {
         ${textField(id, "project_title", "Project title", submission.project_title, true)}
         ${textField(id, "team_lead_name", "Team lead", submission.team_lead_name)}
         ${textField(id, "email", "Email", submission.email)}
-        ${textField(id, "school", "School", submission.school)}
+        ${textField(id, "participant_group", "Participant group", submission.participant_group)}
+        ${textField(id, "student_status", "Current role / status", submission.student_status)}
+        ${textField(id, "suggested_topic", "Suggested WFIF topic", submission.suggested_topic, true)}
+        ${textField(id, "school", "School / institution / organization", submission.school)}
         ${textField(id, "country_region", "Country / region", submission.country_region)}
         ${textField(id, "poc_website_url", "POC website URL", submission.poc_website_url, true)}
         ${textField(id, "english_pitch_video_url", "English video URL", submission.english_pitch_video_url, true)}
@@ -308,6 +313,9 @@ submissionList?.addEventListener("click", async (event) => {
         project_title: fieldValue(id, "project_title"),
         team_lead_name: fieldValue(id, "team_lead_name"),
         email: fieldValue(id, "email"),
+        participant_group: fieldValue(id, "participant_group"),
+        student_status: fieldValue(id, "student_status"),
+        suggested_topic: fieldValue(id, "suggested_topic"),
         school: fieldValue(id, "school"),
         country_region: fieldValue(id, "country_region"),
         poc_website_url: fieldValue(id, "poc_website_url"),
