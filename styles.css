@@ -823,6 +823,15 @@ p {
   color: #ffcf8a;
 }
 
+.city-row:hover span,
+.city-row:hover strong {
+  color: #fff;
+}
+
+.city-row.is-bangkok strong {
+  color: #ffd98f;
+}
+
 .city-row strong {
   color: var(--amber);
   white-space: nowrap;
@@ -906,6 +915,11 @@ p {
   border-top: 5px solid var(--blue);
 }
 
+.event-card.is-active {
+  border-top: 5px solid var(--amber);
+  background: #fffaf4;
+}
+
 .event-card span,
 .event-date {
   color: var(--blue);
@@ -960,6 +974,16 @@ p {
   border-left: 6px solid var(--blue);
   background: #fff;
   box-shadow: var(--shadow);
+}
+
+.event-directory-card.is-active {
+  border-left-color: var(--amber);
+  background: #fffaf4;
+}
+
+.event-directory-card .event-date-active {
+  display: block;
+  margin: 6px 0 8px;
 }
 
 .event-directory-card h2 {
