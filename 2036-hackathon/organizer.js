@@ -61,24 +61,29 @@ let submissionsUnsubscribe = null;
 const DEMO_SUBMISSION = {
   team_lead_name: "Yun-Cheng Tsai",
   email: "pecu610@gmail.com",
-  age_confirmation: "I am age 15 or above",
-  participant_group: "College & University",
-  student_status: "Graduate student",
+  age_confirmation: "I am between ages 12 and 30",
+  participant_group: "Group C - Young Innovators",
+  registration_fee_category: "Individual entry - USD 65",
+  stripe_payment_status: "stripe_pending",
+  student_status: "Young professional",
   school: "Future Intelligence Hub Demo School",
   country_region: "Taiwan / United States",
   team_members: "FIH demo submission for system testing",
   project_title: "2036 Market Trust Lab",
-  suggested_topic: "Impact Capital & Ethical Economy",
+  suggested_topic: "Impact Capital & Inclusive Growth",
   scenario_definition:
     "In 2036, university finance labs and community investment clubs use transparent AI tools to inspect market-pattern evidence before making learning or portfolio decisions.",
   problem_and_users:
     "Students, early-stage investors, and financial-literacy educators often see price charts but cannot explain repeated technical patterns, uncertainty, or model reasoning. They need an interpretable learning tool that turns market sequences into visual evidence.",
   solution_summary:
     "This POC demonstrates an impact-capital learning workflow: candlestick time-series data is converted into Gramian Angular Field images, then a CNN-style classifier surfaces recurring patterns, confidence, uncertainty, and explanation prompts so learners can discuss risk, evidence, and responsible decision-making.",
+  blueprint_pdf_url: "",
   poc_website_url: "https://fiworld.org/2036-hackathon/demo-gaf-cnn.html",
+  bonus_material_url: "",
   english_pitch_video_url: "https://youtu.be/5bJZOxhV9z4?si=ZKSgUvp_ufUQDc7x",
+  ai_tools_disclosure: "Demo entry used AI-assisted drafting and design tools for communication refinement.",
   permission_to_publish:
-    "Yes, FIH may list our project title, team, scenario, POC link, and video link on this page.",
+    "Yes, FIH may publicly display our project title, participant/team name, scenario summary, video link, and approved materials for voting and awards.",
   status: "approved",
 };
 
@@ -191,16 +196,21 @@ const submissionCard = (submission) => {
         ${textField(id, "team_lead_name", "Team lead", submission.team_lead_name)}
         ${textField(id, "email", "Email", submission.email)}
         ${textField(id, "participant_group", "Participant group", submission.participant_group)}
+        ${textField(id, "registration_fee_category", "Registration fee category", submission.registration_fee_category)}
+        ${textField(id, "stripe_payment_status", "Stripe payment status", submission.stripe_payment_status)}
         ${textField(id, "student_status", "Current role / status", submission.student_status)}
         ${textField(id, "suggested_topic", "Suggested WFIF topic", submission.suggested_topic, true)}
         ${textField(id, "school", "School / institution / organization", submission.school)}
         ${textField(id, "country_region", "Country / region", submission.country_region)}
-        ${textField(id, "poc_website_url", "POC website URL", submission.poc_website_url, true)}
+        ${textField(id, "blueprint_pdf_url", "Future Blueprint PDF URL", submission.blueprint_pdf_url, true)}
+        ${textField(id, "poc_website_url", "Optional prototype / website URL", submission.poc_website_url, true)}
+        ${textField(id, "bonus_material_url", "Optional bonus material URL", submission.bonus_material_url, true)}
         ${textField(id, "english_pitch_video_url", "English video URL", submission.english_pitch_video_url, true)}
         ${textField(id, "status", "Status", submission.status)}
         ${textareaField(id, "scenario_definition", "2036 scenario", submission.scenario_definition)}
         ${textareaField(id, "problem_and_users", "Problem and users", submission.problem_and_users)}
         ${textareaField(id, "solution_summary", "Solution summary", submission.solution_summary)}
+        ${textareaField(id, "ai_tools_disclosure", "AI tools disclosure", submission.ai_tools_disclosure)}
       </div>
       <p class="small-note" data-submission-message="${id}"></p>
     </article>

@@ -49,12 +49,12 @@ const countdownLabels = {
   "2026-10-15T00:00:00-07:00": "Announced",
 };
 const participantGroups = [
-  "Middle & High School",
-  "College & University",
-  "Innovators",
-  "Women-Led Teams",
+  "Group A - Junior",
+  "Group B - Senior",
+  "Group C - Young Innovators",
+  "Group D - Team Challenge",
 ];
-const defaultParticipantGroup = "Middle & High School";
+const defaultParticipantGroup = "Group A - Junior";
 
 const header = document.querySelector("[data-header]");
 const nav = document.querySelector("[data-nav]");
@@ -199,13 +199,13 @@ function updateFormStatus(message) {
 const applyPhaseToPage = () => {
   if (submitButton) {
     submitButton.disabled = !isSubmissionOpen();
-    submitButton.textContent = isSubmissionOpen() ? "Submit Project" : "Submission Closed";
+    submitButton.textContent = isSubmissionOpen() ? "Submit Future Blueprint" : "Submission Closed";
   }
 
   if (!isSubmissionOpen()) {
     updateFormStatus(`Submissions are closed. Current phase: ${competitionSettings.phase}.`);
   } else {
-    updateFormStatus("Submissions are open. Sign in with Google and submit before the deadline.");
+    updateFormStatus("Submissions are open. Stripe payment collection is reserved but not active yet.");
   }
 
   renderSubmissionGallery(approvedSubmissions);
@@ -266,14 +266,16 @@ if (submissionForm) {
         submitButton.textContent = "Submitting...";
       }
 
-      updateFormStatus("Submitting your project to the hackathon review queue...");
+      updateFormStatus("Submitting your Future Blueprint to the challenge review queue...");
 
       await setDoc(doc(db, "submissions", user.uid), {
-        source: "FIH 2036 Future World Hackathon",
+        source: "Future Solutions Challenge 2036 Edition",
         team_lead_name: cleanText(payload.team_lead_name),
         email: cleanText(payload.email),
         age_confirmation: cleanText(payload.age_confirmation),
         participant_group: cleanText(payload.participant_group),
+        registration_fee_category: cleanText(payload.registration_fee_category),
+        stripe_payment_status: cleanText(payload.stripe_payment_status),
         student_status: cleanText(payload.student_status),
         school: cleanText(payload.school),
         country_region: cleanText(payload.country_region),
@@ -283,8 +285,11 @@ if (submissionForm) {
         scenario_definition: cleanText(payload.scenario_definition),
         problem_and_users: cleanText(payload.problem_and_users),
         solution_summary: cleanText(payload.solution_summary),
+        blueprint_pdf_url: cleanText(payload.blueprint_pdf_url),
         poc_website_url: cleanText(payload.poc_website_url),
+        bonus_material_url: cleanText(payload.bonus_material_url),
         english_pitch_video_url: cleanText(payload.english_pitch_video_url),
+        ai_tools_disclosure: cleanText(payload.ai_tools_disclosure),
         permission_to_publish: cleanText(payload.permission_to_publish),
         submitterUid: user.uid,
         submitterName: user.displayName || "",
@@ -300,7 +305,7 @@ if (submissionForm) {
       updateFormStatus(`Submission failed: ${error.message}`);
       if (submitButton) {
         submitButton.disabled = false;
-        submitButton.textContent = "Submit Project";
+        submitButton.textContent = "Submit Future Blueprint";
       }
     }
   });
@@ -355,7 +360,7 @@ const videoMarkup = (url) => {
     <div class="video-embed">
       <iframe
         src="${escapeHtml(embedUrl)}"
-        title="One-minute English product introduction video"
+        title="One-minute English concept video"
         loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
@@ -394,7 +399,7 @@ const shareMarkup = (item, index) => {
   }
 
   const shareUrl = getProjectShareUrl(item, index);
-  const title = `Vote for ${item.project || "this 2036 Future World Hackathon project"}`;
+  const title = `Vote for ${item.project || "this Future Solutions Challenge project"}`;
   const encodedUrl = encodeURIComponent(shareUrl);
   const encodedTitle = encodeURIComponent(title);
 
@@ -431,7 +436,9 @@ const normalizeSubmission = (docSnap) => {
     scenario: data.scenario_definition || "",
     problem: data.problem_and_users || "",
     solution: data.solution_summary || "",
+    blueprintUrl: data.blueprint_pdf_url || "",
     pocUrl: data.poc_website_url || "",
+    bonusUrl: data.bonus_material_url || "",
     videoUrl: data.english_pitch_video_url || "",
     voteCount: Number(data.voteCount || 0),
   };
@@ -460,7 +467,9 @@ const projectCardMarkup = (item, index) => {
       <p><strong>Solution:</strong> ${escapeHtml(item.solution)}</p>
       ${videoMarkup(item.videoUrl)}
       <div class="work-actions">
-        ${linkMarkup(item.pocUrl, isDemoSubmission(item) ? "Open Sample POC" : "Open POC Website")}
+        ${linkMarkup(item.blueprintUrl, "Open Future Blueprint")}
+        ${linkMarkup(item.pocUrl, isDemoSubmission(item) ? "Open Sample Prototype" : "Open Optional Prototype")}
+        ${linkMarkup(item.bonusUrl, "Open Bonus Material")}
         ${linkMarkup(item.videoUrl, "Open Video")}
       </div>
       ${voteMarkup(item, index)}
@@ -496,7 +505,7 @@ const renderSubmissionGallery = (items) => {
     gallery.innerHTML = `
       ${demoMarkup}
       <div class="empty-state works-locked">
-        Public project browsing opens after the submission deadline. Until then, use the sample project as a reference for topic framing, POC structure, and judging expectations.
+        Public project browsing opens after the submission deadline. Until then, use the sample project as a reference for topic framing, Future Blueprint structure, and judging expectations.
       </div>
     `;
     return;
@@ -556,11 +565,13 @@ const renderScoreTable = () => {
                   <small>${escapeHtml(item.team)} | ${escapeHtml(getParticipantGroup(item))}</small>
                   ${getSuggestedTopic(item) ? `<small>${escapeHtml(getSuggestedTopic(item))}</small>` : ""}
                 </th>
-                ${scoreFields.map(([key]) => `<td>${numberInput(id, key)}</td>`).join("")}
+                ${scoreFields.map(([key, label, max]) => `<td>${numberInput(id, key, max, label)}</td>`).join("")}
                 <td class="total-cell" data-total>0</td>
                 <td><textarea rows="2" aria-label="Judge notes"></textarea></td>
                 <td class="score-links">
-                  ${linkMarkup(item.pocUrl, "POC")}
+                  ${linkMarkup(item.blueprintUrl, "Blueprint")}
+                  ${linkMarkup(item.pocUrl, "Prototype")}
+                  ${linkMarkup(item.bonusUrl, "Bonus")}
                   ${linkMarkup(item.videoUrl, "Video")}
                 </td>
               </tr>
@@ -568,7 +579,7 @@ const renderScoreTable = () => {
           },
         )
         .join("")
-    : `<tr><td colspan="9" class="empty-table">No approved public submissions are available yet.</td></tr>`;
+    : `<tr><td colspan="10" class="empty-table">No approved public submissions are available yet.</td></tr>`;
 
   scoreBody.querySelectorAll("tr[data-score-row]").forEach((row) => {
     const id = row.getAttribute("data-score-row");
@@ -636,15 +647,16 @@ const loadCompetitionSettings = () => {
 };
 
 const scoreFields = [
-  ["scenario", "Scenario Definition"],
-  ["solution", "Solution Fit"],
-  ["poc", "POC Website"],
-  ["video", "English Pitch"],
-  ["impact", "Impact"],
+  ["future", "Future Thinking", 20],
+  ["problem", "Problem Definition", 15],
+  ["solution", "Solution Design", 20],
+  ["impact", "Potential Impact", 20],
+  ["feasibility", "Feasibility", 10],
+  ["communication", "Communication", 15],
 ];
 
-const numberInput = (id, key) =>
-  `<input class="score-input" type="number" min="0" max="20" step="1" value="0" aria-label="${key} score" data-score="${id}-${key}">`;
+const numberInput = (id, key, max, label) =>
+  `<input class="score-input" type="number" min="0" max="${max}" step="1" value="0" aria-label="${label} score" data-score="${id}-${key}">`;
 
 const updateTotal = (row, id) => {
   const total = scoreFields.reduce((sum, [key]) => {
@@ -740,7 +752,7 @@ if (exportButton && scoreBody) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "fih-2036-hackathon-scores.csv";
+    link.download = "future-solutions-challenge-2036-scores.csv";
     link.click();
     URL.revokeObjectURL(url);
   });

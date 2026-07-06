@@ -3,9 +3,9 @@ window.hackathonSubmissions = [
     id: "FIH2036-001",
     isDemo: true,
     team: "Yun-Cheng Tsai",
-    participantGroup: "College & University",
-    studentStatus: "Graduate student",
-    suggestedTopic: "Impact Capital & Ethical Economy",
+    participantGroup: "Group C - Young Innovators",
+    studentStatus: "Young professional",
+    suggestedTopic: "Impact Capital & Inclusive Growth",
     project: "2036 Market Trust Lab",
     scenario:
       "In 2036, university finance labs and community investment clubs use transparent AI tools to inspect market-pattern evidence before making learning or portfolio decisions.",
