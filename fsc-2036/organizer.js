@@ -80,7 +80,7 @@ const DEMO_SUBMISSION = {
   solution_summary:
     "This POC demonstrates an impact-capital learning workflow: candlestick time-series data is converted into Gramian Angular Field images, then a CNN-style classifier surfaces recurring patterns, confidence, uncertainty, and explanation prompts so learners can discuss risk, evidence, and responsible decision-making.",
   blueprint_pdf_url: "",
-  poc_website_url: "https://fiworld.org/2036-hackathon/demo-gaf-cnn.html",
+  poc_website_url: "https://fiworld.org/fsc-2036/demo-gaf-cnn.html",
   bonus_material_url: "",
   english_pitch_video_url: "https://youtu.be/5bJZOxhV9z4?si=ZKSgUvp_ufUQDc7x",
   ai_tools_disclosure: "Demo entry used AI-assisted drafting and design tools for communication refinement.",

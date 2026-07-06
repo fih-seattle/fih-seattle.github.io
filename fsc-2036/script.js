@@ -279,7 +279,7 @@ const applyPhaseToPage = () => {
   renderScoreTable();
 };
 
-const submissions = Array.isArray(window.hackathonSubmissions) ? window.hackathonSubmissions : [];
+const submissions = Array.isArray(window.challengeSubmissions) ? window.challengeSubmissions : [];
 const isDemoSubmission = (item) => Boolean(item.isDemo || item.demo);
 const demoSubmissions = submissions.filter(isDemoSubmission);
 const publicStaticSubmissions = submissions.filter((item) => !isDemoSubmission(item));

@@ -11,7 +11,7 @@ This hackathon page uses Firebase Auth and Cloud Firestore.
 
 ## Publish Firestore Rules
 
-Open Firestore Database > Rules and paste the contents of `2036-hackathon/firestore.rules`.
+Open Firestore Database > Rules and paste the contents of `fsc-2036/firestore.rules`.
 
 These rules:
 
@@ -50,7 +50,7 @@ results_published  -> show approved works and vote totals, disable voting
 The easier way to switch phases is:
 
 ```text
-2036-hackathon/organizer.html
+fsc-2036/organizer.html
 ```
 
 To enable it for your Google account:

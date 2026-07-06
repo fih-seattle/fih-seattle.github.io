@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /2036-hackathon/judge-scorecard.html
+Disallow: /fsc-2036/judge-scorecard.html

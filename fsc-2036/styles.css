@@ -145,7 +145,7 @@ a {
   padding: 140px 0 76px;
   background:
     linear-gradient(120deg, rgba(5, 5, 5, 0.9), rgba(17, 19, 21, 0.76) 48%, rgba(5, 5, 5, 0.96)),
-    url("../assets/2036-hackathon.png") center / cover;
+    url("../assets/fsc-2036.png") center / cover;
   color: #fff;
 }
 
@@ -307,7 +307,7 @@ h1 {
   padding: 92px 0;
   background:
     linear-gradient(120deg, rgba(12, 178, 222, 0.94), rgba(0, 70, 172, 0.94)),
-    url("../assets/2036-hackathon.png") left center / contain no-repeat;
+    url("../assets/fsc-2036.png") left center / contain no-repeat;
   color: #fff;
 }
 
