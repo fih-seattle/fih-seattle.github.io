@@ -70,6 +70,9 @@ const submittedAt = document.querySelector("[data-submitted-at]");
 const authButtons = document.querySelectorAll("[data-auth-button]");
 const signOutButtons = document.querySelectorAll("[data-sign-out]");
 const authStatus = document.querySelector("[data-auth-status]");
+const participantStatus = document.querySelector("[data-participant-status]");
+const participantStatusTitle = document.querySelector("[data-participant-status-title]");
+const participantStatusDetail = document.querySelector("[data-participant-status-detail]");
 const countdownNodes = document.querySelectorAll("[data-countdown]");
 
 let currentUser = null;
@@ -173,6 +176,75 @@ signOutButtons.forEach((button) => {
   button.addEventListener("click", () => signOut(auth));
 });
 
+function updateFormStatus(message) {
+  if (formStatus) {
+    formStatus.textContent = message;
+  }
+}
+
+const STATUS_LABELS = {
+  pre_registration_received: "Pre-registration received",
+  eligibility_review: "Eligibility review",
+  payment_notice_sent: "Payment notice sent",
+  payment_pending: "Payment pending",
+  registration_complete: "Registration complete",
+  pending: "Pre-registration received",
+  approved: "Approved for public showcase",
+};
+
+const PAYMENT_LABELS = {
+  not_sent: "Payment notice has not been sent yet.",
+  sent: "Payment notice has been sent by email.",
+  stripe_pending: "Payment is pending.",
+  paid: "Payment confirmed.",
+};
+
+const setParticipantStatus = (title, detail, visible = true) => {
+  if (participantStatus) {
+    participantStatus.hidden = !visible;
+  }
+  if (participantStatusTitle) {
+    participantStatusTitle.textContent = title;
+  }
+  if (participantStatusDetail) {
+    participantStatusDetail.textContent = detail;
+  }
+};
+
+const loadParticipantStatus = async (user) => {
+  if (!user || !participantStatus) {
+    setParticipantStatus("", "", false);
+    return;
+  }
+
+  setParticipantStatus("Checking your current record", "Loading your pre-registration status...");
+
+  try {
+    const snapshot = await getDoc(doc(db, "submissions", user.uid));
+
+    if (!snapshot.exists()) {
+      setParticipantStatus(
+        "No pre-registration found",
+        "Submit the form below to enter the eligibility review queue.",
+      );
+      return;
+    }
+
+    const data = snapshot.data();
+    const registrationStatus = data.registration_status || data.status || "pre_registration_received";
+    const paymentStatus = data.payment_notification_status || data.stripe_payment_status || "not_sent";
+    const registrationLabel = STATUS_LABELS[registrationStatus] || registrationStatus;
+    const paymentLabel = PAYMENT_LABELS[paymentStatus] || paymentStatus;
+
+    setParticipantStatus(
+      registrationLabel,
+      `${paymentLabel} FIH will email official payment instructions after eligibility review and payment setup activation.`,
+    );
+  } catch (error) {
+    setParticipantStatus("Status unavailable", `Your status could not be loaded: ${error.message}`);
+  }
+};
+
 onAuthStateChanged(auth, (user) => {
   currentUser = user;
   const signedIn = Boolean(user);
@@ -188,13 +260,8 @@ onAuthStateChanged(auth, (user) => {
   signOutButtons.forEach((button) => {
     button.hidden = !signedIn;
   });
+  loadParticipantStatus(user);
 });
-
-function updateFormStatus(message) {
-  if (formStatus) {
-    formStatus.textContent = message;
-  }
-}
 
 const applyPhaseToPage = () => {
   if (submitButton) {
@@ -205,7 +272,7 @@ const applyPhaseToPage = () => {
   if (!isSubmissionOpen()) {
     updateFormStatus(`Submissions are closed. Current phase: ${competitionSettings.phase}.`);
   } else {
-    updateFormStatus("Submissions are open. Stripe payment collection is reserved but not active yet.");
+    updateFormStatus("Submissions are open as pre-registration records. Payment instructions will be emailed later.");
   }
 
   renderSubmissionGallery(approvedSubmissions);
@@ -266,7 +333,7 @@ if (submissionForm) {
         submitButton.textContent = "Submitting...";
       }
 
-      updateFormStatus("Submitting your Future Blueprint to the challenge review queue...");
+      updateFormStatus("Submitting your pre-registration record to the challenge review queue...");
 
       await setDoc(doc(db, "submissions", user.uid), {
         source: "Future Solutions Challenge 2036 Edition",
@@ -276,6 +343,8 @@ if (submissionForm) {
         participant_group: cleanText(payload.participant_group),
         registration_fee_category: cleanText(payload.registration_fee_category),
         stripe_payment_status: cleanText(payload.stripe_payment_status),
+        registration_status: cleanText(payload.registration_status),
+        payment_notification_status: cleanText(payload.payment_notification_status),
         student_status: cleanText(payload.student_status),
         school: cleanText(payload.school),
         country_region: cleanText(payload.country_region),

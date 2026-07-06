@@ -43,7 +43,9 @@ service cloud.firestore {
     }
 
     match /submissions/{submissionId} {
-      allow read: if isAdmin() || isApprovedSubmission(resource.data);
+      allow read: if isAdmin()
+        || isApprovedSubmission(resource.data)
+        || (signedIn() && submissionId == request.auth.uid);
       allow create: if submissionId == request.auth.uid && isValidSubmissionCreate();
 
       allow update: if isAdmin();

@@ -216,9 +216,9 @@
       <section class="section" id="fees" aria-labelledby="fees-title">
         <div class="container section-heading">
           <p class="eyebrow">Registration fees and payment status</p>
-          <h2 id="fees-title">Stripe online payment links are reserved but not active yet.</h2>
+          <h2 id="fees-title">Submit now as pre-registration. Payment completes the official registration later.</h2>
           <p>
-            The official registration fee is USD 65 for an individual entry and USD 125 for a team entry. Online card payment will be connected through Stripe after company registration, IRS tax ID setup, and banking are complete. The buttons below are interface placeholders and will be replaced with live Stripe Checkout links when payment processing is ready.
+            The official registration fee is USD 65 for an individual entry and USD 125 for a team entry. While online payment setup is being finalized, submitted forms are received as pre-registration records. Official registration is complete only after FIH issues the payment notice and the registration fee is successfully paid.
           </p>
         </div>
         <div class="container fee-grid">
@@ -236,8 +236,8 @@
           </article>
           <article class="fee-card fee-note">
             <span>Current payment handling</span>
-            <strong>Not yet collecting online card payments</strong>
-            <p>Participants may submit project information while payment processing is pending. Organizer confirmation and payment instructions can be issued separately until Stripe goes live.</p>
+            <strong>Payment notice will follow by email</strong>
+            <p>Payment instructions will be sent after basic eligibility review and after FIH's online payment account is activated. Participants must complete payment before the final registration deadline.</p>
           </article>
         </div>
       </section>
@@ -354,8 +354,25 @@
             <p class="eyebrow">Submission form</p>
             <h2>Send the project links directly to FIH.</h2>
             <p class="form-intro">
-              The form collects eligibility, registration-fee category, Future Blueprint PDF link, English video link, AI tools disclosure, and publication preference. Submit before September 30, 2026 to enter eligibility review.
+              The form collects eligibility, registration-fee category, Future Blueprint PDF link, English video link, AI tools disclosure, and publication preference. Submit before September 30, 2026 to enter eligibility review. This first submission is a pre-registration record; payment is required before registration is complete.
             </p>
+            <div class="registration-status-panel" aria-label="Registration and payment status">
+              <div>
+                <span>1</span>
+                <strong>Pre-registration received</strong>
+                <p>Your form is stored in Firebase and enters basic eligibility review.</p>
+              </div>
+              <div>
+                <span>2</span>
+                <strong>Payment notice pending</strong>
+                <p>FIH emails payment instructions after online payment setup is active.</p>
+              </div>
+              <div>
+                <span>3</span>
+                <strong>Registration complete</strong>
+                <p>Your entry becomes official after successful payment confirmation.</p>
+              </div>
+            </div>
             <div class="deadline-callout">
               <strong>Submission countdown</strong>
               <span data-countdown="2026-09-30T23:59:59-07:00">--</span>
@@ -365,8 +382,14 @@
             <input type="hidden" name="source" value="Future Solutions Challenge 2036 Edition">
               <input type="hidden" name="submitted_at_page_time" data-submitted-at>
               <input type="hidden" name="stripe_payment_status" value="stripe_pending">
+              <input type="hidden" name="registration_status" value="pre_registration_received">
+              <input type="hidden" name="payment_notification_status" value="not_sent">
             <div class="auth-panel">
               <p data-auth-status>Sign in with Google to submit or vote.</p>
+              <div class="participant-status" data-participant-status hidden>
+                <strong data-participant-status-title>Pre-registration status</strong>
+                <span data-participant-status-detail>Loading your current record...</span>
+              </div>
               <div class="auth-actions">
                 <button class="button button-secondary" type="button" data-auth-button>Sign in with Google</button>
                 <button class="button button-secondary" type="button" data-sign-out hidden>Sign out</button>
@@ -499,7 +522,7 @@
             </div>
             <button class="button button-primary" type="submit" data-submit-button>Submit Future Blueprint</button>
             <p class="form-note" data-form-status>
-              Submissions are stored in Firebase and remain private until organizer approval. Stripe payment collection is reserved but not active yet.
+              Submissions are stored as pre-registration records and remain private until organizer approval. Payment instructions will be emailed after eligibility review and payment setup activation.
             </p>
           </form>
         </div>

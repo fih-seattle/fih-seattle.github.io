@@ -89,8 +89,39 @@ New submissions are written to the `submissions` collection with:
 
 ```text
 status = pending
+registration_status = pre_registration_received
+payment_notification_status = not_sent
+stripe_payment_status = stripe_pending
 voteCount = 0
 ```
+
+## Pre-Registration and Payment Status
+
+Until Stripe payment collection is active, submitted forms are treated as pre-registration records.
+
+Recommended status meanings:
+
+```text
+registration_status = pre_registration_received
+payment_notification_status = not_sent
+stripe_payment_status = stripe_pending
+```
+
+After basic eligibility review and payment setup activation, send the official payment notice by email and update:
+
+```text
+registration_status = payment_notice_sent
+payment_notification_status = sent
+```
+
+After Stripe payment confirmation, update:
+
+```text
+registration_status = registration_complete
+stripe_payment_status = paid
+```
+
+Participants who sign in with the same Google account can read only their own submission status. Pending submissions remain private from the public website and from other participants.
 
 To publish a project after the submission deadline, open Firestore and change:
 
