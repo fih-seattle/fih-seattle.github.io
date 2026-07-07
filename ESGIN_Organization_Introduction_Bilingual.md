@@ -1,4 +1,8 @@
 # Global ESG Leadership Organization (ESGIN)
+
+**Public positioning note:** ESGIN is a UK-registered international organization advancing ESG, responsible AI, and cross-sector implementation initiatives. References to United Nations venues, consultations, registries, or platform listings describe participation or public listing records, not institutional affiliation or endorsement by the United Nations.
+
+**公開定位說明：**ESGIN 是在英國註冊、推動 ESG、負責任 AI 與跨部門實作倡議的國際組織。本文提到的聯合國場地、諮詢、registry 或平台登錄，皆指參與紀錄或公開登錄資訊，不代表聯合國的機構隸屬或背書。
 # 世界永續領袖峰會
 
 ---
@@ -6,7 +10,7 @@
 ## Why the World Needs ESGIN
 ## 世界為什麼需要 ESGIN
 
-**ESGIN is a global sustainability action think tank, bringing together leaders across business, capital and society to transform real-world business practices into measurable action frameworks and collective intelligence.**
+**ESGIN is a sustainability action network, bringing together practitioners across business, capital and society to translate real-world business practices into practical action frameworks and shared learning.**
 
 By reshaping how people understand business, value and responsibility, we catalyze shifts in business mindsets, behaviors and the systems that shape society.
 
@@ -16,7 +20,7 @@ By reshaping how people understand business, value and responsibility, we cataly
 
 ---
 
-**ESGIN 是一個全球永續行動智庫，匯聚企業、資本與社會領袖，將真實世界的商業實踐轉化為可衡量的行動框架與集體智慧，重新定義商業、價值與責任，推動商業思維、行為模式與社會系統的深層轉型。**
+**ESGIN 是一個永續行動網絡，連結企業、資本與社會領域的實踐者，將真實世界的商業實踐轉化為可操作的行動框架與共享學習。**
 
 **ESGIN 的存在，正是因為落地實踐是碎片化的——跨行業、跨國界、跨學科。**
 
@@ -27,9 +31,9 @@ By reshaping how people understand business, value and responsibility, we cataly
 ## Who We Are
 ## 組織定位
 
-The Global ESG Leadership Organization (ESGIN) is an international, implementation-oriented sustainability organization registered in the United Kingdom, headquartered in **Seattle, USA**. Operating across more than **60 countries and territories**, ESGIN functions as a global multi-stakeholder platform connecting business leaders, sustainability practitioners, policymakers, financial institutions, academia, youth leaders, women leaders, and civil society actors to accelerate the implementation of the **2030 Agenda for Sustainable Development**.
+The Global ESG Leadership Organization (ESGIN) is a UK-registered international organization advancing ESG, responsible AI, and cross-sector implementation initiatives. ESGIN reports network activity across more than **60 countries and territories** and functions as a multi-stakeholder platform connecting business leaders, sustainability practitioners, policymakers, financial institutions, academia, youth leaders, women leaders, and civil society actors around the **2030 Agenda for Sustainable Development**.
 
-全球永續領導組織（ESGIN），即世界永續領袖峰會，是一個在英國正式註冊、總部設於**美國西雅圖**的國際性、以實踐為導向的永續發展組織，業務遍及逾 **60 個國家與地區**。ESGIN 作為全球多利益相關方平台，連結商業領袖、永續發展實踐者、政策制定者、金融機構、學術界、青年領袖、女性領袖與公民社會，共同加速推動 **2030 永續發展議程**的落地實踐。
+全球永續領導組織（ESGIN），即世界永續領袖峰會，是一個在英國註冊、推動 ESG、負責任 AI 與跨部門實作倡議的國際組織。ESGIN 報告其網絡活動觸及逾 **60 個國家與地區**，並作為多利益相關方平台，連結商業領袖、永續發展實踐者、政策制定者、金融機構、學術界、青年領袖、女性領袖與公民社會，圍繞 **2030 永續發展議程**推動學習與實作。
 
 Distinct from organizations focused primarily on policy advocacy or awareness-building, ESGIN emphasizes measurable implementation and institutional capacity-building. The organization develops practical pathways that help enterprises, institutions, and communities operationalize sustainability commitments through implementation-oriented collaboration, practitioner-informed learning, governance frameworks, leadership programmes, sustainability education, and ecosystem partnerships.
 
@@ -58,12 +62,12 @@ Guided by five core principles — **Integrity · Inclusivity · Intelligence ·
 
 ---
 
-## Epic-Level Transformation
-## 史詩級的商業心智行為系統變革
+## Practical Transformation
+## 商業心智與行為的實務轉化
 
-ESGIN's work represents an **Epic-Level Transformation of the Business Mindset-Behavior System**. We don't simply educate or advocate. We build the infrastructure through which transformation actually happens — by:
+ESGIN's work focuses on practical transformation of business mindsets and behavior. We do not simply educate or advocate; we build implementation pathways through:
 
-ESGIN 的工作代表著一場**史詩級的商業心智行為系統變革**。我們不只是教育或倡議，我們構建讓變革真正發生的基礎設施——透過：
+ESGIN 的工作聚焦於商業心智與行為的實務轉化。我們不只是教育或倡議，也透過以下方式建立可落地的實作路徑：
 
 - Converting real-world corporate sustainability experiences into replicable, executable frameworks
 - Connecting global commitments with local implementation
@@ -75,13 +79,13 @@ ESGIN 的工作代表著一場**史詩級的商業心智行為系統變革**。�
 - 建立政策制定者無法單獨產出的實踐者洞察與集體智慧
 - 動員那些拒絕將獲利與使命對立的領袖
 
-**We change the operating system of business.**
+**We help organizations turn sustainability ideas into practice.**
 
-**我們重寫商業的作業系統。**
+**我們協助組織將永續理念轉化為實際行動。**
 
-**We turn real-world action into policy. We turn policy into a new standard for commerce.**
+**We connect real-world action, policy learning, and more responsible commercial practice.**
 
-**我們將真實世界的行動轉化為政策。我們將政策轉化為商業的新標準。**
+**我們連結真實世界的行動、政策學習與更負責任的商業實踐。**
 
 ---
 
@@ -124,9 +128,9 @@ ESGIN 透過向**聯合國多哈社會發展解決方案平台**提交倡議、�
 ### IV. Action Infrastructure
 ### 四、行動基礎設施
 
-ESGIN convenes a global network of more than **6,000 participants** and over **350 senior advisors and contributors** across more than **60 countries and territories** through convenings, regional chapters, peer learning platforms, cross-sector dialogues, and the **Future Intelligence Hub (FIH)** — ESGIN's flagship urban innovation platform.
+ESGIN reports a network of more than **6,000 participants** and over **350 senior advisors and contributors** across more than **60 countries and territories** through convenings, regional chapters, peer learning platforms, cross-sector dialogues, and the **Future Intelligence Hub (FIH)** — ESGIN's urban innovation initiative.
 
-ESGIN 匯聚遍及逾 **60 個國家與地區**、超過 **6,000 名參與者** 及逾 **350 位資深顧問與貢獻者** 的全球網絡，透過論壇峰會、區域分會、同儕學習平台、跨部門對話，以及 ESGIN 旗艦城市創新平台**未來智慧中心（FIH）**，建立協調一致的 ESG 與 SDG 落地路徑。
+ESGIN 報告其網絡活動涵蓋逾 **60 個國家與地區**、超過 **6,000 名參與者** 及逾 **350 位資深顧問與貢獻者**，並透過論壇峰會、區域分會、同儕學習平台、跨部門對話，以及 ESGIN 城市創新倡議**未來智慧中心（FIH）**，推動 ESG 與 SDG 的學習和落地路徑。
 
 ---
 
@@ -139,15 +143,15 @@ ESGIN 整個生態系統圍繞清晰的五大支柱架構運作——**連結 ·
 
 | Pillar 支柱 | Function 功能 | Description 說明 |
 |-------------|---------------|-----------------|
-| **Connect 連結** | Network Entry 網絡接入 | Join our global network and Impact Circle communities across Shanghai, Singapore, Doha, New York and beyond — online and offline<br>加入全球網絡及遍及上海、新加坡、多哈、紐約等城市的影響力圈社群，線上線下雙軌交流 |
+| **Connect 連結** | Network Entry 網絡接入 | Join ESGIN learning and Impact Circle communities connected to cities such as Shanghai, Singapore, Doha, New York and beyond — online and offline<br>加入 ESGIN 學習網絡，以及與上海、新加坡、多哈、紐約等城市相關的 Impact Circle 社群，透過線上與線下方式交流 |
 | **Share 分享** | Knowledge Exchange 知識交流 | Exchange real-world ESG implementation experience across sectors, regions and leadership levels<br>跨行業、跨地區、跨層級交流真實的 ESG 落地實踐經驗 |
 | **Learn 學習** | Capability Building 能力建設 | Academy courses, webinars, and the flagship journal ESG in Action Monthly (ISSN 2979-0972)<br>學院課程、網絡研討會及旗艦刊物《ESG in Action Monthly》（ISSN 2979-0972） |
 | **Act 行動** | Implementation 實踐落地 | Practical toolkits, case studies, and implementation frameworks members can apply immediately<br>可即時應用的實用工具包、案例研究與落地實施框架 |
 | **Lead 引領** | Systemic Change 系統變革 | Cultivating leaders who go beyond ESG reporting to create systemic impact<br>培育能夠超越 ESG 報告層面、創造系統性影響的領導者 |
 
-We are currently the only platform dedicated to ESG practical implementation, going far beyond compliance and data reporting. Our goal is to help global leaders and organisations not only "understand ESG" but truly "do ESG" and generate measurable change.
+ESGIN focuses on ESG practical implementation beyond compliance and data reporting. Our goal is to help leaders and organisations not only "understand ESG" but move toward doing ESG in measurable ways.
 
-我們目前是唯一一個專注於 ESG 實踐落地的平台，遠遠超越合規要求與數據報告的範疇。我們的目標是幫助全球領導者和組織不僅「了解 ESG」，更能真正「踐行 ESG」並創造可量化的改變。
+ESGIN 聚焦於 ESG 實踐落地，並希望超越合規要求與數據報告的層面。我們的目標是幫助領導者和組織不僅「了解 ESG」，也能逐步以可衡量的方式「踐行 ESG」。
 
 ### ESG in Action Monthly | ESG 行動月刊
 
@@ -159,9 +163,9 @@ We transform complex topics — including human rights due diligence, climate tr
 
 我們將人權盡職調查、氣候轉型、自然正向金融及多哈八大倡議等複雜議題，轉化為清晰且可立即應用的內容。每篇文章均包含真實案例、執行挑戰、誠實數據及具體的後續行動建議，並始終呈現成功與困難兩面，以避免任何形式的漂綠（greenwashing）。
 
-All content is rigorously fact-checked by our network of over **350 international advisors** and aligned with UN and PRI sources.
+Content is reviewed with practitioner input and aligned where relevant with public UN, PRI, and other sustainability sources.
 
-所有內容均經逾 **350 位國際顧問**的嚴格事實核查，並與聯合國及 PRI 來源保持一致。
+內容會結合實踐者意見進行審閱，並在適用時參考公開的聯合國、PRI 與其他永續來源。
 
 ---
 
@@ -170,23 +174,23 @@ All content is rigorously fact-checked by our network of over **350 internationa
 
 | Metric 指標 | Figure 數據 |
 |-------------|-------------|
-| 🌍 Countries & Territories 覆蓋國家與地區 | 60+ |
-| 🤝 Senior Advisors & Contributors 資深顧問與貢獻者 | 350+ |
-| 👥 Digital Community & Journal Subscribers 數位社群及刊物訂閱者 | 6,000+ |
+| 🌍 Reported Countries & Territories 報告觸及國家與地區 | 60+ |
+| 🤝 Reported Senior Advisors & Contributors 報告資深顧問與貢獻者 | 350+ |
+| 👥 Reported Digital Community & Journal Subscribers 報告數位社群及刊物訂閱者 | 6,000+ |
 | 📡 Monthly Online Forum Participants 每月線上論壇參與者 | 8,000+ |
 | 🌐 Continents 覆蓋洲際 | 6 |
 | 🎓 Capacity-Building Participants (2025–26) 能力建設參與者 | 1,200+ |
 | 🗓 Events & Programmes (Jul 2025–Apr 2026) 活動及教育計劃場次 | 85 |
-| 🇺🇳 UN Events & Engagements 聯合國活動與參與 | 60+ |
-| 📋 UN Initiatives Accepted (Doha Platform) 聯合國多哈平台獲批倡議 | 8 |
+| 🇺🇳 UN-related Event Participation Records 聯合國相關活動參與紀錄 | 60+ |
+| 📋 Doha Platform Initiatives Accepted 多哈平台獲接受倡議 | 8 |
 | 📚 UK & Ireland Legal Deposit Libraries 英愛法定呈繳圖書館收藏 | 全部 6 所 |
 
 ---
 
-## United Nations Engagement & Institutional Standing
-## 聯合國參與紀錄與機構地位
+## United Nations-Related Participation Records
+## 聯合國相關參與紀錄
 
-ESGIN has participated in, organized, or contributed to the following UN and intergovernmental processes:
+ESGIN has participated in, organized, or contributed to the following UN-related and intergovernmental processes. These records describe participation, accepted submissions, or event roles; they do not imply institutional affiliation unless explicitly stated by the relevant organizer.
 
 ESGIN 已參與、組織或貢獻以下聯合國及政府間進程：
 
@@ -289,9 +293,9 @@ ESGIN 已參與、組織或貢獻以下聯合國及政府間進程：
 ## Governance
 ## 治理架構
 
-ESGIN is headquartered in **Seattle, United States of America**, and registered in the United Kingdom (Company No. 15443379, 128 City Road, London EC1V 2NX) under the Companies Act 2006. The Founder and Managing Director acts as the legal representative of the organization.
+ESGIN is registered in the United Kingdom (Company No. 15443379, 128 City Road, London EC1V 2NX) under the Companies Act 2006, with Seattle serving as a coordination base for FIH-related activity. The Founder and Managing Director acts as the legal representative of the organization.
 
-ESGIN 總部設於**美國西雅圖**，並依據 2006 年《英國公司法》在英國正式註冊（公司編號：15443379，地址：128 City Road, London EC1V 2NX）。創始人兼執行董事為組織法定代表人。
+ESGIN 依據 2006 年《英國公司法》在英國註冊（公司編號：15443379，地址：128 City Road, London EC1V 2NX），西雅圖作為 FIH 相關活動的協調基地。創始人兼執行董事為組織法定代表人。
 
 ### Board of Directors | 董事會
 
@@ -339,32 +343,32 @@ Building the operational mechanisms that support measurable and locally adaptabl
 
 ---
 
-## Future Intelligence Hub (FIH) — ESGIN's Flagship Implementation Platform
-## 未來智慧中心（FIH）— ESGIN 旗艦落地平台
+## Future Intelligence Hub (FIH) — ESGIN Implementation Initiative
+## 未來智慧中心（FIH）— ESGIN 實作倡議
 
-FIH is ESGIN's flagship urban innovation infrastructure — a physical, AI-powered social innovation and micro-entrepreneurship incubation hub empowering sustainable urban and community development.
+FIH is ESGIN's urban innovation initiative — an AI-powered social innovation and micro-entrepreneurship incubation pathway supporting sustainable urban and community development.
 
-未來智慧中心（FIH）是 ESGIN 的旗艦城市創新基礎設施——一個以 AI 驅動社會創新與微型創業孵化的實體空間，賦能永續城市與社區發展。
+未來智慧中心（FIH）是 ESGIN 的城市創新倡議，透過 AI、社會創新與微型創業孵化路徑，支持永續城市與社區發展。
 
 **"Connecting People, Knowledge, Resources and Solutions to Build the Future Society — Powered by AI."**
 
 **「以 AI 驅動人才、知識、資源與解方的連結，共同建構未來社會。」**
 
-FIH begins from a gap: the opportunities created by AI are expanding faster than the speed at which people can gain access to them — particularly micro-entrepreneurs and local innovators who are excluded from capital, mentorship, and digital tools. FIH establishes a physical, on-the-ground space in every city where it operates, turning ESGIN's global initiatives into city-level action through micro-entrepreneurship incubation, AI capability building, SDG-aligned innovation, and Opportunity Day capital connections.
+FIH begins from a gap: the opportunities created by AI are expanding faster than the speed at which people can gain access to them — particularly micro-entrepreneurs and local innovators who are excluded from capital, mentorship, and digital tools. FIH is being developed as a city-level pathway that can connect micro-entrepreneurship incubation, AI capability building, SDG-aligned innovation, and Opportunity Day-style capital conversations where local partners are confirmed.
 
-FIH 的起點是一個落差：AI 帶來的機會正在快速擴張，但能力、資源與舞台的取得速度遠遠跟不上——尤其是被排除在資本、導師與數位工具之外的微型創業者與在地創新者。FIH 在每一座落地城市建立一座實體進駐空間，透過微型創業孵化、AI 能力建設、SDG 對齊的創新設計及 Opportunity Day 資本連結，將 ESGIN 的全球倡議轉化為城市層面的具體行動。
+FIH 的起點是一個落差：AI 帶來的機會正在快速擴張，但能力、資源與舞台的取得速度遠遠跟不上——尤其是被排除在資本、導師與數位工具之外的微型創業者與在地創新者。FIH 正在被發展為城市層級的實作路徑，在有明確在地夥伴時，連結微型創業孵化、AI 能力建設、SDG 對齊的創新設計，以及 Opportunity Day 類型的資本對話。
 
 The model: **Global Host (ESGIN) + Local Implementation Partner** — asset-light, globally standardized, locally executed.
 
-運作模式：**全球主辦方（ESGIN）+ 在地執行夥伴**——輕資產、全球標準化、在地執行。
+運作模式：**全球主辦方（ESGIN）+ 在地執行夥伴**——共享方法、在地執行，並依各城市實際需求調整。
 
 FIH currently supports the following Doha Solutions Platform initiatives: ID60 · ID62 · ID85 · ID87 · ID88 · ID175 · RDY
 
 FIH 目前支持以下多哈解決方案平台倡議：ID60 · ID62 · ID85 · ID87 · ID88 · ID175 · RDY
 
-Launch cities: **Bangkok · Hong Kong · Suzhou · Shanghai · Dubai · London · Taipei · Manila**
+City interests and pathways under development: **Bangkok · Hong Kong · Suzhou · Shanghai · Dubai · London · Taipei · Manila**
 
-首發城市：**曼谷 · 香港 · 蘇州 · 上海 · 杜拜 · 倫敦 · 台北 · 馬尼拉**
+正在發展中的城市興趣與路徑：**曼谷 · 香港 · 蘇州 · 上海 · 杜拜 · 倫敦 · 台北 · 馬尼拉**
 
 ---
 
@@ -389,9 +393,9 @@ Launch cities: **Bangkok · Hong Kong · Suzhou · Shanghai · Dubai · London �
 ## International Network & Advisors
 ## 國際顧問與貢獻者網絡
 
-Through a global network of more than **350 senior advisors and contributors** and more than **6,000 digital community participants** across six continents, ESGIN convenes expertise and implementation capacity across corporate leadership, sustainability practice, governance, finance, innovation, public policy, education, and civil society.
+Through a reported network of more than **350 senior advisors and contributors** and more than **6,000 digital community participants** across six continents, ESGIN convenes expertise and implementation capacity across corporate leadership, sustainability practice, governance, finance, innovation, public policy, education, and civil society.
 
-透過遍及六大洲、逾 **350 位資深顧問與貢獻者** 及逾 **6,000 名數位社群參與者** 的全球網絡，ESGIN 匯聚涵蓋企業領導、永續實踐、治理、金融、創新、公共政策、教育與公民社會各領域的專業知識與落地能力。
+透過其報告的網絡活動，包括逾 **350 位資深顧問與貢獻者** 及逾 **6,000 名數位社群參與者**，ESGIN 匯聚涵蓋企業領導、永續實踐、治理、金融、創新、公共政策、教育與公民社會各領域的專業知識與落地能力。
 
 ### Representative Advisors & Contributors | 部分顧問代表
 
@@ -432,8 +436,8 @@ Registered Office 法定辦事處: 128 City Road, London EC1V 2NX, United Kingdo
 
 ---
 
-*ESGIN — The Infrastructure of Sustainable Action. Rebuilding the Future of Commerce.*
-*We turn real-world action into policy. We turn policy into a new standard for commerce.*
+*ESGIN — Practical pathways for sustainable action.*
+*We connect real-world action, policy learning, and more responsible commercial practice.*
 
 *ESGIN — 永續行動的基礎設施。重建商業的未來。*
-*我們將真實世界的行動轉化為政策。我們將政策轉化為商業的新標準。*
+*我們連結真實世界的行動、政策學習與更負責任的商業實踐。*

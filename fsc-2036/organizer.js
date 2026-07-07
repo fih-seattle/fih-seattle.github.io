@@ -85,7 +85,7 @@ const DEMO_SUBMISSION = {
   english_pitch_video_url: "https://youtu.be/5bJZOxhV9z4?si=ZKSgUvp_ufUQDc7x",
   ai_tools_disclosure: "Demo entry used AI-assisted drafting and design tools for communication refinement.",
   permission_to_publish:
-    "Yes, FIH may publicly display our project title, participant/team name, scenario summary, video link, and approved materials for voting and awards.",
+    "Yes, FIH may publicly display our project title, participant/team name, scenario summary, video link, and approved materials for voting and recognition.",
   status: "approved",
 };
 
