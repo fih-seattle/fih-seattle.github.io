@@ -67,8 +67,8 @@ document.addEventListener("keydown", (event) => {
 const cities = [
   {
     name: "Seattle",
-    label: "Open Seattle command site",
-    status: "Global HQ / Command Center",
+    label: "Open Seattle coordination site",
+    status: "Coordination Hub / Opening Local Region",
     coords: [47.6062, -122.3321],
     url: "seattle-local-region/index.html",
     active: true,
@@ -90,7 +90,7 @@ const cities = [
 const createMarkerIcon = (city) =>
   L.divIcon({
     className: `fih-marker${city.active ? " is-live" : ""}${city.headquarters ? " is-hq" : ""}`,
-    html: city.headquarters ? "<span></span><strong>HQ</strong>" : "<span></span>",
+    html: city.headquarters ? "<span></span><strong>Hub</strong>" : "<span></span>",
     iconSize: city.headquarters ? [72, 50] : [34, 34],
     iconAnchor: city.headquarters ? [36, 25] : [17, 17],
     popupAnchor: [0, -18],

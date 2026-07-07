@@ -90,35 +90,35 @@ New submissions are written to the `submissions` collection with:
 ```text
 status = pending
 registration_status = pre_registration_received
-payment_notification_status = not_sent
-stripe_payment_status = stripe_pending
+payment_notification_status = not_applicable_pilot_intake
+stripe_payment_status = not_applicable_pilot_intake
 voteCount = 0
 ```
 
-## Pre-Registration and Payment Status
+## Pilot Intake and Future Fee Status
 
-Until Stripe payment collection is active, submitted forms are treated as pre-registration records.
+During the 2026 pilot intake period, submitted forms are treated as pre-registration records and no payment is requested.
 
 Recommended status meanings:
 
 ```text
 registration_status = pre_registration_received
-payment_notification_status = not_sent
-stripe_payment_status = stripe_pending
+payment_notification_status = not_applicable_pilot_intake
+stripe_payment_status = not_applicable_pilot_intake
 ```
 
-After basic eligibility review and payment setup activation, send the official payment notice by email and update:
+Do not request payment by email during pilot intake. Any future paid registration should be published only after secure online checkout, refund terms, privacy notice, participation agreement, organizer legal name, and support contact information are available on the public website.
 
 ```text
-registration_status = payment_notice_sent
-payment_notification_status = sent
+registration_status = eligibility_review
+payment_notification_status = not_applicable_pilot_intake
 ```
 
-After Stripe payment confirmation, update:
+After eligibility approval, update:
 
 ```text
 registration_status = registration_complete
-stripe_payment_status = paid
+stripe_payment_status = not_applicable_pilot_intake
 ```
 
 Participants who sign in with the same Google account can read only their own submission status. Pending submissions remain private from the public website and from other participants.

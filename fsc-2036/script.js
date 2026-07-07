@@ -185,18 +185,19 @@ function updateFormStatus(message) {
 const STATUS_LABELS = {
   pre_registration_received: "Pre-registration received",
   eligibility_review: "Eligibility review",
-  payment_notice_sent: "Payment notice sent",
-  payment_pending: "Payment pending",
+  payment_notice_sent: "Legacy fee process paused",
+  payment_pending: "Pilot intake review",
   registration_complete: "Registration complete",
   pending: "Pre-registration received",
   approved: "Approved for public showcase",
 };
 
 const PAYMENT_LABELS = {
-  not_sent: "Payment notice has not been sent yet.",
-  sent: "Payment notice has been sent by email.",
-  stripe_pending: "Payment is pending.",
-  paid: "Payment confirmed.",
+  not_sent: "No payment is requested during pilot intake.",
+  sent: "Legacy fee process is paused.",
+  stripe_pending: "No payment is requested during pilot intake.",
+  not_applicable_pilot_intake: "No payment is requested during pilot intake.",
+  paid: "Legacy payment confirmed.",
 };
 
 const setParticipantStatus = (title, detail, visible = true) => {
@@ -238,7 +239,7 @@ const loadParticipantStatus = async (user) => {
 
     setParticipantStatus(
       registrationLabel,
-      `${paymentLabel} FIH will email official payment instructions after eligibility review and payment setup activation.`,
+      `${paymentLabel} Future fee policies will be published on this website only after secure online payment, refund terms, privacy notice, and participation agreement are available.`,
     );
   } catch (error) {
     setParticipantStatus("Status unavailable", `Your status could not be loaded: ${error.message}`);
@@ -272,7 +273,7 @@ const applyPhaseToPage = () => {
   if (!isSubmissionOpen()) {
     updateFormStatus(`Submissions are closed. Current phase: ${competitionSettings.phase}.`);
   } else {
-    updateFormStatus("Submissions are open as pre-registration records. Payment instructions will be emailed later.");
+    updateFormStatus("Submissions are open as free pilot intake records. No payment is requested during the pilot intake period.");
   }
 
   renderSubmissionGallery(approvedSubmissions);

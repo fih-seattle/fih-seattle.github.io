@@ -35,7 +35,7 @@
         <a href="#challenge">Challenge</a>
         <a href="#topics">Topics</a>
         <a href="#groups">Groups</a>
-        <a href="#fees">Fees</a>
+        <a href="#fees">Pilot Intake</a>
         <a href="#pathway">Pathway</a>
         <a href="#timeline">Timeline</a>
         <a href="#submit">Submit</a>
@@ -215,29 +215,29 @@
 
       <section class="section" id="fees" aria-labelledby="fees-title">
         <div class="container section-heading">
-          <p class="eyebrow">Registration fees and payment status</p>
-          <h2 id="fees-title">Submit now as pre-registration. Payment completes the official registration later.</h2>
+          <p class="eyebrow">Pilot intake and future fee policy</p>
+          <h2 id="fees-title">Registration is currently free during the pilot intake period.</h2>
           <p>
-            The official registration fee is USD 65 for an individual entry and USD 125 for a team entry. While online payment setup is being finalized, submitted forms are received as pre-registration records. Official registration is complete only after FIH issues the payment notice and the registration fee is successfully paid.
+            Submit now to enter eligibility review for the 2026 pilot intake. Any future fee policy will be published only after secure online payment, refund terms, privacy notice, and participation agreement are available on this website.
           </p>
         </div>
         <div class="container fee-grid">
           <article class="fee-card">
             <span>Individual Entry</span>
-            <strong>USD 65</strong>
+            <strong>Free pilot intake</strong>
             <p>For Group A Junior, Group B Senior, or Group C Young Innovators individual submissions.</p>
-            <a class="button button-disabled" href="#submit" data-stripe-payment-link="individual" aria-disabled="true">Stripe Link Pending</a>
+            <a class="button button-secondary" href="#submit">Submit Entry</a>
           </article>
           <article class="fee-card">
             <span>Team Entry</span>
-            <strong>USD 125</strong>
+            <strong>Free pilot intake</strong>
             <p>For Group D Team Challenge submissions with two to five eligible participants.</p>
-            <a class="button button-disabled" href="#submit" data-stripe-payment-link="team" aria-disabled="true">Stripe Link Pending</a>
+            <a class="button button-secondary" href="#submit">Submit Team</a>
           </article>
           <article class="fee-card fee-note">
-            <span>Current payment handling</span>
-            <strong>Payment notice will follow by email</strong>
-            <p>Payment instructions will be sent after basic eligibility review and after FIH's online payment account is activated. Participants must complete payment before the final registration deadline.</p>
+            <span>Future fee policy</span>
+            <strong>No payment requests during pilot intake</strong>
+            <p>FIH will not request payment by email during the pilot intake period. Future paid registration will require secure online checkout, refund terms, privacy notice, participation agreement, and clear organizer information on this website.</p>
           </article>
         </div>
       </section>
@@ -246,7 +246,7 @@
         <div class="container summit-grid">
           <div class="summit-copy">
             <p class="eyebrow">Bangkok international stage</p>
-            <h3 id="pathway-title">From global student ideas to a <span class="no-break">3-minute demo</span> opportunity at UNCC Bangkok.</h3>
+            <h3 id="pathway-title">From global student ideas to a <span class="no-break">3-minute demo</span> opportunity at the Bangkok forum.</h3>
             <p>
   The Future Solutions Challenge welcomes student ideas from around the world.
   Outstanding projects may be selected for a 3-minute demo opportunity during the World Futures Intelligence Forum in Bangkok. It now sits beside Bangkok LearnHack 2026, an active in-person education hackathon by Future Intelligence Hub and Adam's House.
@@ -354,7 +354,7 @@
             <p class="eyebrow">Submission form</p>
             <h2>Send the project links directly to FIH.</h2>
             <p class="form-intro">
-              The form collects eligibility, registration-fee category, Future Blueprint PDF link, English video link, AI tools disclosure, and publication preference. Submit before September 30, 2026 to enter eligibility review. This first submission is a pre-registration record; payment is required before registration is complete.
+              The form collects eligibility, pilot intake category, Future Blueprint PDF link, English video link, AI tools disclosure, and publication preference. Submit before September 30, 2026 to enter eligibility review. Registration is free during the pilot intake period.
             </p>
             <div class="registration-status-panel" aria-label="Registration and payment status">
               <div>
@@ -364,13 +364,13 @@
               </div>
               <div>
                 <span>2</span>
-                <strong>Payment notice pending</strong>
-                <p>FIH emails payment instructions after online payment setup is active.</p>
+                <strong>No payment requested</strong>
+                <p>FIH will not request payment by email during the pilot intake period.</p>
               </div>
               <div>
                 <span>3</span>
-                <strong>Registration complete</strong>
-                <p>Your entry becomes official after successful payment confirmation.</p>
+                <strong>Eligibility decision</strong>
+                <p>Your entry becomes active after organizer eligibility review.</p>
               </div>
             </div>
             <div class="deadline-callout">
@@ -381,9 +381,9 @@
           <form class="submission-form" data-submission-form>
             <input type="hidden" name="source" value="Future Solutions Challenge 2036 Edition">
               <input type="hidden" name="submitted_at_page_time" data-submitted-at>
-              <input type="hidden" name="stripe_payment_status" value="stripe_pending">
+              <input type="hidden" name="stripe_payment_status" value="not_applicable_pilot_intake">
               <input type="hidden" name="registration_status" value="pre_registration_received">
-              <input type="hidden" name="payment_notification_status" value="not_sent">
+              <input type="hidden" name="payment_notification_status" value="not_applicable_pilot_intake">
             <div class="auth-panel">
               <p data-auth-status>Sign in with Google to submit or vote.</p>
               <div class="participant-status" data-participant-status hidden>
@@ -423,11 +423,11 @@
                 </select>
               </label>
               <label>
-                Registration fee category
+                Pilot intake category
                 <select name="registration_fee_category" required>
                   <option value="">Select one</option>
-                  <option>Individual entry - USD 65</option>
-                  <option>Team entry - USD 125</option>
+                  <option>Individual entry - free pilot intake</option>
+                  <option>Team entry - free pilot intake</option>
                 </select>
               </label>
               <label>
@@ -522,7 +522,7 @@
             </div>
             <button class="button button-primary" type="submit" data-submit-button>Submit Future Blueprint</button>
             <p class="form-note" data-form-status>
-              Submissions are stored as pre-registration records and remain private until organizer approval. Payment instructions will be emailed after eligibility review and payment setup activation.
+              Submissions are stored as pre-registration records and remain private until organizer approval. No payment is requested during the pilot intake period.
             </p>
           </form>
         </div>

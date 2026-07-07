@@ -63,10 +63,10 @@ const DEMO_SUBMISSION = {
   email: "pecu610@gmail.com",
   age_confirmation: "I am between ages 12 and 30",
   participant_group: "Group C - Young Innovators",
-  registration_fee_category: "Individual entry - USD 65",
-  stripe_payment_status: "stripe_pending",
+  registration_fee_category: "Individual entry - free pilot intake",
+  stripe_payment_status: "not_applicable_pilot_intake",
   registration_status: "registration_complete",
-  payment_notification_status: "sent",
+  payment_notification_status: "not_applicable_pilot_intake",
   student_status: "Young professional",
   school: "Future Intelligence Hub Demo School",
   country_region: "Taiwan / United States",
@@ -202,18 +202,18 @@ const submissionCard = (submission) => {
       </div>
       <div class="submission-status-row">
         ${statusBadge("Registration", submission.registration_status || submission.status || "pre_registration_received")}
-        ${statusBadge("Payment notice", submission.payment_notification_status || "not_sent")}
-        ${statusBadge("Stripe", submission.stripe_payment_status || "stripe_pending")}
+        ${statusBadge("Pilot fee policy", submission.payment_notification_status || "not_applicable_pilot_intake")}
+        ${statusBadge("Checkout status", submission.stripe_payment_status || "not_applicable_pilot_intake")}
       </div>
       <div class="submission-edit-grid">
         ${textField(id, "project_title", "Project title", submission.project_title, true)}
         ${textField(id, "team_lead_name", "Team lead", submission.team_lead_name)}
         ${textField(id, "email", "Email", submission.email)}
         ${textField(id, "participant_group", "Participant group", submission.participant_group)}
-        ${textField(id, "registration_fee_category", "Registration fee category", submission.registration_fee_category)}
-        ${textField(id, "stripe_payment_status", "Stripe payment status", submission.stripe_payment_status)}
+        ${textField(id, "registration_fee_category", "Pilot intake category", submission.registration_fee_category)}
+        ${textField(id, "stripe_payment_status", "Checkout status", submission.stripe_payment_status)}
         ${textField(id, "registration_status", "Registration status", submission.registration_status)}
-        ${textField(id, "payment_notification_status", "Payment notice status", submission.payment_notification_status)}
+        ${textField(id, "payment_notification_status", "Pilot fee policy status", submission.payment_notification_status)}
         ${textField(id, "student_status", "Current role / status", submission.student_status)}
         ${textField(id, "suggested_topic", "Suggested WFIF topic", submission.suggested_topic, true)}
         ${textField(id, "school", "School / institution / organization", submission.school)}
