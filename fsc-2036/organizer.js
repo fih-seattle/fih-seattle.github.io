@@ -52,11 +52,13 @@ const phaseMessage = document.querySelector("[data-phase-message]");
 const phaseButtons = document.querySelectorAll("[data-phase-option]");
 const submissionManager = document.querySelector("[data-submission-manager]");
 const submissionList = document.querySelector("[data-submission-list]");
+const exportAttributionButton = document.querySelector("[data-export-attribution]");
 
 let currentUser = null;
 let currentPhaseValue = "";
 let settingsUnsubscribe = null;
 let submissionsUnsubscribe = null;
+let currentSubmissions = [];
 
 const DEMO_SUBMISSION = {
   team_lead_name: "Yun-Cheng Tsai",
@@ -70,6 +72,13 @@ const DEMO_SUBMISSION = {
   student_status: "Young professional",
   school: "Future Intelligence Hub Demo School",
   country_region: "Taiwan / United States",
+  participant_city: "Seattle",
+  referral_owner: "PECU-SEATTLE",
+  referral_source_type: "Invited by Pecu / FIH Seattle",
+  promotion_region: "Seattle / United States",
+  referrer_name_or_organization: "",
+  attribution_review_status: "pending_organizer_review",
+  commission_review_status: "not_reviewed",
   team_members: "FIH demo submission for system testing",
   project_title: "2036 Market Trust Lab",
   suggested_topic: "Impact Capital & Inclusive Growth",
@@ -202,6 +211,8 @@ const submissionCard = (submission) => {
       </div>
       <div class="submission-status-row">
         ${statusBadge("Registration", submission.registration_status || submission.status || "pre_registration_received")}
+        ${statusBadge("Referral owner", submission.referral_owner || "PECU-SEATTLE")}
+        ${statusBadge("Attribution review", submission.attribution_review_status || "pending_organizer_review")}
         ${statusBadge("Pilot fee policy", submission.payment_notification_status || "not_applicable_pilot_intake")}
         ${statusBadge("Checkout status", submission.stripe_payment_status || "not_applicable_pilot_intake")}
       </div>
@@ -218,6 +229,13 @@ const submissionCard = (submission) => {
         ${textField(id, "suggested_topic", "Suggested WFIF topic", submission.suggested_topic, true)}
         ${textField(id, "school", "School / institution / organization", submission.school)}
         ${textField(id, "country_region", "Country / region", submission.country_region)}
+        ${textField(id, "participant_city", "City", submission.participant_city)}
+        ${textField(id, "referral_owner", "Referral owner", submission.referral_owner || "PECU-SEATTLE")}
+        ${textField(id, "referral_source_type", "Referral source type", submission.referral_source_type)}
+        ${textField(id, "promotion_region", "Promotion region", submission.promotion_region)}
+        ${textField(id, "referrer_name_or_organization", "Referrer name or organization", submission.referrer_name_or_organization, true)}
+        ${textField(id, "attribution_review_status", "Attribution review status", submission.attribution_review_status || "pending_organizer_review")}
+        ${textField(id, "commission_review_status", "Commission review status", submission.commission_review_status || "not_reviewed")}
         ${textField(id, "blueprint_pdf_url", "Future Blueprint PDF URL", submission.blueprint_pdf_url, true)}
         ${textField(id, "poc_website_url", "Optional prototype / website URL", submission.poc_website_url, true)}
         ${textField(id, "bonus_material_url", "Optional bonus material URL", submission.bonus_material_url, true)}
@@ -257,6 +275,7 @@ const watchSubmissions = () => {
           ...submissionDoc.data(),
         }))
         .sort((a, b) => String(a.project_title || "").localeCompare(String(b.project_title || "")));
+      currentSubmissions = submissions;
       renderSubmissions(submissions);
     },
     (error) => {
@@ -265,6 +284,43 @@ const watchSubmissions = () => {
       }
     },
   );
+};
+
+const csvValue = (value = "") => `"${String(value).replace(/"/g, '""')}"`;
+
+const exportAttributionCsv = () => {
+  const fields = [
+    ["submission_id", "id"],
+    ["referral_owner", "referral_owner"],
+    ["referral_source_type", "referral_source_type"],
+    ["promotion_region", "promotion_region"],
+    ["referrer_name_or_organization", "referrer_name_or_organization"],
+    ["attribution_review_status", "attribution_review_status"],
+    ["commission_review_status", "commission_review_status"],
+    ["team_lead_name", "team_lead_name"],
+    ["email", "email"],
+    ["participant_group", "participant_group"],
+    ["school", "school"],
+    ["participant_city", "participant_city"],
+    ["country_region", "country_region"],
+    ["project_title", "project_title"],
+    ["registration_status", "registration_status"],
+    ["status", "status"],
+  ];
+
+  const rows = [
+    fields.map(([label]) => csvValue(label)).join(","),
+    ...currentSubmissions.map((submission) =>
+      fields.map(([, key]) => csvValue(submission[key] || "")).join(","),
+    ),
+  ];
+  const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `fsc-2036-attribution-${new Date().toISOString().slice(0, 10)}.csv`;
+  link.click();
+  URL.revokeObjectURL(url);
 };
 
 const setSubmissionMessage = (id, message) => {
@@ -323,6 +379,8 @@ signInButton?.addEventListener("click", async () => {
 
 signOutButton?.addEventListener("click", () => signOut(auth));
 
+exportAttributionButton?.addEventListener("click", exportAttributionCsv);
+
 submissionList?.addEventListener("click", async (event) => {
   const demoButton = event.target.closest("[data-apply-demo]");
   const saveButton = event.target.closest("[data-save-submission]");
@@ -348,12 +406,22 @@ submissionList?.addEventListener("click", async (event) => {
         suggested_topic: fieldValue(id, "suggested_topic"),
         school: fieldValue(id, "school"),
         country_region: fieldValue(id, "country_region"),
+        participant_city: fieldValue(id, "participant_city"),
+        referral_owner: fieldValue(id, "referral_owner") || "PECU-SEATTLE",
+        referral_source_type: fieldValue(id, "referral_source_type"),
+        promotion_region: fieldValue(id, "promotion_region"),
+        referrer_name_or_organization: fieldValue(id, "referrer_name_or_organization"),
+        attribution_review_status: fieldValue(id, "attribution_review_status"),
+        commission_review_status: fieldValue(id, "commission_review_status"),
+        blueprint_pdf_url: fieldValue(id, "blueprint_pdf_url"),
         poc_website_url: fieldValue(id, "poc_website_url"),
+        bonus_material_url: fieldValue(id, "bonus_material_url"),
         english_pitch_video_url: fieldValue(id, "english_pitch_video_url"),
         status: fieldValue(id, "status"),
         scenario_definition: fieldValue(id, "scenario_definition"),
         problem_and_users: fieldValue(id, "problem_and_users"),
         solution_summary: fieldValue(id, "solution_summary"),
+        ai_tools_disclosure: fieldValue(id, "ai_tools_disclosure"),
       });
     }
   } catch (error) {

@@ -384,6 +384,8 @@
               <input type="hidden" name="stripe_payment_status" value="not_applicable_pilot_intake">
               <input type="hidden" name="registration_status" value="pre_registration_received">
               <input type="hidden" name="payment_notification_status" value="not_applicable_pilot_intake">
+              <input type="hidden" name="attribution_review_status" value="pending_organizer_review">
+              <input type="hidden" name="commission_review_status" value="not_reviewed">
             <div class="auth-panel">
               <p data-auth-status>Sign in with Google to submit or vote.</p>
               <div class="participant-status" data-participant-status hidden>
@@ -454,6 +456,49 @@
               <label>
                 Country / region
                 <input type="text" name="country_region" required>
+              </label>
+              <label>
+                City
+                <input type="text" name="participant_city" placeholder="Seattle, Taipei, Bangkok, etc.">
+              </label>
+              <label>
+                Introducing source
+                <select name="referral_owner" required>
+                  <option selected>PECU-SEATTLE</option>
+                  <option>Teacher / school contact</option>
+                  <option>Parent or community group</option>
+                  <option>Friend or teammate</option>
+                  <option>LearnHack / Bangkok contact</option>
+                  <option>Social media</option>
+                  <option>Other promoter or organization</option>
+                </select>
+              </label>
+              <label>
+                How did you hear about this challenge?
+                <select name="referral_source_type" required>
+                  <option selected>Invited by Pecu / FIH Seattle</option>
+                  <option>Teacher or school</option>
+                  <option>Parent or community group</option>
+                  <option>Friend or teammate</option>
+                  <option>LearnHack / Bangkok partner</option>
+                  <option>Social media post</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <label>
+                Promotion region
+                <select name="promotion_region" required>
+                  <option selected>Seattle / United States</option>
+                  <option>Bangkok / Thailand</option>
+                  <option>Taiwan</option>
+                  <option>Hong Kong</option>
+                  <option>China</option>
+                  <option>Other / online</option>
+                </select>
+              </label>
+              <label class="wide">
+                Referrer name or organization, if any
+                <input type="text" name="referrer_name_or_organization" placeholder="Leave blank if this came directly from Pecu / FIH Seattle.">
               </label>
               <label class="wide">
                 Team members

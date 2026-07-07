@@ -84,6 +84,7 @@ The same organizer page also includes a submission editor. It can:
 - Edit project title, POC URL, video URL, scenario, problem, solution, and status.
 - Apply the built-in GAF-CNN demo preset for testing.
 - Change `status` to `approved` without editing every field in the Firebase Console.
+- Export an attribution CSV for future referral and commission review.
 
 New submissions are written to the `submissions` collection with:
 
@@ -92,8 +93,37 @@ status = pending
 registration_status = pre_registration_received
 payment_notification_status = not_applicable_pilot_intake
 stripe_payment_status = not_applicable_pilot_intake
+referral_owner = PECU-SEATTLE
+attribution_review_status = pending_organizer_review
+commission_review_status = not_reviewed
 voteCount = 0
 ```
+
+## Referral Attribution for Future Commission Reports
+
+The public form defaults new submissions to:
+
+```text
+referral_owner = PECU-SEATTLE
+referral_source_type = Invited by Pecu / FIH Seattle
+promotion_region = Seattle / United States
+```
+
+Participants can select another source if someone else introduced the challenge. The form stores:
+
+```text
+participant_city
+referral_owner
+referral_source_type
+promotion_region
+referrer_name_or_organization
+attribution_review_status
+commission_review_status
+```
+
+For future commission reports, use `referral_owner` as the first grouping field, then manually review `referrer_name_or_organization`, `promotion_region`, and `country_region` before marking `attribution_review_status` as confirmed. Keep `commission_review_status = not_reviewed` until the fee policy, payment confirmation, refund window, and commission terms are finalized.
+
+The organizer CSV export includes the attribution fields plus participant contact, school, location, project title, and registration status. Use it for review only; final commission eligibility should still be confirmed manually.
 
 ## Pilot Intake and Future Fee Status
 

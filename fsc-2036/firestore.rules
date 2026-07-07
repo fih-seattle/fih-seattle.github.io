@@ -28,6 +28,10 @@ service cloud.firestore {
       return data.status == "approved";
     }
 
+    function isOptionalUrl(value) {
+      return value is string && (value == "" || value.matches("https?://.*"));
+    }
+
     function isValidSubmissionCreate() {
       return signedIn()
         && submissionOpen()
@@ -35,8 +39,7 @@ service cloud.firestore {
         && request.resource.data.voteCount == 0
         && request.resource.data.submitterUid == request.auth.uid
         && request.resource.data.project_title is string
-        && request.resource.data.poc_website_url is string
-        && request.resource.data.poc_website_url.matches("https?://.*")
+        && isOptionalUrl(request.resource.data.poc_website_url)
         && request.resource.data.english_pitch_video_url is string
         && request.resource.data.english_pitch_video_url.matches("https?://.*")
         && request.resource.data.email is string;
