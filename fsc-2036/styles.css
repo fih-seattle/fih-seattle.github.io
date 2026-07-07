@@ -785,9 +785,7 @@ h1 {
 
 .submission-form input,
 .submission-form select,
-.submission-form textarea,
-.score-table input,
-.score-table textarea {
+.submission-form textarea {
   width: 100%;
   border: 1px solid rgba(17, 19, 21, 0.16);
   background: rgba(255, 255, 255, 0.96);
@@ -796,8 +794,7 @@ h1 {
   padding: 12px 13px;
 }
 
-.submission-form textarea,
-.score-table textarea {
+.submission-form textarea {
   resize: vertical;
 }
 
@@ -1102,69 +1099,6 @@ h1 {
 
 .score-header h1 {
   font-size: clamp(2.2rem, 5vw, 4.8rem);
-}
-
-.score-shell {
-  width: min(1480px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 36px 0 72px;
-}
-
-.score-table-wrap {
-  overflow-x: auto;
-  border: 1px solid var(--line);
-  background: #fff;
-  box-shadow: var(--shadow);
-}
-
-.score-table {
-  width: 100%;
-  min-width: 1180px;
-  border-collapse: collapse;
-}
-
-.score-table th,
-.score-table td {
-  padding: 14px;
-  border-bottom: 1px solid var(--line);
-  text-align: left;
-  vertical-align: top;
-}
-
-.score-table thead th {
-  background: #17110c;
-  color: #fff;
-  font-size: 0.82rem;
-}
-
-.score-table tbody th span,
-.score-table tbody th strong,
-.score-table tbody th small {
-  display: block;
-}
-
-.score-table tbody th span {
-  color: var(--orange);
-  font-size: 0.78rem;
-  font-weight: 950;
-}
-
-.score-table tbody th small {
-  color: var(--muted);
-}
-
-.score-input {
-  max-width: 86px;
-}
-
-.total-cell {
-  color: var(--orange);
-  font-size: 1.35rem;
-  font-weight: 950;
-}
-
-.score-links {
-  min-width: 130px;
 }
 
 .site-footer {

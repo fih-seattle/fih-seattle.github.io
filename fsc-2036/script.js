@@ -61,8 +61,6 @@ const nav = document.querySelector("[data-nav]");
 const toggle = document.querySelector("[data-nav-toggle]");
 const gallery = document.querySelector("[data-submission-gallery]");
 const emptyState = document.querySelector("[data-empty-state]");
-const scoreBody = document.querySelector("[data-score-body]");
-const exportButton = document.querySelector("[data-export-scores]");
 const submissionForm = document.querySelector("[data-submission-form]");
 const submitButton = document.querySelector("[data-submit-button]");
 const formStatus = document.querySelector("[data-form-status]");
@@ -277,7 +275,6 @@ const applyPhaseToPage = () => {
   }
 
   renderSubmissionGallery(approvedSubmissions);
-  renderScoreTable();
 };
 
 const submissions = Array.isArray(window.challengeSubmissions) ? window.challengeSubmissions : [];
@@ -622,50 +619,8 @@ const renderSubmissionGallery = (items) => {
   targetProject?.scrollIntoView({ block: "start" });
 };
 
-const renderScoreTable = () => {
-  if (!scoreBody) {
-    return;
-  }
-
-  const scoreSubmissions = submissions.concat(approvedSubmissions);
-  scoreBody.innerHTML = scoreSubmissions.length
-    ? scoreSubmissions
-        .map(
-          (item, index) => {
-            const id = getProjectId(item, index);
-
-            return `
-              <tr data-score-row="${escapeHtml(id)}">
-                <th scope="row">
-                  <span>${escapeHtml(id)}</span>
-                  <strong>${escapeHtml(item.project)}</strong>
-                  <small>${escapeHtml(item.team)} | ${escapeHtml(getParticipantGroup(item))}</small>
-                  ${getSuggestedTopic(item) ? `<small>${escapeHtml(getSuggestedTopic(item))}</small>` : ""}
-                </th>
-                ${scoreFields.map(([key, label, max]) => `<td>${numberInput(id, key, max, label)}</td>`).join("")}
-                <td class="total-cell" data-total>0</td>
-                <td><textarea rows="2" aria-label="Judge notes"></textarea></td>
-                <td class="score-links">
-                  ${linkMarkup(item.blueprintUrl, "Blueprint")}
-                  ${linkMarkup(item.pocUrl, "Prototype")}
-                  ${linkMarkup(item.bonusUrl, "Bonus")}
-                  ${linkMarkup(item.videoUrl, "Video")}
-                </td>
-              </tr>
-            `;
-          },
-        )
-        .join("")
-    : `<tr><td colspan="10" class="empty-table">No approved public submissions are available yet.</td></tr>`;
-
-  scoreBody.querySelectorAll("tr[data-score-row]").forEach((row) => {
-    const id = row.getAttribute("data-score-row");
-    row.addEventListener("input", () => updateTotal(row, id));
-  });
-};
-
 const loadApprovedSubmissions = () => {
-  if (!gallery && !scoreBody) {
+  if (!gallery) {
     return;
   }
 
@@ -676,7 +631,6 @@ const loadApprovedSubmissions = () => {
     }
     approvedSubmissions = [];
     renderSubmissionGallery([]);
-    renderScoreTable();
     return;
   }
 
@@ -691,13 +645,11 @@ const loadApprovedSubmissions = () => {
     (snapshot) => {
       approvedSubmissions = snapshot.docs.map(normalizeSubmission);
       renderSubmissionGallery(approvedSubmissions);
-      renderScoreTable();
     },
     (error) => {
       if (emptyState) {
         emptyState.textContent = `Submitted works could not be loaded from Firebase: ${error.message}`;
       }
-      renderScoreTable();
     },
   );
 };
@@ -721,29 +673,6 @@ const loadCompetitionSettings = () => {
       applyPhaseToPage();
     },
   );
-};
-
-const scoreFields = [
-  ["future", "Future Thinking", 20],
-  ["problem", "Problem Definition", 15],
-  ["solution", "Solution Design", 20],
-  ["impact", "Potential Impact", 20],
-  ["feasibility", "Feasibility", 10],
-  ["communication", "Communication", 15],
-];
-
-const numberInput = (id, key, max, label) =>
-  `<input class="score-input" type="number" min="0" max="${max}" step="1" value="0" aria-label="${label} score" data-score="${id}-${key}">`;
-
-const updateTotal = (row, id) => {
-  const total = scoreFields.reduce((sum, [key]) => {
-    const input = row.querySelector(`[data-score="${id}-${key}"]`);
-    return sum + Number(input?.value || 0);
-  }, 0);
-  const totalCell = row.querySelector("[data-total]");
-  if (totalCell) {
-    totalCell.textContent = String(total);
-  }
 };
 
 loadCompetitionSettings();
@@ -807,30 +736,3 @@ document.addEventListener("click", async (event) => {
     }
   }
 });
-
-if (exportButton && scoreBody) {
-  exportButton.addEventListener("click", () => {
-    const rows = [["ID", "Project", "Team", ...scoreFields.map((field) => field[1]), "Total", "Notes"]];
-    scoreBody.querySelectorAll("tr[data-score-row]").forEach((row) => {
-      const id = row.getAttribute("data-score-row");
-      const heading = row.querySelector("th");
-      const project = heading?.querySelector("strong")?.textContent || "";
-      const team = heading?.querySelector("small")?.textContent || "";
-      const scores = scoreFields.map(([key]) => row.querySelector(`[data-score="${id}-${key}"]`)?.value || "0");
-      const total = row.querySelector("[data-total]")?.textContent || "0";
-      const notes = row.querySelector("textarea")?.value || "";
-      rows.push([id, project, team, ...scores, total, notes]);
-    });
-
-    const csv = rows
-      .map((row) => row.map((cell) => `"${String(cell).replaceAll('"', '""')}"`).join(","))
-      .join("\n");
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "future-solutions-challenge-2036-scores.csv";
-    link.click();
-    URL.revokeObjectURL(url);
-  });
-}
