@@ -347,7 +347,7 @@ if (submissionForm) {
         school: cleanText(payload.school),
         country_region: cleanText(payload.country_region),
         participant_city: cleanText(payload.participant_city),
-        referral_owner: cleanText(payload.referral_owner) || "PECU-SEATTLE",
+        referral_owner: cleanText(payload.referral_owner) || "PECULAB-REFERRAL",
         referral_source_type: cleanText(payload.referral_source_type),
         promotion_region: cleanText(payload.promotion_region),
         referrer_name_or_organization: cleanText(payload.referrer_name_or_organization),

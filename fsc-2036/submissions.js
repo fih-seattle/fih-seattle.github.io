@@ -2,7 +2,7 @@ window.challengeSubmissions = [
   {
     id: "FIH2036-001",
     isDemo: true,
-    team: "Yun-Cheng Tsai",
+    team: "PecuLab Demo Team",
     participantGroup: "Group C - Young Innovators",
     studentStatus: "Young professional",
     suggestedTopic: "Impact Capital & Inclusive Growth",

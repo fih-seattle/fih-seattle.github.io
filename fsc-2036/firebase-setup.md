@@ -93,7 +93,7 @@ status = pending
 registration_status = pre_registration_received
 payment_notification_status = not_applicable_pilot_intake
 stripe_payment_status = not_applicable_pilot_intake
-referral_owner = PECU-SEATTLE
+referral_owner = PECULAB-REFERRAL
 attribution_review_status = pending_organizer_review
 commission_review_status = not_reviewed
 voteCount = 0
@@ -104,8 +104,8 @@ voteCount = 0
 The public form defaults new submissions to:
 
 ```text
-referral_owner = PECU-SEATTLE
-referral_source_type = Invited by Pecu / FIH Seattle
+referral_owner = PECULAB-REFERRAL
+referral_source_type = Referred by PecuLab / Seattle technical network
 promotion_region = Seattle / United States
 ```
 

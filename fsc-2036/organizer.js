@@ -61,7 +61,7 @@ let submissionsUnsubscribe = null;
 let currentSubmissions = [];
 
 const DEMO_SUBMISSION = {
-  team_lead_name: "Yun-Cheng Tsai",
+  team_lead_name: "PecuLab Demo Team",
   email: "pecu610@gmail.com",
   age_confirmation: "I am between ages 12 and 30",
   participant_group: "Group C - Young Innovators",
@@ -73,8 +73,8 @@ const DEMO_SUBMISSION = {
   school: "Future Intelligence Hub Demo School",
   country_region: "Taiwan / United States",
   participant_city: "Seattle",
-  referral_owner: "PECU-SEATTLE",
-  referral_source_type: "Invited by Pecu / FIH Seattle",
+  referral_owner: "PECULAB-REFERRAL",
+  referral_source_type: "Referred by PecuLab / Seattle technical network",
   promotion_region: "Seattle / United States",
   referrer_name_or_organization: "",
   attribution_review_status: "pending_organizer_review",
@@ -211,7 +211,7 @@ const submissionCard = (submission) => {
       </div>
       <div class="submission-status-row">
         ${statusBadge("Registration", submission.registration_status || submission.status || "pre_registration_received")}
-        ${statusBadge("Referral owner", submission.referral_owner || "PECU-SEATTLE")}
+        ${statusBadge("Referral owner", submission.referral_owner || "PECULAB-REFERRAL")}
         ${statusBadge("Attribution review", submission.attribution_review_status || "pending_organizer_review")}
         ${statusBadge("Pilot fee policy", submission.payment_notification_status || "not_applicable_pilot_intake")}
         ${statusBadge("Checkout status", submission.stripe_payment_status || "not_applicable_pilot_intake")}
@@ -230,7 +230,7 @@ const submissionCard = (submission) => {
         ${textField(id, "school", "School / institution / organization", submission.school)}
         ${textField(id, "country_region", "Country / region", submission.country_region)}
         ${textField(id, "participant_city", "City", submission.participant_city)}
-        ${textField(id, "referral_owner", "Referral owner", submission.referral_owner || "PECU-SEATTLE")}
+        ${textField(id, "referral_owner", "Referral owner", submission.referral_owner || "PECULAB-REFERRAL")}
         ${textField(id, "referral_source_type", "Referral source type", submission.referral_source_type)}
         ${textField(id, "promotion_region", "Promotion region", submission.promotion_region)}
         ${textField(id, "referrer_name_or_organization", "Referrer name or organization", submission.referrer_name_or_organization, true)}
@@ -407,7 +407,7 @@ submissionList?.addEventListener("click", async (event) => {
         school: fieldValue(id, "school"),
         country_region: fieldValue(id, "country_region"),
         participant_city: fieldValue(id, "participant_city"),
-        referral_owner: fieldValue(id, "referral_owner") || "PECU-SEATTLE",
+        referral_owner: fieldValue(id, "referral_owner") || "PECULAB-REFERRAL",
         referral_source_type: fieldValue(id, "referral_source_type"),
         promotion_region: fieldValue(id, "promotion_region"),
         referrer_name_or_organization: fieldValue(id, "referrer_name_or_organization"),
