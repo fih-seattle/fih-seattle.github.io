@@ -77,7 +77,7 @@ const cities = [
   {
     name: "Bangkok",
     label: "Open LearnHack 2026",
-    status: "Active LearnHack 2026 + WFIF pathway",
+    status: "Active LearnHack 2026 pathway",
     coords: [13.7563, 100.5018],
     url: "https://adamshouse.uk/hackathon/learnhack",
     active: true,

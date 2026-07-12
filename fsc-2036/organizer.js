@@ -226,7 +226,7 @@ const submissionCard = (submission) => {
         ${textField(id, "registration_status", "Registration status", submission.registration_status)}
         ${textField(id, "payment_notification_status", "Pilot fee policy status", submission.payment_notification_status)}
         ${textField(id, "student_status", "Current role / status", submission.student_status)}
-        ${textField(id, "suggested_topic", "Suggested WFIF topic", submission.suggested_topic, true)}
+        ${textField(id, "suggested_topic", "Challenge topic", submission.suggested_topic, true)}
         ${textField(id, "school", "School / institution / organization", submission.school)}
         ${textField(id, "country_region", "Country / region", submission.country_region)}
         ${textField(id, "participant_city", "City", submission.participant_city)}

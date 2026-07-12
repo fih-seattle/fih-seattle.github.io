@@ -1200,6 +1200,181 @@ p {
   margin: -10px -10px 4px;
 }
 
+.challenge-poster {
+  position: relative;
+  display: grid;
+  align-content: space-between;
+  min-height: 420px;
+  margin: -10px -10px 4px;
+  padding: clamp(22px, 3vw, 34px);
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 106, 0, 0.94), rgba(255, 178, 26, 0.92) 42%, rgba(13, 98, 85, 0.94)),
+    #ff6a00;
+  color: #fff;
+  isolation: isolate;
+}
+
+.challenge-poster::before {
+  content: "";
+  position: absolute;
+  inset: 9%;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  transform: rotate(-6deg);
+  z-index: -1;
+}
+
+.challenge-poster::after {
+  content: "";
+  position: absolute;
+  right: -18%;
+  bottom: -18%;
+  width: 56%;
+  aspect-ratio: 1;
+  border: 36px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  z-index: -1;
+}
+
+.challenge-poster-topline,
+.challenge-poster-track {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-card .challenge-poster span {
+  color: inherit;
+  letter-spacing: 0.04em;
+}
+
+.challenge-poster-topline span,
+.challenge-poster-track span {
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: rgba(5, 17, 31, 0.18);
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.challenge-poster-orbit {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(78%, 330px);
+  aspect-ratio: 1;
+  margin: 8px auto;
+}
+
+.challenge-poster-orbit i {
+  position: absolute;
+  inset: calc(var(--ring, 0) * 18px);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  transform: rotate(calc(var(--ring, 0) * 12deg));
+}
+
+.challenge-poster-orbit i:nth-child(1) {
+  --ring: 0;
+}
+
+.challenge-poster-orbit i:nth-child(2) {
+  --ring: 1;
+  border-style: dashed;
+}
+
+.challenge-poster-orbit i:nth-child(3) {
+  --ring: 2;
+}
+
+.challenge-poster-orbit b {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46%;
+  aspect-ratio: 1;
+  background: #07111f;
+  border-radius: 999px;
+  box-shadow: 0 18px 42px rgba(7, 17, 31, 0.28);
+  color: #fff;
+  font-size: 3.4rem;
+  line-height: 1;
+}
+
+.challenge-poster-topics {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.event-card .challenge-poster-topics span {
+  position: absolute;
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.64);
+  white-space: nowrap;
+}
+
+.challenge-poster-topics span:nth-child(1) {
+  left: 50%;
+  top: 8%;
+  transform: translateX(-50%);
+}
+
+.challenge-poster-topics span:nth-child(2) {
+  right: -4%;
+  top: 31%;
+  transform: rotate(18deg);
+}
+
+.challenge-poster-topics span:nth-child(3) {
+  right: 8%;
+  bottom: 22%;
+  transform: rotate(-14deg);
+}
+
+.challenge-poster-topics span:nth-child(4) {
+  left: 50%;
+  bottom: 7%;
+  transform: translateX(-50%);
+}
+
+.challenge-poster-topics span:nth-child(5) {
+  left: -2%;
+  bottom: 29%;
+  transform: rotate(14deg);
+}
+
+.challenge-poster-topics span:nth-child(6) {
+  left: 5%;
+  top: 28%;
+  transform: rotate(-18deg);
+}
+
+.challenge-poster-title {
+  display: grid;
+  gap: 2px;
+}
+
+.event-card .challenge-poster-title span {
+  display: block;
+  color: #fff;
+  font-size: 4.1rem;
+  font-weight: 950;
+  line-height: 0.92;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 .media-zoom-trigger {
   position: relative;
   display: block;
@@ -1896,6 +2071,30 @@ p {
     display: inline-flex;
     justify-content: center;
     margin-top: 8px;
+  }
+
+  .challenge-poster {
+    min-height: 360px;
+  }
+
+  .challenge-poster-orbit b {
+    font-size: 2.35rem;
+  }
+
+  .challenge-poster-topics {
+    font-size: 0.58rem;
+  }
+
+  .challenge-poster-topics span:nth-child(2) {
+    right: -8%;
+  }
+
+  .challenge-poster-topics span:nth-child(5) {
+    left: -7%;
+  }
+
+  .event-card .challenge-poster-title span {
+    font-size: 2.45rem;
   }
 
   .hero {
