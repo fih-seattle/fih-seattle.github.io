@@ -85,6 +85,7 @@ const isSubmissionOpen = () => competitionSettings.phase === PHASES.SUBMISSIONS_
 const isShowcaseOpen = () =>
   competitionSettings.phase === PHASES.EVALUATION_OPEN || competitionSettings.phase === PHASES.RESULTS_PUBLISHED;
 const isVotingOpen = () => competitionSettings.phase === PHASES.EVALUATION_OPEN;
+const isResultsPublished = () => competitionSettings.phase === PHASES.RESULTS_PUBLISHED;
 
 const formatCountdown = (targetDate, fallback) => {
   const diff = targetDate.getTime() - Date.now();
@@ -295,11 +296,12 @@ const getProjectShareUrl = (item, index = 0) => {
   return `${pageUrl}#${getProjectAnchor(item, index)}`;
 };
 
-const getSortedSubmissions = (items) =>
-  publicStaticSubmissions
-    .concat(items)
-    .slice()
-    .sort((a, b) => Number(b.voteCount || 0) - Number(a.voteCount || 0));
+const getSortedSubmissions = (items) => {
+  const entries = publicStaticSubmissions.concat(items).slice();
+  return isResultsPublished()
+    ? entries.sort((a, b) => Number(b.voteCount || 0) - Number(a.voteCount || 0))
+    : entries.sort((a, b) => String(a.project || "").localeCompare(String(b.project || "")));
+};
 
 const getParticipantGroup = (item) => item.participantGroup || item.participant_group || defaultParticipantGroup;
 
@@ -529,7 +531,17 @@ const voteMarkup = (item, index) => {
   const projectId = getSubmissionDocId(item, index);
   const voteCount = Number(item.voteCount || 0);
   const disabled = isVotingOpen() ? "" : "disabled";
-  const label = isVotingOpen() ? "Vote with Google" : "Voting Closed";
+  const label = isVotingOpen() ? "Support with Google" : "Voting Closed";
+
+  if (!isResultsPublished()) {
+    return `
+      <div class="vote-row">
+        <strong>Public support</strong>
+        <span>Counts remain hidden during voting</span>
+        <button class="vote-button" type="button" data-vote="${escapeHtml(projectId)}" ${disabled}>${label}</button>
+      </div>
+    `;
+  }
 
   return `
     <div class="vote-row">
@@ -595,8 +607,8 @@ const normalizeSubmission = (docSnap) => {
 
 const projectCardMarkup = (item, index) => {
   const group = getParticipantGroup(item);
-  const rankLabel = isDemoSubmission(item) ? "Sample Work" : "People's Choice";
-  const rankBadge = isDemoSubmission(item) ? "Demo" : `#${index + 1}`;
+  const rankLabel = isDemoSubmission(item) ? "Sample Work" : isResultsPublished() ? "People's Choice Result" : "Approved Public Solution";
+  const rankBadge = isDemoSubmission(item) ? "Demo" : isResultsPublished() ? `#${index + 1}` : "Selected";
 
   return `
     <article class="work-card${isDemoSubmission(item) ? " is-sample" : ""}" id="${getProjectAnchor(item, index)}">
@@ -656,7 +668,7 @@ const renderSubmissionGallery = (items) => {
     gallery.innerHTML = `
       ${demoMarkup}
       <div class="empty-state works-locked">
-        Public project browsing opens after the submission deadline. Until then, use the sample project as a reference for topic framing, Future Blueprint structure, and judging expectations.
+        The curated public showcase opens after the submission deadline and eligibility review. Submission totals are not published during the call. Until then, use the sample project as a reference for topic framing, Future Blueprint structure, and judging expectations.
       </div>
     `;
     return;
@@ -668,27 +680,26 @@ const renderSubmissionGallery = (items) => {
     ? participantGroups
         .map((group) => {
       const groupItems = sortedItems.filter((item) => getParticipantGroup(item) === group);
-      const cards = groupItems.length
-        ? groupItems
-            .map((item) => {
-              const index = sortedItems.indexOf(item);
-              return projectCardMarkup(item, index);
-            })
-            .join("")
-        : `<div class="empty-state">No approved works in this group yet.</div>`;
+      if (!groupItems.length) return "";
+      const cards = groupItems
+        .map((item) => {
+          const index = sortedItems.indexOf(item);
+          return projectCardMarkup(item, index);
+        })
+        .join("");
 
       return `
         <section class="work-group" aria-label="${escapeHtml(group)} works">
           <div class="work-group-heading">
             <span>${escapeHtml(group)}</span>
-            <strong>${groupItems.length} ${groupItems.length === 1 ? "work" : "works"}</strong>
+            <strong>Curated public selection</strong>
           </div>
           <div class="gallery-grid">${cards}</div>
         </section>
       `;
         })
         .join("")
-    : `<div class="empty-state">No approved public works are available yet. Approved projects will appear here after review.</div>`;
+    : `<div class="empty-state">The curated public selection will be published after eligibility and publication review.</div>`;
 
   gallery.innerHTML = `${demoMarkup}${groupedMarkup}`;
 
