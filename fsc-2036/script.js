@@ -199,7 +199,7 @@ const PAYMENT_LABELS = {
   stripe_pending: "Payment confirmation pending.",
   checkout_not_open: "Official Chase payment link has not been sent.",
   pending_checkout_launch: "Official Chase payment link has not been sent.",
-  not_applicable_pilot_intake: "Legacy free-pilot record; organizer review required.",
+    not_applicable_pilot_intake: "Legacy intake record; organizer review required.",
   paid: "Payment confirmed.",
 };
 
