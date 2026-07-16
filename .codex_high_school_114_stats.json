@@ -1,0 +1,623 @@
+{
+  "grade_file": "C:\\GitHub\\high-school\\114\\114-1成績總檔.xlsx",
+  "roster_file": "C:\\GitHub\\high-school\\114\\114-2 總表.xlsx",
+  "feedback_file": "C:\\GitHub\\high-school\\114\\@@-0119-114學年度第1學期「Python AI實作：從生活議題到實戰應用課程多元選修線上課程」 回.xlsx",
+  "assessment": [
+    {
+      "name": "0912 隨堂練習1",
+      "regular": 392,
+      "alt": 50,
+      "statuses": {
+        "完全正確": 2,
+        "執行成功(有邏輯錯誤)": 278,
+        "執行失敗": 106,
+        "語法錯誤": 6,
+        "Notebook 完全正確": 14,
+        "其他格式-內容正確": 36
+      },
+      "n": 442,
+      "avg": 87.9524886877828,
+      "median": 100.0,
+      "ge90": 315,
+      "ge60": 442,
+      "perfect": 262
+    },
+    {
+      "name": "0919 隨堂練習2",
+      "regular": 440,
+      "alt": 34,
+      "statuses": {
+        "完全正確": 10,
+        "執行失敗": 428,
+        "語法錯誤": 2,
+        "其他格式-內容正確": 26,
+        "Notebook 完全正確": 8
+      },
+      "n": 474,
+      "avg": 97.16244725738396,
+      "median": 100.0,
+      "ge90": 443,
+      "ge60": 474,
+      "perfect": 430
+    },
+    {
+      "name": "0926 隨堂練習3",
+      "regular": 359,
+      "alt": 13,
+      "statuses": {
+        "完全正確": 14,
+        "執行失敗": 324,
+        "語法錯誤": 21,
+        "其他格式-內容正確": 12,
+        "Notebook 完全正確": 1
+      },
+      "n": 372,
+      "avg": 96.38440860215054,
+      "median": 100.0,
+      "ge90": 360,
+      "ge60": 372,
+      "perfect": 188
+    },
+    {
+      "name": "1031 隨堂練習4",
+      "regular": 365,
+      "alt": 28,
+      "statuses": {
+        "完全正確": 149,
+        "執行失敗": 41,
+        "執行成功(有邏輯錯誤)": 166,
+        "語法錯誤": 9,
+        "Notebook 完全正確": 7,
+        "其他格式-內容正確": 21
+      },
+      "n": 393,
+      "avg": 86.37404580152672,
+      "median": 95.0,
+      "ge90": 260,
+      "ge60": 358,
+      "perfect": 149
+    },
+    {
+      "name": "1107 隨堂練習5",
+      "regular": 356,
+      "alt": 0,
+      "statuses": {
+        "第二題": 264,
+        "第一題、第二題": 16,
+        "無": 76
+      },
+      "n": 356,
+      "avg": 95.84269662921348,
+      "median": 95.0,
+      "ge90": 356,
+      "ge60": 356,
+      "perfect": 76
+    },
+    {
+      "name": "1121 隨堂練習6",
+      "regular": 200,
+      "alt": 0,
+      "statuses": {
+        "無": 194,
+        "第二題": 6
+      },
+      "n": 200,
+      "avg": 99.85,
+      "median": 100.0,
+      "ge90": 200,
+      "ge60": 200,
+      "perfect": 194
+    },
+    {
+      "name": "1205 隨堂練習7",
+      "regular": 334,
+      "alt": 0,
+      "statuses": {
+        "第三題": 67,
+        "第一題": 6,
+        "第一題、第三題": 2,
+        "第二題": 1,
+        "第一題、第二題、第三題": 1
+      },
+      "n": 334,
+      "avg": 98.7874251497006,
+      "median": 100.0,
+      "ge90": 333,
+      "ge60": 334,
+      "perfect": 257
+    },
+    {
+      "name": "1212 隨堂練習8",
+      "regular": 333,
+      "alt": 0,
+      "statuses": {
+        "第一題、第二題": 5,
+        "第一題": 31,
+        "第一題、第二題、第三題": 31,
+        "第二題": 5,
+        "第三題": 7,
+        "第二題、第三題": 2,
+        "第一題、第三題": 6
+      },
+      "n": 333,
+      "avg": 97.53753753753753,
+      "median": 100.0,
+      "ge90": 301,
+      "ge60": 333,
+      "perfect": 246
+    },
+    {
+      "name": "作業1",
+      "regular": 132,
+      "alt": 10,
+      "statuses": {
+        "完全正確": 5,
+        "執行失敗": 126,
+        "語法錯誤": 1,
+        "其他格式-內容正確": 8,
+        "Notebook 完全正確": 2
+      },
+      "n": 142,
+      "avg": 97.42957746478874,
+      "median": 100.0,
+      "ge90": 134,
+      "ge60": 142,
+      "perfect": 127
+    },
+    {
+      "name": "作業2",
+      "regular": 313,
+      "alt": 10,
+      "statuses": {
+        "完全正確": 278,
+        "執行失敗": 32,
+        "語法錯誤": 3,
+        "其他格式-內容正確": 6,
+        "Notebook 完全正確": 4
+      },
+      "n": 323,
+      "avg": 98.59133126934985,
+      "median": 100.0,
+      "ge90": 317,
+      "ge60": 323,
+      "perfect": 278
+    },
+    {
+      "name": "作業3",
+      "regular": 287,
+      "alt": 6,
+      "statuses": {
+        "完全正確": 35,
+        "執行失敗": 235,
+        "語法錯誤": 17,
+        "其他格式-內容正確": 3,
+        "Notebook 完全正確": 2,
+        "Notebook 語法錯誤": 1
+      },
+      "n": 293,
+      "avg": 98.82252559726962,
+      "median": 100.0,
+      "ge90": 289,
+      "ge60": 293,
+      "perfect": 249
+    },
+    {
+      "name": "作業4",
+      "regular": 236,
+      "alt": 12,
+      "statuses": {
+        "完全正確": 70,
+        "語法錯誤": 22,
+        "執行成功(有邏輯錯誤)": 121,
+        "執行失敗": 23,
+        "Notebook 完全正確": 4,
+        "其他格式-內容正確": 8
+      },
+      "n": 248,
+      "avg": 90.04032258064517,
+      "median": 95.0,
+      "ge90": 186,
+      "ge60": 240,
+      "perfect": 70
+    },
+    {
+      "name": "作業5",
+      "regular": 466,
+      "alt": 53,
+      "statuses": {
+        "完全正確": 40,
+        "執行失敗": 378,
+        "語法錯誤": 48,
+        "Notebook 完全正確": 18,
+        "其他格式-內容正確": 35
+      },
+      "n": 519,
+      "avg": 96.16570327552986,
+      "median": 100.0,
+      "ge90": 484,
+      "ge60": 519,
+      "perfect": 384
+    }
+  ],
+  "total_1141": 4429,
+  "alt_1141": 216,
+  "students_1142": 554,
+  "schools_1142": 29,
+  "weekly": [
+    {
+      "week": "03/06",
+      "n": 460,
+      "rate": 83.03249097472924
+    },
+    {
+      "week": "03/13",
+      "n": 447,
+      "rate": 80.68592057761732
+    },
+    {
+      "week": "03/20",
+      "n": 406,
+      "rate": 73.28519855595668
+    },
+    {
+      "week": "04/10",
+      "n": 405,
+      "rate": 73.10469314079423
+    },
+    {
+      "week": "04/17",
+      "n": 395,
+      "rate": 71.29963898916968
+    },
+    {
+      "week": "04/24",
+      "n": 380,
+      "rate": 68.59205776173285
+    },
+    {
+      "week": "05/08",
+      "n": 224,
+      "rate": 40.43321299638989
+    },
+    {
+      "week": "05/15",
+      "n": 178,
+      "rate": 32.12996389891697
+    },
+    {
+      "week": "05/22",
+      "n": 210,
+      "rate": 37.90613718411552
+    },
+    {
+      "week": "05/29",
+      "n": 183,
+      "rate": 33.03249097472924
+    }
+  ],
+  "selfweeks": [
+    {
+      "week": "0306",
+      "n": 514,
+      "ratings": {
+        "大致懂": 203,
+        "很懂": 80,
+        "有點懂": 176,
+        "幾乎不懂": 55
+      },
+      "understand_rate": 55.05836575875487
+    },
+    {
+      "week": "0313",
+      "n": 472,
+      "ratings": {
+        "大致懂": 190,
+        "很懂": 34,
+        "有點懂": 203,
+        "幾乎不懂": 45
+      },
+      "understand_rate": 47.45762711864407
+    },
+    {
+      "week": "0320",
+      "n": 440,
+      "ratings": {
+        "有點懂": 209,
+        "大致懂": 155,
+        "幾乎不懂": 41,
+        "很懂": 35
+      },
+      "understand_rate": 43.18181818181818
+    },
+    {
+      "week": "0410",
+      "n": 425,
+      "ratings": {
+        "幾乎不懂": 26,
+        "有點懂": 156,
+        "很懂": 48,
+        "大致懂": 195
+      },
+      "understand_rate": 57.1764705882353
+    },
+    {
+      "week": "0417",
+      "n": 414,
+      "ratings": {
+        "有點懂": 178,
+        "很懂": 31,
+        "大致懂": 174,
+        "幾乎不懂": 31
+      },
+      "understand_rate": 49.51690821256039
+    },
+    {
+      "week": "0424",
+      "n": 399,
+      "ratings": {
+        "幾乎不懂": 28,
+        "有點懂": 166,
+        "大致懂": 164,
+        "很懂": 41
+      },
+      "understand_rate": 51.37844611528822
+    },
+    {
+      "week": "0508",
+      "n": 231,
+      "ratings": {
+        "有點懂": 102,
+        "很懂": 20,
+        "大致懂": 95,
+        "幾乎不懂": 14
+      },
+      "understand_rate": 49.78354978354978
+    },
+    {
+      "week": "0515",
+      "n": 186,
+      "ratings": {
+        "大致懂": 56,
+        "很懂": 17,
+        "幾乎不懂": 26,
+        "有點懂": 87
+      },
+      "understand_rate": 39.24731182795699
+    },
+    {
+      "week": "0522",
+      "n": 219,
+      "ratings": {
+        "很懂": 21,
+        "有點懂": 98,
+        "大致懂": 87,
+        "幾乎不懂": 13
+      },
+      "understand_rate": 49.31506849315068
+    },
+    {
+      "week": "0529",
+      "n": 194,
+      "ratings": {
+        "有點懂": 80,
+        "大致懂": 87,
+        "很懂": 15,
+        "幾乎不懂": 12
+      },
+      "understand_rate": 52.577319587628864
+    }
+  ],
+  "all_ratings": {
+    "大致懂": 1406,
+    "很懂": 342,
+    "有點懂": 1455,
+    "幾乎不懂": 291
+  },
+  "feedback_n": 95,
+  "likert": [
+    {
+      "q": "我覺得此次課程，對於我在學習「AI」的相關知識，如理解「AI」運作原理、運用「AI」解決問題等內容。",
+      "mean": 3.6,
+      "positive": 52.63157894736842,
+      "n": 95
+    },
+    {
+      "q": "我覺得此次課程，對於我在學習將 「AI」 與生活議題緊密結合，如個人理財、健康管理、社交媒體分析等真實生活中的挑戰。",
+      "mean": 3.5894736842105264,
+      "positive": 52.63157894736842,
+      "n": 95
+    },
+    {
+      "q": "我覺得此次課程，對於掌握 「Python 基礎」，如學習並熟練掌握 「Python 程式設計」的基本語法和概念，包括數據結構、條件語句、迴圈等。",
+      "mean": 3.4210526315789473,
+      "positive": 43.1578947368421,
+      "n": 95
+    },
+    {
+      "q": "我覺得此次課程，學會構建、訓練和評估簡單的「AI」模型，如線性迴歸模型。",
+      "mean": 3.526315789473684,
+      "positive": 47.36842105263158,
+      "n": 95
+    },
+    {
+      "q": "我覺得此次課程，對於我在學習「AI」模型中，能夠將「AI」模型應用於解決生活中的實際問題，如房價預測、垃圾分類和情感分析等。",
+      "mean": 3.6526315789473682,
+      "positive": 51.578947368421055,
+      "n": 95
+    },
+    {
+      "q": "我覺得此次的課程，對於我在「AI」領域是否提升相關技能，如數據處理與分析技能。",
+      "mean": 3.5319148936170213,
+      "positive": 48.93617021276596,
+      "n": 94
+    },
+    {
+      "q": "整體而言，我覺得課程內容難易度適中。",
+      "mean": 3.4105263157894736,
+      "positive": 41.05263157894737,
+      "n": 95
+    },
+    {
+      "q": "整體而言，我對這次課程中授課教學與實作活動的比例。",
+      "mean": 3.5894736842105264,
+      "positive": 51.578947368421055,
+      "n": 95
+    },
+    {
+      "q": "整體而言，我對這次課程中老師的整體教學感覺。",
+      "mean": 3.4842105263157896,
+      "positive": 45.26315789473684,
+      "n": 95
+    },
+    {
+      "q": "我覺得此次的課程，對於我想進一步學習「AI」領域相關知識。",
+      "mean": 3.557894736842105,
+      "positive": 47.36842105263158,
+      "n": 95
+    }
+  ],
+  "project": {
+    "comment_blocks": 42,
+    "with_colab": 41,
+    "with_video": 38,
+    "with_both": 37,
+    "with_docs": 2
+  },
+  "peer_n": 40,
+  "peer_scores_n": 120,
+  "peer_score_mean": 3.3833333333333333,
+  "reflection_complete": 40,
+  "audit": {
+    "unique_urls": 9511,
+    "audited_urls": 740,
+    "bulk_dataset_urls_not_individually_fetched": 8771,
+    "domains": {
+      "taiwan.taiwanstay.net.tw": 8684,
+      "colab.research.google.com": 319,
+      "www.ptt.cc": 89,
+      "youtu.be": 84,
+      "github.com": 57,
+      "docs.google.com": 51,
+      "www.youtube.com": 24,
+      "www.facebook.com": 21,
+      "forms.gle": 17,
+      "homepage.ntu.edu.tw": 7,
+      "goo.gl": 7,
+      "youtube.com": 6,
+      "judgecode.org": 6,
+      "myppt.cc": 5,
+      "drive.google.com": 4,
+      "www.notion.so": 4,
+      "i.imgur.com": 4,
+      "line.me": 4,
+      "meet.google.com": 3,
+      "ai.google.dev": 3,
+      "aistudio.google.com": 3,
+      "www.evergreen-hotels.com": 3,
+      "coddy.tech": 2,
+      "cciitw.pixnet.net": 2,
+      "mdpr.jp": 2,
+      "reurl.cc": 2,
+      "stars.udn.com": 2,
+      "www.chinatimes.com": 2,
+      "www.toy-people.com": 2,
+      "www.leftbankbnb.com.tw": 2,
+      "lin.ee": 2,
+      "utm.to": 2,
+      "gemini.google.com": 1,
+      "localhost:8080": 1,
+      "raw.githubusercontent.com": 1,
+      "vocus.cc": 1,
+      "163.22.17.167": 1,
+      "essayscore.moe.edu.tw": 1,
+      "writeai.moe.edu.tw": 1,
+      "app.notion.com": 1,
+      "54.206.200.235:8000": 1,
+      "docs.anaconda.com": 1,
+      "www.hpa.gov.tw": 1,
+      "playground.tensorflow.org": 1,
+      "scikit-learn.org": 1,
+      "www.liveism.com": 1,
+      "drive.usercontent.google.com": 1,
+      "r2u.stat.illinois.edu": 1,
+      "storage.googleapis.com": 1,
+      "images.chinatimes.com": 1,
+      "news.agentm.tw": 1,
+      "uc.udn.com.tw": 1,
+      "www.seoul.co.kr": 1,
+      "c": 1,
+      "col": 1,
+      "colab": 1,
+      "colab.r": 1,
+      "pandas.pydata.org": 1,
+      "037603158.okgo.tw民宿主人夫婦原想找個喜歡的地方長期居住": 1,
+      "088801118.okgo.tw": 1,
+      "0933565579.mmweb.tw": 1,
+      "138.8168.org.tw位於宜蘭太平山": 1,
+      "5658tn.com": 1,
+      "aa128899.pixnet.net": 1,
+      "aodi.pixnet.net": 1,
+      "baker73416.pixnet.net": 1,
+      "blog.xuite.net": 1,
+      "chang-an.house.pgo.tw": 1,
+      "colorfulhouse.jri.tw": 1,
+      "cozylife.ittbnb.com": 1,
+      "dreamyhome.taitungbnb.tw": 1,
+      "fulu.yoyotaitung.com.tw": 1,
+      "happytree211.pixnet.net臉書請搜尋幸福樹舍專頁": 1,
+      "hotel.family-tpe.com": 1,
+      "hyangarden.etaitung.tw": 1,
+      "levitevillage.net利未是一棟依山而建的四層斜頂建築": 1,
+      "mutianxuan.yoyotaitung.com.tw": 1,
+      "taipei.landishotelsresorts.com": 1,
+      "travel.ettoday.net": 1,
+      "twobest.okgo.tw": 1,
+      "wego-hotel.com": 1,
+      "wikid.pixnet.net": 1,
+      "www.825185.com.tw": 1,
+      "www.akei.com.tw": 1,
+      "www.avignon.com.tw": 1,
+      "www.booking.com": 1,
+      "www.chingching-motel.com.tw": 1,
+      "www.crownshine.com.twfacebook粉絲專頁https:": 1,
+      "www.dandl.com.tw": 1,
+      "www.fangliaohotel.com.tw": 1,
+      "www.ghomesir.com.tw": 1,
+      "www.gladsea.com.tw": 1,
+      "www.greencity.com.tw": 1,
+      "www.hioneholiday.com.tw": 1,
+      "www.hotel-intrendy.com": 1,
+      "www.joygarde.com": 1,
+      "www.kitravel.com.tw": 1,
+      "www.longmenhouse.com.tw龍門舊舍民宿是將一棟民國13": 1,
+      "www.netete.com": 1,
+      "www.papago-resort.com": 1,
+      "www.qk.to": 1,
+      "www.taitungbb.com.tw": 1,
+      "www.topmall.cc": 1,
+      "www.weibo.com": 1,
+      "www.yudali.tw": 1,
+      "wx.miot.cn": 1,
+      "abnb.me": 1,
+      "anpinglane.okgo.tw": 1,
+      "aodiwu.weebly.com": 1,
+      "bunnyann.com": 1,
+      "dearbnb.com": 1,
+      "house303.co": 1,
+      "junehouse.weebly.com": 1,
+      "lj.okgo.tw": 1,
+      "taiwanstay.net.tw": 1,
+      "www.ahotel.tw": 1,
+      "www.forest3030hostel.com.tw": 1,
+      "zh-tw.facebook.com": 1
+    },
+    "status_counts": {
+      "200": 600,
+      "404": 41,
+      "0": 83,
+      "401": 13,
+      "500": 2,
+      "403": 1
+    }
+  }
+}

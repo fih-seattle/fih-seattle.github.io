@@ -183,19 +183,21 @@ function updateFormStatus(message) {
 const STATUS_LABELS = {
   pre_registration_received: "Pre-registration received",
   eligibility_review: "Eligibility review",
-  payment_notice_sent: "Legacy fee process paused",
-  payment_pending: "Pilot intake review",
+  payment_notice_sent: "Official Chase payment link sent",
+  payment_pending: "Payment confirmation pending",
   registration_complete: "Registration complete",
   pending: "Pre-registration received",
   approved: "Approved for public showcase",
 };
 
 const PAYMENT_LABELS = {
-  not_sent: "No payment is requested during pilot intake.",
-  sent: "Legacy fee process is paused.",
-  stripe_pending: "No payment is requested during pilot intake.",
-  not_applicable_pilot_intake: "No payment is requested during pilot intake.",
-  paid: "Legacy payment confirmed.",
+  not_sent: "Official Chase payment link has not been sent.",
+  sent: "Official Chase payment link sent.",
+  stripe_pending: "Payment confirmation pending.",
+  checkout_not_open: "Official Chase payment link has not been sent.",
+  pending_checkout_launch: "Official Chase payment link has not been sent.",
+  not_applicable_pilot_intake: "Legacy free-pilot record; organizer review required.",
+  paid: "Payment confirmed.",
 };
 
 const setParticipantStatus = (title, detail, visible = true) => {
@@ -237,7 +239,7 @@ const loadParticipantStatus = async (user) => {
 
     setParticipantStatus(
       registrationLabel,
-      `${paymentLabel} Future fee policies will be published on this website only after secure online payment, refund terms, privacy notice, and participation agreement are available.`,
+      `${paymentLabel} The published fee is USD 65 for an individual entry or USD 125 for a team entry. After the organizer confirms that your materials are complete, the official Chase payment link is sent by reply in your pre-registration receipt email thread.`,
     );
   } catch (error) {
     setParticipantStatus("Status unavailable", `Your status could not be loaded: ${error.message}`);
@@ -271,7 +273,7 @@ const applyPhaseToPage = () => {
   if (!isSubmissionOpen()) {
     updateFormStatus(`Submissions are closed. Current phase: ${competitionSettings.phase}.`);
   } else {
-    updateFormStatus("Submissions are open as free pilot intake records. No payment is requested during the pilot intake period.");
+    updateFormStatus("Pre-registration is open. Submitting does not create a charge. The official Chase payment link is not yet available; the published fee is USD 65 for an individual entry or USD 125 for a team entry.");
   }
 
   renderSubmissionGallery(approvedSubmissions);
@@ -343,6 +345,7 @@ if (submissionForm) {
         stripe_payment_status: cleanText(payload.stripe_payment_status),
         registration_status: cleanText(payload.registration_status),
         payment_notification_status: cleanText(payload.payment_notification_status),
+        notification_email_status: "formsubmit_notification_requested",
         student_status: cleanText(payload.student_status),
         school: cleanText(payload.school),
         country_region: cleanText(payload.country_region),
@@ -374,6 +377,42 @@ if (submissionForm) {
         updatedAt: serverTimestamp(),
       });
 
+      let emailNotificationStatus = "sent";
+      try {
+        const participantEmail = user.email || cleanText(payload.email);
+        const notificationResponse = await fetch("https://formsubmit.co/ajax/peculab.ai@gmail.com", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: `[FSC 2036] Pre-registration received - ${cleanText(payload.project_title)}`,
+            _template: "table",
+            _captcha: "false",
+            _cc: participantEmail,
+            email: participantEmail,
+            submission_id: user.uid,
+            registration_status: "Pre-registration received / Eligibility review pending",
+            participant_or_team_lead: cleanText(payload.team_lead_name),
+            project_title: cleanText(payload.project_title),
+            participant_group: cleanText(payload.participant_group),
+            fee_category: cleanText(payload.registration_fee_category),
+            school_or_organization: cleanText(payload.school),
+            country_or_region: cleanText(payload.country_region),
+            blueprint_pdf_url: cleanText(payload.blueprint_pdf_url),
+            english_video_url: cleanText(payload.english_pitch_video_url),
+            organizer_next_step: "Review the required materials, then reply with the official Chase payment link and payment deadline.",
+          }),
+        });
+        if (!notificationResponse.ok) {
+          throw new Error(`FormSubmit returned ${notificationResponse.status}`);
+        }
+      } catch (notificationError) {
+        console.error("The database submission was saved, but the email notification failed.", notificationError);
+        emailNotificationStatus = "failed";
+      }
+      sessionStorage.setItem("fsc2036EmailNotificationStatus", emailNotificationStatus);
       window.location.href = "thanks.html";
     } catch (error) {
       updateFormStatus(`Submission failed: ${error.message}`);

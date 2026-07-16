@@ -13,24 +13,35 @@
         <p class="eyebrow">Pre-registration received</p>
         <h1 id="thanks-title">Thank you. Your form is in the review queue.</h1>
         <p>
-          Your Future Solutions Challenge form has been received as a pilot intake record. Registration is currently free during the pilot intake period, and FIH will not request payment by email.
+          Your Future Solutions Challenge form has been saved as a pre-registration record. A registration summary has also been sent to peculab.ai@gmail.com with a copy to your verified Google sign-in address. Submitting the form did not create a charge.
         </p>
         <div class="thanks-status-list" aria-label="Current registration status">
           <div>
             <strong>Current status</strong>
-            <span>Pre-registration received / No payment requested</span>
+            <span>Pre-registration received / Eligibility review pending</span>
           </div>
           <div>
             <strong>Next update from FIH</strong>
-            <span>Eligibility review outcome or follow-up questions about your submission.</span>
+            <span>The organizer reviews your required materials and replies to the confirmation email with the official Chase payment link.</span>
           </div>
           <div>
             <strong>Final confirmation</strong>
-            <span>Entry active after organizer eligibility review.</span>
+            <span>Registration complete only after the required payment is received and matched to your entry.</span>
           </div>
         </div>
+        <p class="form-note" data-email-notification-status>The confirmation email has been sent automatically. Check your inbox and spam folder.</p>
         <a class="button button-primary" href="index.html">Return to Challenge Page</a>
       </section>
     </main>
+    <script>
+      (() => {
+        const status = sessionStorage.getItem("fsc2036EmailNotificationStatus");
+        const statusNode = document.querySelector("[data-email-notification-status]");
+        if (status === "failed" && statusNode) {
+          statusNode.textContent = "Your database submission is saved, but the email notification could not be delivered. Please contact peculab.ai@gmail.com and include your Google sign-in email.";
+        }
+        sessionStorage.removeItem("fsc2036EmailNotificationStatus");
+      })();
+    </script>
   </body>
 </html>

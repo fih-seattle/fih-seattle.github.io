@@ -1,6 +1,6 @@
 # Firebase Setup
 
-This hackathon page uses Firebase Auth and Cloud Firestore.
+This challenge page uses Firebase Auth and Cloud Firestore. Email confirmation reuses the site's already-active FormSubmit destination and does not require Cloud Functions, SMTP, an email extension, or a Gmail App Password.
 
 ## Enable Products
 
@@ -8,6 +8,10 @@ This hackathon page uses Firebase Auth and Cloud Firestore.
 2. Enable Google sign-in.
 3. Firebase Console > Firestore Database.
 4. Create a database in production mode.
+
+## Automatic Receipt Email
+
+After Firestore saves the form, `script.js` posts a registration summary to the same FormSubmit destination already used by the site's contact forms. FormSubmit sends it to `peculab.ai@gmail.com`, copies the participant's verified Google sign-in address through `_cc`, and uses the participant email as Reply-To. The organizer can reply in that thread with the Chase payment link. No additional account configuration is required.
 
 ## Publish Firestore Rules
 
@@ -91,8 +95,9 @@ New submissions are written to the `submissions` collection with:
 ```text
 status = pending
 registration_status = pre_registration_received
-payment_notification_status = not_applicable_pilot_intake
-stripe_payment_status = not_applicable_pilot_intake
+payment_notification_status = pending_checkout_launch
+stripe_payment_status = checkout_not_open
+notification_email_status = pending
 referral_owner = PECULAB-REFERRAL
 attribution_review_status = pending_organizer_review
 commission_review_status = not_reviewed
@@ -125,30 +130,65 @@ For future commission reports, use `referral_owner` as the first grouping field,
 
 The organizer CSV export includes the attribution fields plus participant contact, school, location, project title, and registration status. Use it for review only; final commission eligibility should still be confirmed manually.
 
-## Pilot Intake and Future Fee Status
+## Registration and Payment SOP
 
-During the 2026 pilot intake period, submitted forms are treated as pre-registration records and no payment is requested.
+### 1. Form received
 
-Recommended status meanings:
+The public form writes the pre-registration record directly to Firestore, then automatically sends the registration summary through FormSubmit to `peculab.ai@gmail.com`, copied to the participant's verified Google sign-in address.
+
+Initial values:
 
 ```text
 registration_status = pre_registration_received
-payment_notification_status = not_applicable_pilot_intake
-stripe_payment_status = not_applicable_pilot_intake
+payment_notification_status = pending_checkout_launch
+stripe_payment_status = checkout_not_open
+notification_email_status = formsubmit_notification_requested
 ```
 
-Do not request payment by email during pilot intake. Any future paid registration should be published only after secure online checkout, refund terms, privacy notice, participation agreement, organizer legal name, and support contact information are available on the public website.
+### 2. Completeness and eligibility review
+
+Open `fsc-2036/organizer.html` and verify age/group eligibility, required English Future Blueprint and video links, AI disclosure, participant details, and parental consent when applicable. Then update:
 
 ```text
 registration_status = eligibility_review
-payment_notification_status = not_applicable_pilot_intake
 ```
 
-After eligibility approval, update:
+Do not send a payment link to an incomplete or ineligible entry.
+
+### 3. Send the Chase payment link
+
+After the required materials are complete, reply to the participant's confirmation email. Keep the participant copied, identify the submission ID and amount, include the official Chase payment link, and state the payment deadline. Then update:
+
+```text
+registration_status = payment_pending
+payment_notification_status = payment_notice_sent
+stripe_payment_status = payment_pending
+```
+
+Use only the organizer-controlled Chase link. Do not accept emailed card details, bank credentials, or payment through a participant-supplied link. Publish the refund/cancellation policy, privacy notice, participation agreement, organizer legal name, and support contact before collecting payment.
+
+### 4. Confirm payment and registration
+
+Match the Chase transaction to the submission ID and payer. Do not rely only on a participant screenshot. After confirming receipt, update:
 
 ```text
 registration_status = registration_complete
-stripe_payment_status = not_applicable_pilot_intake
+stripe_payment_status = paid
+payment_notification_status = payment_notice_sent
+```
+
+Reply once more in the same email thread with the final registration confirmation and retain the payment reference outside the public Firestore fields. Do not store card or bank information in Firestore.
+
+Suggested subject for the payment reply:
+
+```text
+[FSC 2036] Payment required to confirm registration - {Submission ID}
+```
+
+Suggested subject for the final reply:
+
+```text
+[FSC 2036] Registration confirmed - {Submission ID}
 ```
 
 Participants who sign in with the same Google account can read only their own submission status. Pending submissions remain private from the public website and from other participants.

@@ -575,6 +575,37 @@ h1 {
   background: #fff7ed;
 }
 
+.fee-explainer,
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.fee-explainer article,
+.rules-grid article {
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(7, 17, 31, 0.06);
+}
+
+.fee-explainer h3,
+.rules-grid h3 {
+  margin-top: 0;
+  color: var(--night);
+}
+
+.fee-explainer ul {
+  margin-bottom: 0;
+  padding-left: 1.2rem;
+}
+
+.fee-explainer li + li {
+  margin-top: 0.6rem;
+}
+
 .special-awards {
   display: flex;
   flex-wrap: wrap;
@@ -1173,6 +1204,13 @@ h1 {
   color: rgba(255, 255, 255, 0.84);
 }
 
+.thanks-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
 .organizer-page {
   min-height: 100vh;
   background: #f5f7fb;
@@ -1691,6 +1729,8 @@ h1 {
   .criteria-grid,
   .timeline-grid,
   .fee-grid,
+  .fee-explainer,
+  .rules-grid,
   .awards-grid,
   .countdown-grid,
   .topic-grid,

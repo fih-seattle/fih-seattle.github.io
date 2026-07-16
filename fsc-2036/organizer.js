@@ -65,10 +65,11 @@ const DEMO_SUBMISSION = {
   email: "pecu610@gmail.com",
   age_confirmation: "I am between ages 12 and 30",
   participant_group: "Group C - Young Innovators",
-  registration_fee_category: "Individual entry - free pilot intake",
-  stripe_payment_status: "not_applicable_pilot_intake",
+  registration_fee_category: "Individual entry - USD 65",
+  stripe_payment_status: "checkout_not_open",
   registration_status: "registration_complete",
-  payment_notification_status: "not_applicable_pilot_intake",
+  payment_notification_status: "pending_checkout_launch",
+  notification_email_status: "formsubmit_notification_requested",
   student_status: "Young professional",
   school: "Future Intelligence Hub Demo School",
   country_region: "Taiwan / United States",
@@ -213,18 +214,20 @@ const submissionCard = (submission) => {
         ${statusBadge("Registration", submission.registration_status || submission.status || "pre_registration_received")}
         ${statusBadge("Referral owner", submission.referral_owner || "PECULAB-REFERRAL")}
         ${statusBadge("Attribution review", submission.attribution_review_status || "pending_organizer_review")}
-        ${statusBadge("Pilot fee policy", submission.payment_notification_status || "not_applicable_pilot_intake")}
-        ${statusBadge("Checkout status", submission.stripe_payment_status || "not_applicable_pilot_intake")}
+        ${statusBadge("Payment link", submission.payment_notification_status || "pending_checkout_launch")}
+        ${statusBadge("Payment status", submission.stripe_payment_status || "checkout_not_open")}
+        ${statusBadge("Receipt email", submission.notification_email_status || "pending")}
       </div>
       <div class="submission-edit-grid">
         ${textField(id, "project_title", "Project title", submission.project_title, true)}
         ${textField(id, "team_lead_name", "Team lead", submission.team_lead_name)}
         ${textField(id, "email", "Email", submission.email)}
         ${textField(id, "participant_group", "Participant group", submission.participant_group)}
-        ${textField(id, "registration_fee_category", "Pilot intake category", submission.registration_fee_category)}
-        ${textField(id, "stripe_payment_status", "Checkout status", submission.stripe_payment_status)}
+        ${textField(id, "registration_fee_category", "Entry fee category", submission.registration_fee_category)}
+        ${textField(id, "stripe_payment_status", "Payment status", submission.stripe_payment_status)}
         ${textField(id, "registration_status", "Registration status", submission.registration_status)}
-        ${textField(id, "payment_notification_status", "Pilot fee policy status", submission.payment_notification_status)}
+        ${textField(id, "payment_notification_status", "Payment-link email status", submission.payment_notification_status)}
+        ${textField(id, "notification_email_status", "Receipt email status", submission.notification_email_status)}
         ${textField(id, "student_status", "Current role / status", submission.student_status)}
         ${textField(id, "suggested_topic", "Challenge topic", submission.suggested_topic, true)}
         ${textField(id, "school", "School / institution / organization", submission.school)}
@@ -402,6 +405,7 @@ submissionList?.addEventListener("click", async (event) => {
         stripe_payment_status: fieldValue(id, "stripe_payment_status"),
         registration_status: fieldValue(id, "registration_status"),
         payment_notification_status: fieldValue(id, "payment_notification_status"),
+        notification_email_status: fieldValue(id, "notification_email_status"),
         student_status: fieldValue(id, "student_status"),
         suggested_topic: fieldValue(id, "suggested_topic"),
         school: fieldValue(id, "school"),
