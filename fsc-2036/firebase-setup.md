@@ -161,7 +161,7 @@ Do not send a payment link to an incomplete or ineligible entry.
 
 ### 3. Send the Chase payment link
 
-After the required materials are complete, reply to the participant's confirmation email. Keep the participant copied, identify the submission ID and amount, include the official Chase payment link, state the payment deadline, and repeat that the fee is generally non-refundable after payment subject to the published limited exceptions and applicable law. For a participant under 18, address the payment terms to the parent or legal guardian and request that the guardian complete or expressly authorize payment. Then update:
+After the required materials are complete, reply to the participant's confirmation email. Keep the participant copied, identify PECULAB LLC as the U.S. registration administrator and merchant of record, identify the submission ID and amount, include the official Chase payment link, state the payment deadline, and repeat that the fee is generally non-refundable after payment subject to the published limited exceptions and applicable law. For a participant under 18, address the payment terms to the parent or legal guardian and request that the guardian complete or expressly authorize payment. Then update:
 
 ```text
 registration_status = payment_pending
@@ -169,7 +169,7 @@ payment_notification_status = payment_notice_sent
 stripe_payment_status = payment_pending
 ```
 
-Use only the organizer-controlled Chase link. Do not accept emailed card details, bank credentials, or payment through a participant-supplied link. Keep the non-refundable policy, limited exceptions, privacy notice, participation agreement, organizer identity, and support contact available before collecting payment.
+Use only the PECULAB LLC-controlled Chase link. Confirm that the Chase page and receipt display PECULAB LLC. Do not accept emailed card details, bank credentials, or payment through a participant-supplied link. Keep the non-refundable policy, limited exceptions, privacy notice, participation agreement, organizer identity, payment administrator identity, and support contact available before collecting payment.
 
 ### 4. Confirm payment and registration
 
