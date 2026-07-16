@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FIH Future Blueprint | Two-Page Structure</title>
+    <style>
+      :root { color-scheme: light; font-family: Arial, Helvetica, sans-serif; color: #132f38; }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: #edf3f4; }
+      .toolbar { position: sticky; top: 0; z-index: 2; display: flex; gap: 12px; justify-content: center; padding: 14px; background: #132f38; color: white; }
+      .toolbar a, .toolbar button { padding: 10px 14px; border: 0; border-radius: 4px; background: #ff6a00; color: white; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; }
+      .toolbar a { background: transparent; border: 1px solid rgba(255,255,255,.5); }
+      .instructions { max-width: 8.27in; margin: 24px auto 0; padding: 16px 20px; background: #fff7ed; border-left: 5px solid #ff6a00; }
+      .page { width: 8.27in; min-height: 11.69in; margin: 24px auto; padding: .48in; background: white; box-shadow: 0 12px 35px rgba(14,42,49,.14); }
+      header { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 14px; border-bottom: 3px solid #ff6a00; }
+      h1 { margin: 0; font-size: 24px; }
+      h2 { margin: 4px 0 0; color: #147f78; font-size: 17px; }
+      .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 18px 0; }
+      .field, section { padding: 12px; border: 1px solid #bed0d4; }
+      section { margin-top: 10px; }
+      h3 { margin: 0 0 5px; font-size: 14px; }
+      p { margin: 0; color: #49656b; font-size: 11px; line-height: 1.45; }
+      .writing-space { min-height: 54px; margin-top: 9px; background: repeating-linear-gradient(to bottom, transparent 0, transparent 20px, #dce7e9 21px); }
+      .large { min-height: 84px; }
+      footer { margin-top: 16px; color: #6a8085; font-size: 10px; text-align: center; }
+      @media (max-width: 850px) { .page { width: calc(100% - 20px); min-height: auto; margin: 10px; padding: 20px; } .instructions { margin: 10px; } }
+      @media print { body { background: white; } .toolbar, .instructions { display: none; } .page { margin: 0; box-shadow: none; page-break-after: always; } .page:last-child { page-break-after: auto; } }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <button type="button" onclick="window.print()">Print / Save as PDF</button>
+      <a href="index.html#requirements">Return to Challenge</a>
+    </div>
+    <div class="instructions"><strong>How to use:</strong> Copy this two-page structure into your preferred document or design tool, replace the prompts with your own concise English content, add visuals if useful, and export the final work as a one- or two-page PDF. Using this exact visual design is optional; covering the required thinking is what matters.</div>
+
+    <article class="page">
+      <header><div><h1>FIH Future Blueprint</h1><h2>Page 1 · Future &amp; Problem</h2></div><strong>Future Solutions Challenge 2036</strong></header>
+      <div class="meta"><div class="field"><h3>Project title</h3><div class="writing-space"></div></div><div class="field"><h3>Participant / team and group</h3><div class="writing-space"></div></div></div>
+      <section><h3>1. Why This Matters to Me</h3><p>What real observation, experience, or story made you care about this issue?</p><div class="writing-space"></div></section>
+      <section><h3>2. 2036 Future Scenario</h3><p>Describe a plausible 2036 context supported by observable technology, climate, demographic, economic, social, or policy signals.</p><div class="writing-space large"></div></section>
+      <section><h3>3. Opportunity or Pain Point</h3><p>What important future problem needs to be solved? Why will today's approaches be insufficient?</p><div class="writing-space"></div></section>
+      <section><h3>4. Problem Statement</h3><p>Who is affected, what happens, why does it matter, and how large could the impact be? Use evidence or a reasonable estimate.</p><div class="writing-space"></div></section>
+      <section><h3>5. Future Value Proposition</h3><p>For whom will you create value, and why will your approach be better suited to 2036?</p><div class="writing-space"></div></section>
+      <footer>Participant-owned work · English submission · One or two pages total</footer>
+    </article>
+
+    <article class="page">
+      <header><div><h1>FIH Future Blueprint</h1><h2>Page 2 · Solution, Roadmap &amp; Impact</h2></div><strong>Future Solutions Challenge 2036</strong></header>
+      <section><h3>6. Proposed Solution</h3><p>Explain the solution, user journey, and core functions. Add a sketch, diagram, or prototype image if helpful.</p><div class="writing-space large"></div></section>
+      <section><h3>7. Future Roadmap</h3><p>Show a credible path: Today → 3 years → 5 years → 2030 → 2033 → 2036. What must happen, and what is the biggest challenge at each stage?</p><div class="writing-space large"></div></section>
+      <section><h3>8. Success Metrics</h3><p>Give three to five measurable indicators, such as people served, emissions reduced, jobs created, access improved, or learning outcomes.</p><div class="writing-space"></div></section>
+      <section><h3>9. Risks &amp; Assumptions</h3><p>What could go wrong? Which assumptions are most uncertain? Would the idea still help if the future develops differently?</p><div class="writing-space"></div></section>
+      <section><h3>10. Why Now?</h3><p>Why must work begin in 2026 rather than waiting until 2036?</p><div class="writing-space"></div></section>
+      <section><h3>11. Global Collaboration</h3><p>Which governments, universities, NGOs, companies, investors, communities, or other partners would be needed?</p><div class="writing-space"></div></section>
+      <section><h3>Optional Inspirations</h3><p>List books, studies, news, lived experience, or other sources that informed the idea. This section is not scored.</p><div class="writing-space"></div></section>
+      <footer>Template use is recommended but not mandatory · Export the completed work as PDF</footer>
+    </article>
+  </body>
+</html>

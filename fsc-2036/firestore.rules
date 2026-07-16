@@ -40,9 +40,44 @@ service cloud.firestore {
         && request.resource.data.submitterUid == request.auth.uid
         && request.resource.data.project_title is string
         && isOptionalUrl(request.resource.data.poc_website_url)
+        && request.resource.data.poc_stage in [
+          "",
+          "Concept mockup or wireframe",
+          "Clickable or interactive prototype",
+          "Working technical demo",
+          "Public website or application",
+          "Video demonstration",
+          "Public code repository",
+          "Other proof of concept"
+        ]
+        && request.resource.data.poc_public_summary is string
+        && request.resource.data.poc_public_summary.size() <= 1000
+        && (
+          (request.resource.data.poc_stage == "" && request.resource.data.poc_website_url == "")
+          || (request.resource.data.poc_stage != "" && request.resource.data.poc_website_url.matches("https?://.*"))
+        )
         && request.resource.data.english_pitch_video_url is string
         && request.resource.data.english_pitch_video_url.matches("https?://.*")
-        && request.resource.data.email is string;
+        && request.resource.data.email is string
+        && (
+          (
+            request.resource.data.participant_group == "Group D - Team Challenge"
+            && request.resource.data.registration_fee_category == "Team entry - USD 125 total for 2-5 members"
+            && request.resource.data.team_members is string
+            && request.resource.data.team_members.size() > 0
+          )
+          || (
+            request.resource.data.participant_group in ["Group A - Junior", "Group B - Senior", "Group C - Young Innovators"]
+            && request.resource.data.registration_fee_category == "Individual entry - USD 65"
+          )
+        )
+        && request.resource.data.parent_guardian_consent in [
+          "I am age 18 or older - not applicable",
+          "I am under 18 and have parent or legal-guardian consent"
+        ]
+        && request.resource.data.participation_terms_confirmation == "I understand this is pre-registration, no charge is created now, and registration is complete only after eligibility approval and confirmed payment."
+        && request.resource.data.non_refundable_fee_acknowledgement == "I understand that, if I later choose to pay, the entry fee is generally non-refundable after payment, subject only to the stated limited exceptions and applicable law."
+        && request.resource.data.privacy_communication_confirmation == "I agree that my submission data may be processed as described above and that a registration summary may be emailed to the organizer and copied to my verified Google sign-in address.";
     }
 
     match /submissions/{submissionId} {

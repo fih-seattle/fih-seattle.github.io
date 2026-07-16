@@ -126,7 +126,7 @@ attribution_review_status
 commission_review_status
 ```
 
-For future commission reports, use `referral_owner` as the first grouping field, then manually review `referrer_name_or_organization`, `promotion_region`, and `country_region` before marking `attribution_review_status` as confirmed. Keep `commission_review_status = not_reviewed` until the fee policy, payment confirmation, refund window, and commission terms are finalized.
+For future commission reports, use `referral_owner` as the first grouping field, then manually review `referrer_name_or_organization`, `promotion_region`, and `country_region` before marking `attribution_review_status` as confirmed. Keep `commission_review_status = not_reviewed` until payment is confirmed and any applicable dispute period and commission terms are resolved.
 
 The organizer CSV export includes the attribution fields plus participant contact, school, location, project title, and registration status. Use it for review only; final commission eligibility should still be confirmed manually.
 
@@ -143,6 +143,10 @@ registration_status = pre_registration_received
 payment_notification_status = pending_checkout_launch
 stripe_payment_status = checkout_not_open
 notification_email_status = formsubmit_notification_requested
+parent_guardian_consent = participant confirmation
+participation_terms_confirmation = participant confirmation
+non_refundable_fee_acknowledgement = participant confirmation
+privacy_communication_confirmation = participant confirmation
 ```
 
 ### 2. Completeness and eligibility review
@@ -157,7 +161,7 @@ Do not send a payment link to an incomplete or ineligible entry.
 
 ### 3. Send the Chase payment link
 
-After the required materials are complete, reply to the participant's confirmation email. Keep the participant copied, identify the submission ID and amount, include the official Chase payment link, and state the payment deadline. Then update:
+After the required materials are complete, reply to the participant's confirmation email. Keep the participant copied, identify the submission ID and amount, include the official Chase payment link, state the payment deadline, and repeat that the fee is generally non-refundable after payment subject to the published limited exceptions and applicable law. For a participant under 18, address the payment terms to the parent or legal guardian and request that the guardian complete or expressly authorize payment. Then update:
 
 ```text
 registration_status = payment_pending
@@ -165,7 +169,7 @@ payment_notification_status = payment_notice_sent
 stripe_payment_status = payment_pending
 ```
 
-Use only the organizer-controlled Chase link. Do not accept emailed card details, bank credentials, or payment through a participant-supplied link. Publish the refund/cancellation policy, privacy notice, participation agreement, organizer legal name, and support contact before collecting payment.
+Use only the organizer-controlled Chase link. Do not accept emailed card details, bank credentials, or payment through a participant-supplied link. Keep the non-refundable policy, limited exceptions, privacy notice, participation agreement, organizer identity, and support contact available before collecting payment.
 
 ### 4. Confirm payment and registration
 

@@ -327,6 +327,27 @@ if (submissionForm) {
 
       const formData = new FormData(submissionForm);
       const payload = Object.fromEntries(formData.entries());
+      const selectedGroup = cleanText(payload.participant_group);
+      const selectedFee = cleanText(payload.registration_fee_category);
+      const pocStage = cleanText(payload.poc_stage);
+      const pocUrl = cleanText(payload.poc_website_url);
+
+      if (selectedGroup === "Group D - Team Challenge" && !selectedFee.startsWith("Team entry")) {
+        updateFormStatus("Group D must use the USD 125 team-entry fee category.");
+        return;
+      }
+      if (selectedGroup !== "Group D - Team Challenge" && !selectedFee.startsWith("Individual entry")) {
+        updateFormStatus("Groups A, B, and C must use the USD 65 individual-entry fee category.");
+        return;
+      }
+      if (selectedGroup === "Group D - Team Challenge" && !cleanText(payload.team_members)) {
+        updateFormStatus("Group D entries must list all team members and their ages.");
+        return;
+      }
+      if ((pocStage && !pocUrl) || (!pocStage && pocUrl)) {
+        updateFormStatus("To submit a public POC, select its stage and provide its public URL. Leave both fields empty if no POC is submitted.");
+        return;
+      }
 
       if (submitButton) {
         submitButton.disabled = true;
@@ -340,6 +361,7 @@ if (submissionForm) {
         team_lead_name: cleanText(payload.team_lead_name),
         email: cleanText(payload.email),
         age_confirmation: cleanText(payload.age_confirmation),
+        parent_guardian_consent: cleanText(payload.parent_guardian_consent),
         participant_group: cleanText(payload.participant_group),
         registration_fee_category: cleanText(payload.registration_fee_category),
         stripe_payment_status: cleanText(payload.stripe_payment_status),
@@ -364,10 +386,15 @@ if (submissionForm) {
         solution_summary: cleanText(payload.solution_summary),
         blueprint_pdf_url: cleanText(payload.blueprint_pdf_url),
         poc_website_url: cleanText(payload.poc_website_url),
+        poc_stage: cleanText(payload.poc_stage),
+        poc_public_summary: cleanText(payload.poc_public_summary),
         bonus_material_url: cleanText(payload.bonus_material_url),
         english_pitch_video_url: cleanText(payload.english_pitch_video_url),
         ai_tools_disclosure: cleanText(payload.ai_tools_disclosure),
         permission_to_publish: cleanText(payload.permission_to_publish),
+        participation_terms_confirmation: cleanText(payload.participation_terms_confirmation),
+        non_refundable_fee_acknowledgement: cleanText(payload.non_refundable_fee_acknowledgement),
+        privacy_communication_confirmation: cleanText(payload.privacy_communication_confirmation),
         submitterUid: user.uid,
         submitterName: user.displayName || "",
         submitterEmail: user.email || "",
@@ -398,10 +425,17 @@ if (submissionForm) {
             project_title: cleanText(payload.project_title),
             participant_group: cleanText(payload.participant_group),
             fee_category: cleanText(payload.registration_fee_category),
+            parent_or_guardian_consent: cleanText(payload.parent_guardian_consent),
+            participation_terms_confirmation: cleanText(payload.participation_terms_confirmation),
+            non_refundable_fee_acknowledgement: cleanText(payload.non_refundable_fee_acknowledgement),
+            privacy_communication_confirmation: cleanText(payload.privacy_communication_confirmation),
             school_or_organization: cleanText(payload.school),
             country_or_region: cleanText(payload.country_region),
             blueprint_pdf_url: cleanText(payload.blueprint_pdf_url),
             english_video_url: cleanText(payload.english_pitch_video_url),
+            poc_stage: cleanText(payload.poc_stage) || "No POC submitted",
+            poc_public_summary: cleanText(payload.poc_public_summary),
+            poc_url: cleanText(payload.poc_website_url),
             organizer_next_step: "Review the required materials, then reply with the official Chase payment link and payment deadline.",
           }),
         });
@@ -551,6 +585,8 @@ const normalizeSubmission = (docSnap) => {
     solution: data.solution_summary || "",
     blueprintUrl: data.blueprint_pdf_url || "",
     pocUrl: data.poc_website_url || "",
+    pocStage: data.poc_stage || "",
+    pocSummary: data.poc_public_summary || "",
     bonusUrl: data.bonus_material_url || "",
     videoUrl: data.english_pitch_video_url || "",
     voteCount: Number(data.voteCount || 0),
@@ -578,10 +614,12 @@ const projectCardMarkup = (item, index) => {
       <p><strong>2036 Scenario:</strong> ${escapeHtml(item.scenario)}</p>
       ${item.problem ? `<p><strong>Target Problem:</strong> ${escapeHtml(item.problem)}</p>` : ""}
       <p><strong>Solution:</strong> ${escapeHtml(item.solution)}</p>
+      ${item.pocStage ? `<p class="poc-stage"><strong>POC Stage:</strong> ${escapeHtml(item.pocStage)}</p>` : ""}
+      ${item.pocSummary ? `<p><strong>What the POC demonstrates:</strong> ${escapeHtml(item.pocSummary)}</p>` : ""}
       ${videoMarkup(item.videoUrl)}
       <div class="work-actions">
         ${linkMarkup(item.blueprintUrl, "Open Future Blueprint")}
-        ${linkMarkup(item.pocUrl, isDemoSubmission(item) ? "Open Sample Prototype" : "Open Optional Prototype")}
+        ${linkMarkup(item.pocUrl, isDemoSubmission(item) ? "Open Sample POC" : "Open Public POC")}
         ${linkMarkup(item.bonusUrl, "Open Bonus Material")}
         ${linkMarkup(item.videoUrl, "Open Video")}
       </div>

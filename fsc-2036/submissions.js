@@ -14,6 +14,8 @@ window.challengeSubmissions = [
     solution:
       "A GAF-CNN inspired workflow converts candlestick time-series data into visual pattern evidence, then surfaces confidence, uncertainty, and discussion prompts for responsible impact-capital learning.",
     pocUrl: "https://fiworld.org/fsc-2036/demo-gaf-cnn.html",
+    pocStage: "Working technical demo",
+    pocSummary: "Interactive demonstration of the sample solution workflow, evidence views, and responsible-use framing.",
     videoUrl: "https://youtu.be/5bJZOxhV9z4?si=ZKSgUvp_ufUQDc7x",
     school: "Future Intelligence Hub Demo School",
     country: "Taiwan / United States",

@@ -529,6 +529,70 @@ h1 {
   background: #fff8f1;
 }
 
+.hero-trust-line {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.value-grid article {
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(7, 17, 31, 0.06);
+}
+
+.value-grid strong {
+  color: var(--orange);
+}
+
+.value-grid h3 {
+  margin: 12px 0 8px;
+  color: var(--night);
+}
+
+.value-grid p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.showcase-note {
+  padding: 14px 16px;
+  border-left: 4px solid var(--teal);
+  background: #f1fbfa;
+}
+
+.poc-stage {
+  display: inline-block;
+  padding: 7px 10px;
+  border: 1px solid rgba(22, 155, 143, 0.25);
+  background: #f1fbfa;
+  color: #0b746b;
+}
+
+.start-checklist {
+  display: grid;
+  grid-template-columns: 1.25fr repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.start-checklist div {
+  padding: 16px;
+  background: #fff8f1;
+}
+
 .fee-grid,
 .awards-grid {
   display: grid;
@@ -576,7 +640,9 @@ h1 {
 }
 
 .fee-explainer,
-.rules-grid {
+.rules-grid,
+.judging-notes,
+.policy-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
@@ -584,7 +650,9 @@ h1 {
 }
 
 .fee-explainer article,
-.rules-grid article {
+.rules-grid article,
+.judging-notes article,
+.policy-grid article {
   padding: 24px;
   border: 1px solid var(--line);
   background: #fff;
@@ -592,7 +660,9 @@ h1 {
 }
 
 .fee-explainer h3,
-.rules-grid h3 {
+.rules-grid h3,
+.judging-notes h3,
+.policy-grid h3 {
   margin-top: 0;
   color: var(--night);
 }
@@ -1731,10 +1801,14 @@ h1 {
   .fee-grid,
   .fee-explainer,
   .rules-grid,
+  .judging-notes,
+  .policy-grid,
   .awards-grid,
   .countdown-grid,
   .topic-grid,
   .group-grid,
+  .value-grid,
+  .start-checklist,
   .split,
   .summit-grid,
   .demo-hero,

@@ -64,6 +64,7 @@ const DEMO_SUBMISSION = {
   team_lead_name: "PecuLab Demo Team",
   email: "pecu610@gmail.com",
   age_confirmation: "I am between ages 12 and 30",
+  parent_guardian_consent: "I am age 18 or older - not applicable",
   participant_group: "Group C - Young Innovators",
   registration_fee_category: "Individual entry - USD 65",
   stripe_payment_status: "checkout_not_open",
@@ -91,11 +92,19 @@ const DEMO_SUBMISSION = {
     "This POC demonstrates an impact-capital learning workflow: candlestick time-series data is converted into Gramian Angular Field images, then a CNN-style classifier surfaces recurring patterns, confidence, uncertainty, and explanation prompts so learners can discuss risk, evidence, and responsible decision-making.",
   blueprint_pdf_url: "",
   poc_website_url: "https://fiworld.org/fsc-2036/demo-gaf-cnn.html",
+  poc_stage: "Working technical demo",
+  poc_public_summary: "Interactive demonstration of the sample solution workflow and outputs.",
   bonus_material_url: "",
   english_pitch_video_url: "https://youtu.be/5bJZOxhV9z4?si=ZKSgUvp_ufUQDc7x",
   ai_tools_disclosure: "Demo entry used AI-assisted drafting and design tools for communication refinement.",
   permission_to_publish:
     "Yes, FIH may publicly display our project title, participant/team name, scenario summary, video link, and approved materials for voting and recognition.",
+  participation_terms_confirmation:
+    "I understand this is pre-registration, no charge is created now, and registration is complete only after eligibility approval and confirmed payment.",
+  non_refundable_fee_acknowledgement:
+    "I understand that, if I later choose to pay, the entry fee is generally non-refundable after payment, subject only to the stated limited exceptions and applicable law.",
+  privacy_communication_confirmation:
+    "I agree that my submission data may be processed as described above and that a registration summary may be emailed to the organizer and copied to my verified Google sign-in address.",
   status: "approved",
 };
 
@@ -223,6 +232,7 @@ const submissionCard = (submission) => {
         ${textField(id, "team_lead_name", "Team lead", submission.team_lead_name)}
         ${textField(id, "email", "Email", submission.email)}
         ${textField(id, "participant_group", "Participant group", submission.participant_group)}
+        ${textField(id, "parent_guardian_consent", "Parent or guardian consent", submission.parent_guardian_consent)}
         ${textField(id, "registration_fee_category", "Entry fee category", submission.registration_fee_category)}
         ${textField(id, "stripe_payment_status", "Payment status", submission.stripe_payment_status)}
         ${textField(id, "registration_status", "Registration status", submission.registration_status)}
@@ -241,6 +251,8 @@ const submissionCard = (submission) => {
         ${textField(id, "commission_review_status", "Commission review status", submission.commission_review_status || "not_reviewed")}
         ${textField(id, "blueprint_pdf_url", "Future Blueprint PDF URL", submission.blueprint_pdf_url, true)}
         ${textField(id, "poc_website_url", "Optional prototype / website URL", submission.poc_website_url, true)}
+        ${textField(id, "poc_stage", "POC stage", submission.poc_stage)}
+        ${textareaField(id, "poc_public_summary", "Public POC summary", submission.poc_public_summary)}
         ${textField(id, "bonus_material_url", "Optional bonus material URL", submission.bonus_material_url, true)}
         ${textField(id, "english_pitch_video_url", "English video URL", submission.english_pitch_video_url, true)}
         ${textField(id, "status", "Status", submission.status)}
@@ -248,6 +260,9 @@ const submissionCard = (submission) => {
         ${textareaField(id, "problem_and_users", "Problem and users", submission.problem_and_users)}
         ${textareaField(id, "solution_summary", "Solution summary", submission.solution_summary)}
         ${textareaField(id, "ai_tools_disclosure", "AI tools disclosure", submission.ai_tools_disclosure)}
+        ${textareaField(id, "participation_terms_confirmation", "Participation terms confirmation", submission.participation_terms_confirmation)}
+        ${textareaField(id, "non_refundable_fee_acknowledgement", "Non-refundable fee acknowledgement", submission.non_refundable_fee_acknowledgement)}
+        ${textareaField(id, "privacy_communication_confirmation", "Privacy and communication confirmation", submission.privacy_communication_confirmation)}
       </div>
       <p class="small-note" data-submission-message="${id}"></p>
     </article>
@@ -401,6 +416,7 @@ submissionList?.addEventListener("click", async (event) => {
         team_lead_name: fieldValue(id, "team_lead_name"),
         email: fieldValue(id, "email"),
         participant_group: fieldValue(id, "participant_group"),
+        parent_guardian_consent: fieldValue(id, "parent_guardian_consent"),
         registration_fee_category: fieldValue(id, "registration_fee_category"),
         stripe_payment_status: fieldValue(id, "stripe_payment_status"),
         registration_status: fieldValue(id, "registration_status"),
@@ -419,6 +435,8 @@ submissionList?.addEventListener("click", async (event) => {
         commission_review_status: fieldValue(id, "commission_review_status"),
         blueprint_pdf_url: fieldValue(id, "blueprint_pdf_url"),
         poc_website_url: fieldValue(id, "poc_website_url"),
+        poc_stage: fieldValue(id, "poc_stage"),
+        poc_public_summary: fieldValue(id, "poc_public_summary"),
         bonus_material_url: fieldValue(id, "bonus_material_url"),
         english_pitch_video_url: fieldValue(id, "english_pitch_video_url"),
         status: fieldValue(id, "status"),
@@ -426,6 +444,9 @@ submissionList?.addEventListener("click", async (event) => {
         problem_and_users: fieldValue(id, "problem_and_users"),
         solution_summary: fieldValue(id, "solution_summary"),
         ai_tools_disclosure: fieldValue(id, "ai_tools_disclosure"),
+        participation_terms_confirmation: fieldValue(id, "participation_terms_confirmation"),
+        non_refundable_fee_acknowledgement: fieldValue(id, "non_refundable_fee_acknowledgement"),
+        privacy_communication_confirmation: fieldValue(id, "privacy_communication_confirmation"),
       });
     }
   } catch (error) {
