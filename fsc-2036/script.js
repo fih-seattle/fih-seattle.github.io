@@ -44,9 +44,11 @@ const PHASES = {
 };
 const countdownLabels = {
   "2026-07-15T00:00:00-07:00": "Open now",
-  "2026-09-30T23:59:59-07:00": "Closed",
-  "2026-10-01T00:00:00-07:00": "Reviewing now",
-  "2026-10-15T00:00:00-07:00": "Announced",
+  "2026-08-31T23:59:59-07:00": "Closed",
+  "2026-09-01T00:00:00-07:00": "Confirmation period",
+  "2026-09-08T00:00:00-07:00": "Reviewing now",
+  "2026-09-22T00:00:00-07:00": "Announced",
+  "2026-11-04T09:00:00+07:00": "Forum started",
 };
 const participantGroups = [
   "Group A - Junior",

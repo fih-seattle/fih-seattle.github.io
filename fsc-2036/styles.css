@@ -716,7 +716,7 @@ h1 {
 
 .countdown-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -763,7 +763,7 @@ h1 {
 
 .timeline-ribbon {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   margin-top: 18px;
   border: 1px solid var(--line);
   background: #07111f;
