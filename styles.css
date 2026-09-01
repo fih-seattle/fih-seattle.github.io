@@ -1215,6 +1215,19 @@ p {
   isolation: isolate;
 }
 
+.wfif-poster-link {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  background: #07111f;
+}
+
+.wfif-poster-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .challenge-poster::before {
   content: "";
   position: absolute;
